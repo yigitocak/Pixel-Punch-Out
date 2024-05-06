@@ -1,4 +1,5 @@
 import './Header.scss'
+import {NavLink} from "react-router-dom";
 
 export const Header = () => {
     return(
@@ -6,35 +7,41 @@ export const Header = () => {
             <ul
                 className="header__list"
             >
-                <div
-                    className="header__wrapper"
+                <li
+                    className="header__item"
                 >
-                    <li
-                        className="header__item"
+                    <NavLink
+                        className="header__link"
+                        to="/"
                     >
                         Home
-                    </li>
-                    <li
-                        className="header__item"
-                    >
-                        Leaderboard
-                    </li>
-                </div>
+                    </NavLink>
+                </li>
                 <div
                     className="header__wrapper"
                 >
                     <li
                         className="header__item"
                     >
-                        <input/>
+                        <NavLink
+                            className="header__link"
+                            to="/leaderboard"
+                        >
+                            Leaderboard
+                        </NavLink>
                     </li>
+
                     <li
                         className="header__item"
                     >
-                        Profile
+                        <NavLink
+                            className="header__link"
+                            to="/login"
+                        >
+                            Login
+                        </NavLink>
                     </li>
                 </div>
-
             </ul>
         </header>
     )
