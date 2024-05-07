@@ -22,8 +22,19 @@
   }
 
   &__item {
-    color: $white;
     padding: 2.5rem 4rem;
   }
 
+  &__link{
+    color: $white;
+    text-decoration: none;
+
+    &:hover {
+      color: $orangered;
+    }
+  }
+}
+
+.active {
+  color: $darkorange;
 }
