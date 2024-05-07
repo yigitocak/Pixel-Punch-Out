@@ -37,9 +37,22 @@ There aren't many options for multiplayer fighting games that you can play right
 
 ## Mockups
 
-Currently, I don't have any mockups, but I did create the logo for the game.
+Currently, I don't have in game screenshots, but I did create the logo, login, signup, and the leaderboard for the game.
 <br />
-<img src="" width="150" height="150" alt="Pixel Punch-Out Logo">
+#### Logo
+<img src="./client/public/favicon.png" width="150" height="150" alt="Pixel Punch-Out Logo">
+
+#### Login
+
+<img src="./Mockups/login.png" alt="Login Page">
+
+#### Sign Up
+
+<img src="./Mockups/register.png" alt="Sign Up Page">
+
+#### Leaderboard
+
+<img src="./Mockups/leaderboard.png" alt="Leaderboard">
 
 ## Data
 
