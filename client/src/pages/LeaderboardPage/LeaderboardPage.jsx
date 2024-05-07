@@ -1,37 +1,44 @@
 import "./LeaderboardPage.scss"
-import axios from "axios";
-import {useEffect, useState} from "react";
-import {LeaderboardItem} from "../../Components/LeaderboardItem/LeaderboardItem";
+import {LeaderboardList} from "../../Components/LeaderboardList/LeaderboardList";
 
 export const LeaderboardPage = () => {
-    const [data, setData] = useState([])
-
-    useEffect(() => {
-        const getInfo = async () => {
-            const response = await axios.get("http://localhost:8080/leaderboard", {
-                headers: {
-                    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJ6YW1heiIsImVtYWlsIjoiemJhYkBnbWFpbC5jb20iLCJpYXQiOjE3MTUwMjY4NDgsImV4cCI6MTcxNTYzMTY0OH0.FdkY9FNpPFXG0FsDZ4FF7-jafDPulFz2_Bc1CA9dHmo`
-                }
-            })
-            const {status, data} = response
-            setData(data)
-        }
-        getInfo()
-
-
-
-    }, [])
-
-
     return (
         <section
             className="leaderboard"
         >
-            <ul
-                className="leaderboard__div"
+            <h1
+                className="leaderboard__top"
+            >Top 10</h1>
+            <div
+                className="leaderboard__container"
             >
-                {data.map(data => <LeaderboardItem key={data.username} username={data.username} wins={data.wins} loses={data.losses}/>)}
-            </ul>
+                <div
+                    className="leaderboard__wrapper"
+                >
+                    <h2
+                        className="leaderboard__title"
+                    >
+                        Username
+                    </h2>
+                    <h2
+                        className="leaderboard__title"
+                    >
+                        Wins
+                    </h2>
+                    <h2
+                        className="leaderboard__title"
+                    >
+                        Losses
+                    </h2>
+                    <h2
+                        className="leaderboard__title"
+                    >
+                        Win Rate
+                    </h2>
+                </div>
+
+                <LeaderboardList/>
+            </div>
 
         </section>
     )

@@ -1,0 +1,17 @@
+@import "../../styles/partials/colors";
+
+.not-found {
+  color: $white;
+  text-align: center;
+  padding-top: 2rem;
+
+  &__link {
+    color: $darkorange;
+
+  }
+
+  &__logo {
+    height: 20px;
+    width: 20px;
+  }
+}
