@@ -1,0 +1,94 @@
+@import "../../styles/partials/colors";
+
+.signup{
+
+  &__form{
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem 4rem;
+    width: 28%;
+    background: $gray;
+    border: 3px solid $darkorange;
+    border-radius: 30px;
+  }
+
+  &__label{
+    display: flex;
+    flex-direction: column;
+    color: $darkorange;
+    padding: 1.5rem 0;
+  }
+
+  &__input {
+    max-height: 25vh;
+    height: 100%;
+    padding: 0.75rem;
+    border-radius: 30px;
+    border: none;
+    margin-top: 1rem;
+    color: $gray;
+    font-family: 'Press Start 2P', cursive;
+
+    &::placeholder {
+      font-family: 'Press Start 2P', cursive;
+      color: $gray;
+      padding: 0.5rem 0;
+    }
+  }
+
+  &__checkbox {
+    margin: 0 1rem 0 0;
+    width: 18px;
+    height: 18px;
+  }
+
+  &__remember {
+    color: $white;
+    font-size: 0.75rem;
+  }
+
+  &__button{
+    font-family: 'Press Start 2P', cursive;
+    background: $darkorange;
+    color: $white;
+    border: none;
+    border-radius: 25px;
+    width: 35%;
+    text-align: center;
+    max-height: 50vh;
+    padding: 0.75rem;
+    height: 100%;
+    margin-top: 1rem;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__remember-label {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__back {
+    text-align: center;
+    color: $white;
+    margin-top: 2rem;
+    font-size: 0.8rem;
+
+    &:hover {
+      color: $darkorange;
+    }
+  }
+
+  &__link {
+    color: $white;
+    margin-left: 0.5rem;
+
+    &:hover {
+      color: $darkorange;
+    }
+  }
+}
