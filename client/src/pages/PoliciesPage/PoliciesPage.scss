@@ -1,0 +1,42 @@
+@import "../../styles/partials/colors";
+
+.policies {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 200vh;
+  height: 100%;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 3rem;
+    max-width: 75vw;
+    min-width: 70vw;
+    width: 35%;
+    background: $gray;
+    border: 3px solid $darkorange;
+    border-radius: 30px;
+  }
+
+  &__title {
+    color: $darkorange;
+    font-size: 3rem;
+
+  }
+
+  &__privacy-title {
+    color: $darkorange;
+    margin-top: 3rem;
+  }
+
+  &__info {
+    color: $white;
+    line-height: 1.3rem;
+    letter-spacing: 0.02rem;
+  }
+}

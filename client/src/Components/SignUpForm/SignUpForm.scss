@@ -91,4 +91,9 @@
       color: $darkorange;
     }
   }
+
+  &__error {
+    color: $orangered;
+    line-height: 1.25rem;
+  }
 }

@@ -8,7 +8,9 @@ export const LeaderboardPage = () => {
         >
             <h1
                 className="leaderboard__top"
-            >Top 10</h1>
+            >
+                Top 10
+            </h1>
             <div
                 className="leaderboard__container"
             >
@@ -36,10 +38,8 @@ export const LeaderboardPage = () => {
                         Win Rate
                     </h2>
                 </div>
-
                 <LeaderboardList/>
             </div>
-
         </section>
     )
 }
