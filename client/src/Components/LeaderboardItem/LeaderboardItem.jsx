@@ -12,7 +12,7 @@ export const LeaderboardItem = ({wins,loses,username, winrate, id}) => {
             >
                 <NavLink
                     className="leaderboard__username"
-                    to={`/profile/${id}`}
+                    to={`/profiles/${id}`}
                 >
                     {username}
                 </NavLink>

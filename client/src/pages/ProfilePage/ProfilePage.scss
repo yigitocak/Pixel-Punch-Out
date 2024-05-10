@@ -1,0 +1,30 @@
+@import "../../styles/partials/colors";
+
+.profile {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  &__container{
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem 4rem;
+    margin-top: 3rem;
+    width: 35%;
+    background: $gray;
+    border: 3px solid $darkorange;
+    border-radius: 30px;
+  }
+
+  &__username {
+    color: $white;
+    font-size: 2rem;
+  }
+
+  &__info {
+    color: $darkorange;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+  }
+}

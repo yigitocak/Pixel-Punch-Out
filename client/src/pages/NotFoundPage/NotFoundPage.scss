@@ -2,8 +2,11 @@
 
 .not-found {
   color: $white;
-  text-align: center;
-  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5rem;
+  justify-content: center;
+  align-items: center;
 
   &__link {
     color: $darkorange;
@@ -11,7 +14,9 @@
   }
 
   &__logo {
-    height: 20px;
-    width: 20px;
+    display: block;
+    height: 250px;
+    width: 250px;
+    margin-top: 7em;
   }
 }

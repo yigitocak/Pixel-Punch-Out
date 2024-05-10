@@ -1,7 +1,7 @@
 import './Header.scss'
 import {NavLink} from "react-router-dom";
 
-export const Header = () => {
+export const Header = ({isLoggedIn, username}) => {
     return(
         <header className="header">
             <ul
@@ -34,12 +34,21 @@ export const Header = () => {
                     <li
                         className="header__item"
                     >
-                        <NavLink
-                            className="header__link"
-                            to="/login"
-                        >
-                            Login
-                        </NavLink>
+                        {isLoggedIn ?
+                            (<NavLink
+                                className="header__link"
+                                to={`/profiles/${username}`}
+                            >
+                                Profile
+                            </NavLink>)
+                             :
+                            (<NavLink
+                                className="header__link"
+                                to="/login"
+                            >
+                                Login
+                            </NavLink>)
+                        }
                     </li>
                 </div>
             </ul>

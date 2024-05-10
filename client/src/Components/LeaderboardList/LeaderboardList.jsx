@@ -2,19 +2,19 @@ import "./LeaderboardList.scss"
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {LeaderboardItem} from "../LeaderboardItem/LeaderboardItem";
+import {BASE_URL} from "../../utils/utils";
 
 export const LeaderboardList = () => {
     const [data, setData] = useState([])
 
+    const getInfo = async () => {
+        const response = await axios.get(`${BASE_URL}leaderboard`)
+        setData(response.data)
+    }
+
     useEffect(() => {
-        const getInfo = async () => {
-            const response = await axios.get("http://localhost:8080/leaderboard")
-            const {data} = response
-            setData(data)
-        }
         getInfo()
     }, [])
-
 
     return (
         <ul

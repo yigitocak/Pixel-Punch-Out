@@ -1,5 +1,6 @@
 import './NotFoundPage.scss'
 import {NavLink} from "react-router-dom";
+import logo from '../../assets/images/logos/logo.jpg'
 
 export const NotFoundPage = () => {
     return (
@@ -17,7 +18,7 @@ export const NotFoundPage = () => {
             </NavLink>
             <img
                 className="not-found__logo"
-                src="../../assets/images/logos/logo.jpg"
+                src={logo}
                 alt="logo"
             />
         </section>
