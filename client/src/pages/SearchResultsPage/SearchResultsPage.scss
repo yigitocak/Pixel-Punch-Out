@@ -1,0 +1,24 @@
+@import "../../styles/partials/colors";
+
+.result{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+
+  &__title {
+    color: $darkorange;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__error {
+    margin-top: 2rem;
+    color: $orangered;
+    font-size: 1.25rem;
+  }
+}

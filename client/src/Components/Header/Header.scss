@@ -21,8 +21,37 @@
     width: 100%;
   }
 
+  &__input {
+    width: 300px;
+    outline: none;
+    border: none;
+    font-family: 'Press Start 2P', cursive;
+
+    &::placeholder {
+      font-family: 'Press Start 2P', cursive;
+    }
+  }
+
+  &__input-button {
+    border: none;
+    cursor: pointer;
+    border-radius: 12px;
+    margin-left: 1rem;
+    background: transparent;
+  }
+
   &__item {
     padding: 2.5rem 4rem;
+  }
+
+  &__search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    margin-right: -18vw;
+    background: $white;
+    border-radius: 12px;
   }
 
   &__link{
