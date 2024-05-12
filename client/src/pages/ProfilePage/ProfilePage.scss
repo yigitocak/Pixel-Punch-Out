@@ -9,22 +9,88 @@
   &__container{
     display: flex;
     flex-direction: column;
-    padding: 2.5rem 4rem;
+    padding: 2.5rem 4rem 0 4rem;
     margin-top: 3rem;
     width: 35%;
     background: $gray;
     border: 3px solid $darkorange;
     border-radius: 30px;
+    position: relative;
+  }
+
+  &__picture-wrapper {
+    flex: 1;
+  }
+
+  &__picture {
+    border-radius: 50%;
+    position: relative;
+    height: 175px;
+    width: 175px;
+
+    cursor: pointer;
+  }
+
+  &__logout {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    height: 30px;
+    cursor: pointer;
+    &:hover{
+      opacity: 0.7;
+    }
+  }
+
+  &__user {
+    display: flex;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  &__upload {
+    display: none;
+  }
+
+  &__upload-label {
+    position: relative;
+  }
+
+  &__upload-camera {
+    bottom: 0;
+    right: 0;
+    height: 45px;
+    position: absolute;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
   }
 
   &__username {
     color: $white;
-    font-size: 2rem;
+    font-size: 1.7rem;
+    flex: 1;
+    margin-left: -3rem;
   }
 
   &__info {
     color: $darkorange;
     font-size: 1.5rem;
     margin-top: 1rem;
+  }
+
+  &__info-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 4rem;
+  }
+
+  &__error {
+    margin-top: 1rem;
+    color: $red;
   }
 }

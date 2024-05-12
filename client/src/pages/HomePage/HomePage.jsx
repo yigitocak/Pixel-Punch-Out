@@ -1,15 +1,22 @@
-import './HomePage.scss'
-import React from 'react';
-import {GameCanvas} from '../../Components/GameCanvas/GameCanvas';
-import {HealthBar} from '../../Components/GameHealthBar/GameHealthBar';
-import io from 'socket.io-client';
-const socket = io('ws://localhost:5050');
+import "./HomePage.scss";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-export const HomePage = () => {
+export const HomePage = ({ isLoggedIn }) => {
+  const navigate = useNavigate();
+  const zamaz = () => {
+    navigate("/play");
+  };
+
+  if (!isLoggedIn) {
     return (
-        <>
-            <HealthBar/>
-            <GameCanvas socket={socket} />
-        </>
+      <div className="home__login">You must login to see the content!</div>
     );
-}
+  }
+
+  return (
+    <>
+      <button onClick={zamaz}>play</button>
+    </>
+  );
+};
