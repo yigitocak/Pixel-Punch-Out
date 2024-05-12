@@ -1,0 +1,27 @@
+@import "../../styles/partials/colors";
+
+.audio {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+
+  &__button{
+    background: $darkorange;
+    border: none;
+    border-radius: 10px;
+    margin: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__button-play {
+    padding: 0.5rem 1rem;
+  }
+
+  &__button-image {
+    height: 35px;
+  }
+}

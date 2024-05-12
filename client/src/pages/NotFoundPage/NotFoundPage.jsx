@@ -1,6 +1,6 @@
 import './NotFoundPage.scss'
 import {NavLink} from "react-router-dom";
-import logo from '../../assets/images/logos/logo.jpg'
+import logo from '../../assets/logos/logo.jpg'
 
 export const NotFoundPage = () => {
     return (
