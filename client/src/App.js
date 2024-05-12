@@ -14,7 +14,6 @@ import { BASE_URL } from "./utils/utils";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { SearchResultsPage } from "./pages/SearchResultsPage/SearchResultsPage";
 import { Footer } from "./Components/Footer/Footer";
-import { GameCanvas } from "./Components/GameCanvas/GameCanvas";
 import { GamePage } from "./pages/GamePage/GamePage";
 
 function App() {
