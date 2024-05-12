@@ -1,7 +1,7 @@
 import "./Header.scss";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import search from "../../assets/images/search.svg";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export const Header = ({ isLoggedIn, username }) => {
   const [input, setInput] = useState("");
