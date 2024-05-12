@@ -1,0 +1,10 @@
+@import "../../styles/partials/colors";
+
+
+.home {
+  &__login {
+    color: $orangered;
+    text-align: center;
+    margin-top: 5rem;
+  }
+}
