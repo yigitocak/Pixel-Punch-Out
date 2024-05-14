@@ -1,0 +1,67 @@
+@import "../../styles/partials/colors";
+
+.audio {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 2000;
+
+  &__controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__button {
+    background: $darkorange;
+    border: none;
+    border-radius: 10px;
+    margin: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__button-play {
+    padding: 0.45rem 1rem;
+  }
+
+  &__button-image {
+    height: 35px;
+  }
+
+  &__volume {
+    text-align: center;
+  }
+
+  &__volume-slider {
+    width: 100%;
+    max-width: 200px;
+    appearance: none;
+    height: 5px;
+    background: white;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 15px;
+      height: 15px;
+      background: $darkorange;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: $darkorange;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+}

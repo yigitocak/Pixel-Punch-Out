@@ -1,0 +1,60 @@
+@import "../../styles/partials/colors";
+
+.comment {
+
+  &__item{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-top: 2px solid $darkorange;
+    padding:  1rem 2rem 1rem 0;
+    color: $darkorange;
+  }
+
+  &__photo {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: 2px solid $darkorange;
+  }
+
+  &__user-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__user {
+    font-size: 1.3rem;
+    margin-left: 1rem;
+  }
+
+  &__user-link {
+    text-decoration: none;
+    color: $darkorange;
+  }
+
+  &__info {
+    color: $white;
+    padding-top: 1rem;
+    margin-left: 0.5rem;
+  }
+
+  &__timestamp {
+    position: absolute;
+    right: 0.5rem;
+    top:1rem;
+    font-size: 0.9rem;
+  }
+
+  &__trash {
+    height: 25px;
+    position: absolute;
+    right: 0.5rem;
+    top: 35%;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
