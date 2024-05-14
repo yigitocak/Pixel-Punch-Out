@@ -154,28 +154,6 @@ export class Fighter extends Sprite {
 
     this.ctx.save(); // Save the current context state
 
-    // this.ctx.fillStyle = "rgba(255, 0, 0, 0.5)"; // Semi-transparent red
-    // this.ctx.fillRect(
-    //   this.attackBox.position.x,
-    //   this.attackBox.position.y,
-    //   this.attackBox.width,
-    //   this.attackBox.height,
-    // );
-
-    if (this.name) {
-      this.ctx.fillStyle = "white"; // Text color
-      this.ctx.font = "15px Press Start 2P"; // Text font
-      this.ctx.textAlign = "center"; // Center the text above the sprite
-
-      // Adjust the vertical position closer to the sprite
-      // The y-coordinate is adjusted to be just above the sprite, considering the scale and height
-      this.ctx.fillText(
-        this.name,
-        this.position.x + (this.width / 2) * this.scale,
-        this.position.y - this.height * this.scale * 0.1, // Closer to the top of the sprite
-      );
-    }
-
     if (this.facing === "left") {
       this.ctx.scale(-1, 1); // Flip the canvas horizontally
       this.ctx.drawImage(
@@ -226,10 +204,6 @@ export class Fighter extends Sprite {
 
     // Keep the attack box closely aligned with the sprite's position
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
-
-    // // Update the position of the fighter based on velocity
-    // this.position.x += this.velocity.x;
-    // this.position.y += this.velocity.y;
   }
 
   attack() {
