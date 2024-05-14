@@ -1,0 +1,22 @@
+@import "../../styles/partials/colors";
+
+.not-found {
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5rem;
+  justify-content: center;
+  align-items: center;
+
+  &__link {
+    color: $darkorange;
+
+  }
+
+  &__logo {
+    display: block;
+    height: 250px;
+    width: 250px;
+    margin-top: 7em;
+  }
+}

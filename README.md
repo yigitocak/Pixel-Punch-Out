@@ -3,25 +3,23 @@
 
 ## Overview
 
-**Pixel Punch-Out** is a multiplayer web platform fighting game that allows players to engage in combat with friends and family. Players can create and join rooms, select from various arenas and characters, and customize the number of lives for each match. The game features a token-based authentication system for secure sign-up and login processes.
+**Pixel Punch-Out** is a multiplayer web platform fighting game that allows players to engage in combat with friends. Players can create and join rooms, select from various arenas. The game features a token-based authentication system for secure sign-up and login processes.
 
 
 ## Problem
 
-There aren't many options for multiplayer fighting games that you can play right from your web browser — most of the good ones need you to download big files or have a fancy gaming setup. **Pixel Punch-Out** fills this void by being super accessible. It's a fun, straightforward game that anyone with a browser can jump into, no heavy downloads or high-end hardware needed. This means more people can get into the gaming action with friends and family without any hassle.
+There aren't many options for multiplayer fighting games that you can play right from your web browser — most of the good ones need you to download big files or have a fancy gaming setup. **Pixel Punch-Out** fills this void by being super accessible. It's a fun, straightforward game that anyone with a browser can jump into, no heavy downloads or high-end hardware needed. This means more people can get into the gaming action with friends without any hassle.
 
 
 ## User Profile
 
-**Pixel Punch-Out** is designed for young to middle-aged gamers looking for a fun and engaging multiplayer experience. This game appeals to both casual gamers who want a quick and enjoyable match with friends and more competitive players who enjoy mastering different characters and arenas. Users can easily set up a game room, invite friends, and start fighting within minutes, making it ideal for those who value convenience and fast gameplay. The simple browser-based access ensures that anyone with internet access can join in the fun, regardless of their hardware capabilities.
+**Pixel Punch-Out** is designed for young to middle-aged gamers looking for a fun and engaging multiplayer experience. This game appeals to both casual gamers who want a quick and enjoyable match with friends and more competitive players who enjoy mastering fighting games. Users can easily set up a game room, and start fighting within minutes, making it ideal for those who value convenience and fast gameplay. The simple browser-based access ensures that anyone with internet access can join in the fun, regardless of their hardware capabilities.
 
 
 ## Features
 
 - **Room Creation and Joining:** Players can easily create or join game rooms, allowing for private matches with friends or open games with others online.
-- **Arena Selection:** When setting up a game room, players can select from a variety of arenas, each with unique aesthetics and layouts, adding strategic elements to the matches.
-- **Character Selection:** A range of characters will be available, each with distinct abilities and fighting styles. Players can choose their favorite fighter to best suit their gameplay strategy.
-- **Lives Selection:** Players can set the number of lives for each match, allowing for customization of game length and difficulty.
+- **Arena Selection:** When setting up a game room, players can select from a variety of arenas, each with unique aesthetics.
 - **Real-time Multiplayer Combat:** The game will support seamless, real-time fights, ensuring a dynamic and engaging player experience.
 - **Token-based Authentication System:** Secure sign-up and login processes will be implemented, ensuring player accounts are protected.
 
@@ -29,26 +27,37 @@ There aren't many options for multiplayer fighting games that you can play right
 
 ### Tech Stack
 
-- **Frontend:** React for building the interactive user interface elements, while the game itself is developed using pure JavaScript to manage game mechanics and animations.
+- **Frontend:** React for building the interactive user interface elements.
 - **Backend:** Node.js with Express for managing game logic, room management, and player interactions in real-time.
-- **Database:** MySQL for storing user data, game settings, and match histories. Chosen for its reliability and support for complex queries, ideal for transactional requirements.
+- **Database:** MySQL for storing user data. Chosen for its reliability and support for complex queries, ideal for transactional requirements.
 - **Authentication:** JSON Web Tokens (JWT) for secure, token-based user authentication.
 - **Websockets:** Socket.IO for real-time bi-directional communication between clients and servers, essential for a seamless multiplayer experience.
 
 ## Mockups
 
-Currently, I don't have any mockups, but I did create the logo for the game.
+Currently, I don't have in game screenshots, but I did create the logo, login, signup, and the leaderboard for the game.
 <br />
-<img src="" width="150" height="150" alt="Pixel Punch-Out Logo">
+#### Logo
+<img src="./client/public/favicon.png" width="150" height="150" alt="Pixel Punch-Out Logo">
+
+#### Login
+
+<img src="./Mockups/login.png" alt="Login Page">
+
+#### Sign Up
+
+<img src="./Mockups/register.png" alt="Sign Up Page">
+
+#### Leaderboard
+
+<img src="./Mockups/leaderboard.png" alt="Leaderboard">
 
 ## Data
 
 **Pixel Punch-Out** will utilize a relational database structure with the following key entities:
 
 - **User:** Stores information about players, including username, password (hashed), email, and game statistics like wins and losses.
-- **Room:** Represents a game session, containing room ID, room name, arena selected, and settings like the number of lives.
-- **Character:** Details each playable character, including character ID, name, abilities, and stats.
-- **Match:** Records details of individual matches, including match results, players involved, and timestamps.
+- **Room:** Represents a game session, containing room ID, room name, arena selected.
 
 #### Relationships:
 - A **User** can create multiple **Rooms** and join many **Rooms**.
@@ -73,7 +82,7 @@ This structure supports efficient data retrieval and updates necessary for real-
     - **Response:** `{ rooms: [{ roomId: "456", roomName: "Battle Arena", status: "waiting" }], success: true }`
 
 - **POST /rooms/create:** Allows a user to create a new game room.
-    - **Parameters:** `userId`, `roomName`, `arenaId`, `lives`
+    - **Parameters:** `userId`, `roomName`, `arenaId`
     - **Response:** `{ roomId: "789", success: true }`
 
 - **POST /rooms/join:** Allows a user to join an existing room.
@@ -116,3 +125,5 @@ The development of **Pixel Punch-Out** is organized into an intense 2-week sprin
 
 
 **Note:** The focus will be on creating a Minimum Viable Product (MVP) that allows for basic playability and user interaction. Additional features and refinements may be planned for future updates based on initial user feedback and project evaluation.
+
+**Nice to have:** Lives section, character selection, and character abilities.

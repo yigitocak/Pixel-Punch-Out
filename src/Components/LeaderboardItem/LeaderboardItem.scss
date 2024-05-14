@@ -1,0 +1,32 @@
+@import "../../styles/partials/colors";
+
+.leaderboard {
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    align-items: center;
+  }
+
+  &__info, &__total {
+    color: $white;
+    width: 33.3%;
+    text-align: center;
+  }
+
+  &__total {
+    position: relative;
+    left: -1.75rem;
+  }
+
+  &__username {
+    text-align: left;
+    color: $white;
+    text-decoration: none;
+
+    &:hover {
+      color: $darkorange;
+    }
+  }
+}
