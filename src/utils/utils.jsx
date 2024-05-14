@@ -1,3 +1,5 @@
-export const BASE_URL =
-  "https://pixel-punch-out-server-e08f7052857e.herokuapp.com/";
-export const WEBSOCKET = `https://pixel-punchout-websocketserver-226f580ce9ff.herokuapp.com/`;
+console.log("REACT_APP_BASE_URL:", process.env.REACT_APP_BASE_URL);
+console.log("REACT_APP_WEBSOCKET:", process.env.REACT_APP_WEBSOCKET);
+
+export const BASE_URL = process.env.REACT_APP_BASE_URL;
+export const WEBSOCKET = process.env.REACT_APP_WEBSOCKET;
