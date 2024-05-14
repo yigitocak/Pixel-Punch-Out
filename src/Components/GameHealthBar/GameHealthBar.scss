@@ -1,13 +1,31 @@
+@import "../../styles/partials/colors";
+
 .health {
   display: flex;
   justify-content: center;
-  margin-top: 7rem;
+  margin-top: 2rem;
+  position: relative;
+
+  &__username {
+    position: absolute;
+    color: $white;
+    top: 0.75rem;
+    left: 2rem;
+  }
+
+  &__enemy {
+    position: absolute;
+    color: $white;
+    top: 0.75rem;
+    right: 2rem;
+  }
+
 
   &__container-div{
     position: relative;
     display: inline-block;
-    border: 7px solid black;
-    border-radius: 5px
+    border: 8px solid black;
+    border-radius: 10px;
   }
 
   &__small-container-div {
@@ -15,7 +33,7 @@
     display: flex;
     width: 100%;
     align-items: center;
-    padding: 20px;
+    padding: 2.5rem 2rem;
   }
 
   &__player-health{
