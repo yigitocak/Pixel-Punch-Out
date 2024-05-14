@@ -1,4 +1,4 @@
-# Pixel Punch-Out
+# [Pixel Punch-Out](https://pixel-punch-4k5zl2c7o-yigitocaks-projects.vercel.app/)
 
 
 ## Overview
@@ -38,7 +38,7 @@ There aren't many options for multiplayer fighting games that you can play right
 Currently, I don't have in game screenshots, but I did create the logo, login, signup, and the leaderboard for the game.
 <br />
 #### Logo
-<img src="./client/public/favicon.png" width="150" height="150" alt="Pixel Punch-Out Logo">
+<img src="./public/favicon.png" width="150" height="150" alt="Pixel Punch-Out Logo">
 
 #### Login
 
@@ -51,6 +51,15 @@ Currently, I don't have in game screenshots, but I did create the logo, login, s
 #### Leaderboard
 
 <img src="./Mockups/leaderboard.png" alt="Leaderboard">
+
+#### In-game Content
+
+<div align=center>  
+<img src="./Mockups/attack.gif" alt="attack">
+<img src="./Mockups/jump.gif" alt="jump">
+<img src="./Mockups/left.gif" alt="left">
+<img src="./Mockups/right.gif" alt="right">
+</div>
 
 ## Data
 
