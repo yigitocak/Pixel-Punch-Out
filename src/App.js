@@ -146,7 +146,6 @@ function App() {
                 setFlashSuccess={setFlashSuccess}
                 setFlashMessage={setFlashMessage}
                 setShowSnackbar={setShowSnackbar}
-                isAuthenticating={isAuthenticating}
               />
             }
           />
