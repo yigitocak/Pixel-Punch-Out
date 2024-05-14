@@ -27,9 +27,6 @@ function App() {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [backgroundId, setBackgroundId] = useState(null);
 
-  console.log("BASE_URL:", BASE_URL);
-  console.log("WEBSOCKET:", WEBSOCKET);
-
   const AUTH_TOKEN_KEY = "authToken";
   const AUTH_ENDPOINT = "auth";
 
