@@ -10,7 +10,7 @@ import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { PoliciesPage } from "./pages/PoliciesPage/PoliciesPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BASE_URL } from "./utils/utils";
+import { BASE_URL, WEBSOCKET } from "./utils/utils";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { SearchResultsPage } from "./pages/SearchResultsPage/SearchResultsPage";
 import { Footer } from "./Components/Footer/Footer";
@@ -26,6 +26,9 @@ function App() {
   const [flashSuccess, setFlashSuccess] = useState(null);
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [backgroundId, setBackgroundId] = useState(null);
+
+  console.log("BASE_URL:", BASE_URL);
+  console.log("WEBSOCKET:", WEBSOCKET);
 
   const AUTH_TOKEN_KEY = "authToken";
   const AUTH_ENDPOINT = "auth";
