@@ -44,7 +44,7 @@ function App() {
         err.response ? err.response.data : err.message,
       );
       if (err.response && err.response.data && err.response.data.message) {
-        setFlashMessage(err.response.data.message);
+        setFlashMessage("You have been logged out! Please login again.");
         setFlashSuccess(false);
         setShowSnackbar(true);
       }
