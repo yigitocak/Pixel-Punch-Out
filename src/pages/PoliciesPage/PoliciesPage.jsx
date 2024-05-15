@@ -1,8 +1,16 @@
 import "./PoliciesPage.scss";
+import { Helmet } from "react-helmet";
 
 export const PoliciesPage = () => {
   return (
     <section className="policies">
+      <Helmet>
+        <title>Privacy Policy | Pixel Punch-Out</title>
+        <meta
+          name="description"
+          content="Review the Pixel Punch-Out Privacy Policy to learn how we handle your data. We prioritize your privacy and ensure your information is secure while you enjoy our multiplayer fighting game."
+        />
+      </Helmet>
       <div className="policies__container">
         <h1 className="policies__title">Privacy Policy</h1>
 

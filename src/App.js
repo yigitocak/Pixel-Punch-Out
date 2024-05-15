@@ -17,6 +17,9 @@ import { Footer } from "./Components/Footer/Footer";
 import { GamePage } from "./pages/GamePage/GamePage";
 import { NotAvailable } from "./Components/NotAvailable/NotAvailable";
 import { FlashMessage } from "./Components/FlashMessage/FlashMessage";
+import { MaintenancePage } from "./pages/MaintenancePage/MaintenancePage";
+
+const MAINTENANCE = false;
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,7 +29,6 @@ function App() {
   const [flashSuccess, setFlashSuccess] = useState(null);
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [backgroundId, setBackgroundId] = useState(null);
-
   const AUTH_TOKEN_KEY = "authToken";
   const AUTH_ENDPOINT = "auth";
 
@@ -71,6 +73,10 @@ function App() {
   useEffect(() => {
     authenticateToken();
   }, [token]);
+
+  if (MAINTENANCE) {
+    return <MaintenancePage />;
+  }
 
   return (
     <>

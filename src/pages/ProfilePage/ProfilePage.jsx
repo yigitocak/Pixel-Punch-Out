@@ -8,6 +8,7 @@ import { ProfileCommentList } from "../../Components/ProfileCommentList/ProfileC
 import camera from "../../assets/images/camera.svg";
 import logout from "../../assets/images/logout.svg";
 import { ConfirmModal } from "../../Components/ConfirmModal/ConfirmModal";
+import { Helmet } from "react-helmet";
 
 export const ProfilePage = ({
   isLoggedIn,
@@ -163,6 +164,13 @@ export const ProfilePage = ({
 
   return (
     <section className="profile">
+      <Helmet>
+        <title>{`${user.username}'s Profile | Pixel Punch-Out`}</title>
+        <meta
+          name="description"
+          content="Manage your Pixel Punch-Out profile! View comments, change your profile picture, and customize your account to stand out"
+        />
+      </Helmet>
       <div className="profile__container">
         {location.pathname === `/profiles/${username}` ? (
           <img src={logout} className="profile__logout" onClick={handleClick} />
