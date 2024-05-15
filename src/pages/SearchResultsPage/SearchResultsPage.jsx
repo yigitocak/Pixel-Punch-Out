@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../../utils/utils";
 import { SearchResultsItem } from "../../Components/SearchResultsItem/SearchResultsItem";
+import { Helmet } from "react-helmet";
 
 export const SearchResultsPage = ({ setQueryParam }) => {
   const [users, setUsers] = useState([]);
@@ -40,6 +41,9 @@ export const SearchResultsPage = ({ setQueryParam }) => {
 
   return (
     <section className="result">
+      <Helmet>
+        <title>Search Results | Pixel Punch-Out</title>
+      </Helmet>
       <h1 className="result__title">Search Results</h1>
       {filteredUsers.length ? (
         <ul className="result__list">

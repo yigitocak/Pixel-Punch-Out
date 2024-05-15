@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
+import { Helmet } from "react-helmet";
 
 export const LoginPage = ({
   isLoggedIn,
@@ -23,7 +24,7 @@ export const LoginPage = ({
     if (isLoggedIn) {
       navigate(`/profiles/${username}`);
     }
-  }, [isLoggedIn, username, navigate]); // Dependency array ensures this only runs when these values change
+  }, [isLoggedIn, username, navigate]);
 
   const handleVerification = async (code) => {
     try {
@@ -47,6 +48,13 @@ export const LoginPage = ({
 
   return (
     <section className="login">
+      <Helmet>
+        <title>Login | Pixel Punch-Out</title>
+        <meta
+          name="description"
+          content="Log in to Pixel Punch-Out to join the battle! Access your account, track your progress, and compete with friends and players worldwide."
+        />
+      </Helmet>
       <LoginForm
         setEmail={setEmail}
         setShowVerifyModal={setShowVerifyModal}

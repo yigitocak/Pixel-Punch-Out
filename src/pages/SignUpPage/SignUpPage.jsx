@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
+import { Helmet } from "react-helmet";
 
 export const SignUpPage = ({
   isLoggedIn,
@@ -40,6 +41,13 @@ export const SignUpPage = ({
 
     return (
       <section className="signup">
+        <Helmet>
+          <title>Sign Up | Pixel Punch-Out</title>
+          <meta
+            name="description"
+            content="Join Pixel Punch-Out today and become a champion! Sign up now to create your fighter, unlock arenas, and battle against friends and players from around the globe in this action-packed browser game. No downloads required!"
+          />
+        </Helmet>
         <SignUpForm
           setEmail={setEmail}
           setShowVerifyModal={setShowVerifyModal}

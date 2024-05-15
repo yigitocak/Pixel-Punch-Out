@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./HomePage.scss";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/utils";
+import { Helmet } from "react-helmet";
 
 export const HomePage = ({ isLoggedIn, setBackgroundId }) => {
   const [selectedMap, setSelectedMap] = useState(null);
@@ -17,6 +18,9 @@ export const HomePage = ({ isLoggedIn, setBackgroundId }) => {
   if (!isLoggedIn) {
     return (
       <section className="home">
+        <Helmet>
+          <title>Welcome | Pixel Punch-Out</title>
+        </Helmet>
         <div className="home__wrapper">
           <h1 className="home__title">Welcome to Pixel Punch-Out!</h1>
           <p className="home__info">
@@ -93,6 +97,9 @@ export const HomePage = ({ isLoggedIn, setBackgroundId }) => {
 
   return (
     <section className="home">
+      <Helmet>
+        <title>Home | Pixel Punch-Out</title>
+      </Helmet>
       <div className="home__wrapper">
         <h1 className="home__title">Welcome Back to Pixel Punch-Out!</h1>
         <p className="home__info">
