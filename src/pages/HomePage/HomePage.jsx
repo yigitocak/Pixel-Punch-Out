@@ -12,7 +12,7 @@ export const HomePage = ({ isLoggedIn, setBackgroundId }) => {
     setSelectedMap(map);
     if (map === "dojo") setBackgroundId(1);
     else if (map === "leaf") setBackgroundId(2);
-    if (map === "dragon") setBackgroundId(3);
+    else if (map === "dragon") setBackgroundId(3);
   };
 
   if (!isLoggedIn) {
@@ -20,6 +20,10 @@ export const HomePage = ({ isLoggedIn, setBackgroundId }) => {
       <section className="home">
         <Helmet>
           <title>Welcome | Pixel Punch-Out</title>
+          <meta
+            name="description"
+            content="Pixel Punch-Out is a multiplayer web platform fighting game. Engage in real-time combat with friends or players worldwide. No downloads or high-end hardware needed. Select arenas, and start the action now!"
+          />
         </Helmet>
         <div className="home__wrapper">
           <h1 className="home__title">Welcome to Pixel Punch-Out!</h1>
@@ -99,6 +103,10 @@ export const HomePage = ({ isLoggedIn, setBackgroundId }) => {
     <section className="home">
       <Helmet>
         <title>Home | Pixel Punch-Out</title>
+        <meta
+          name="description"
+          content="Pixel Punch-Out is a multiplayer web platform fighting game. Engage in real-time combat with friends or players worldwide. No downloads or high-end hardware needed. Select arenas, and start the action now!"
+        />
       </Helmet>
       <div className="home__wrapper">
         <h1 className="home__title">Welcome Back to Pixel Punch-Out!</h1>

@@ -10,7 +10,7 @@ import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { PoliciesPage } from "./pages/PoliciesPage/PoliciesPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BASE_URL, WEBSOCKET } from "./utils/utils";
+import { BASE_URL } from "./utils/utils";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { SearchResultsPage } from "./pages/SearchResultsPage/SearchResultsPage";
 import { Footer } from "./Components/Footer/Footer";
