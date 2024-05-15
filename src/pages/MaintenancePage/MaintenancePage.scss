@@ -1,0 +1,28 @@
+.maintain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  line-height: 1rem;
+
+  &__img {
+    max-height: 25vh;
+    height: 100%;
+  }
+
+  &__title {
+    color: orangered;
+  }
+
+  &__p {
+    color: darkorange;
+  }
+
+  &__iframe{
+    margin-top: 1rem;
+  }
+
+}
+
+
