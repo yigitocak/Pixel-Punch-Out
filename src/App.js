@@ -19,7 +19,7 @@ import { NotAvailable } from "./Components/NotAvailable/NotAvailable";
 import { FlashMessage } from "./Components/FlashMessage/FlashMessage";
 import { MaintenancePage } from "./pages/MaintenancePage/MaintenancePage";
 
-const MAINTENANCE = false;
+const MAINTENANCE = true;
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
