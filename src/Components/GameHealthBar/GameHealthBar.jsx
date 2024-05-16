@@ -2,14 +2,7 @@ import React, { useState } from "react";
 import "./GameHealthBar.scss";
 import { useNavigate } from "react-router-dom";
 
-export const HealthBar = ({
-  socket,
-  username,
-  setShowSnackbar,
-  setFlashSuccess,
-  setFlashMessage,
-}) => {
-  const navigate = useNavigate();
+export const HealthBar = ({ socket, username }) => {
   const [enemyName, setEnemyName] = useState("");
   socket.on("names", (nameData) => {
     if (!nameData) {
@@ -21,13 +14,6 @@ export const HealthBar = ({
       setEnemyName(enemyPlayer.name);
     }
   });
-
-  if (username === enemyName) {
-    setFlashMessage("You can`t play with yourself.");
-    setFlashSuccess(false);
-    setShowSnackbar(true);
-    return navigate("/");
-  }
 
   socket.emit("getNames");
   return (

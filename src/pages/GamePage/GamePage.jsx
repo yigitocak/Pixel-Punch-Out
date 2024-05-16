@@ -37,6 +37,13 @@ export const GamePage = ({
             setFlashSuccess(false);
             setShowSnackbar(true);
           });
+          newSocket.on("SameUserError", (message) => {
+            setFlashMessage(message);
+            setFlashSuccess(false);
+            setShowSnackbar(true);
+            newSocket.disconnect();
+            navigate("/");
+          });
           newSocket.emit("setName", { id: newSocket.id, name: username });
         });
         setSocket(newSocket);
@@ -57,9 +64,6 @@ export const GamePage = ({
           socket={socket}
           username={username}
           backgroundId={backgroundId}
-          setFlashSuccess={setFlashSuccess}
-          setFlashMessage={setFlashMessage}
-          setShowSnackbar={setShowSnackbar}
         />
       )}
     </>

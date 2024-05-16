@@ -12,14 +12,7 @@ import { HealthBar } from "../GameHealthBar/GameHealthBar";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/utils";
 
-export const GameCanvas = ({
-  socket,
-  username,
-  backgroundId,
-  setShowSnackbar,
-  setFlashSuccess,
-  setFlashMessage,
-}) => {
+export const GameCanvas = ({ socket, username, backgroundId }) => {
   const canvasRef = useRef(null);
   const navigate = useNavigate();
   const BACKGROUNDS = [
@@ -385,13 +378,7 @@ export const GameCanvas = ({
   return (
     <section className="health">
       <div className="health__container-div">
-        <HealthBar
-          socket={socket}
-          username={username}
-          setShowSnackbar={setShowSnackbar}
-          setFlashMessage={setFlashMessage}
-          setFlashSuccess={setFlashSuccess}
-        />
+        <HealthBar socket={socket} username={username} />
         <canvas ref={canvasRef}></canvas>
       </div>
     </section>
