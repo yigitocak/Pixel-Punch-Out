@@ -19,11 +19,10 @@ import { NotAvailable } from "./Components/NotAvailable/NotAvailable";
 import { FlashMessage } from "./Components/FlashMessage/FlashMessage";
 import { MaintenancePage } from "./pages/MaintenancePage/MaintenancePage";
 
-const MAINTENANCE = true;
+const MAINTENANCE = false;
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [username, setUsername] = useState("");
   const [flashMessage, setFlashMessage] = useState("");
   const [flashSuccess, setFlashSuccess] = useState(null);
@@ -66,7 +65,6 @@ function App() {
     }
 
     setIsLoggedIn(!!username);
-    setIsAuthenticating(false);
     setUsername(username);
   };
 

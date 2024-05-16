@@ -12,7 +12,14 @@ import { HealthBar } from "../GameHealthBar/GameHealthBar";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/utils";
 
-export const GameCanvas = ({ socket, username, backgroundId }) => {
+export const GameCanvas = ({
+  socket,
+  username,
+  backgroundId,
+  setShowSnackbar,
+  setFlashSuccess,
+  setFlashMessage,
+}) => {
   const canvasRef = useRef(null);
   const navigate = useNavigate();
   const BACKGROUNDS = [
@@ -371,15 +378,20 @@ export const GameCanvas = ({ socket, username, backgroundId }) => {
       // Cleanup listeners when the component unmounts
       clearInterval(timerId);
       window.cancelAnimationFrame(animate);
-      socket.off("startGame");
-      window.location.reload();
+      socket.disconnect();
     };
   }, [socket]); // Re-run the effect if the socket changes
 
   return (
     <section className="health">
       <div className="health__container-div">
-        <HealthBar socket={socket} username={username} />
+        <HealthBar
+          socket={socket}
+          username={username}
+          setShowSnackbar={setShowSnackbar}
+          setFlashMessage={setFlashMessage}
+          setFlashSuccess={setFlashSuccess}
+        />
         <canvas ref={canvasRef}></canvas>
       </div>
     </section>

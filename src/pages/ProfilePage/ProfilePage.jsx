@@ -14,7 +14,6 @@ export const ProfilePage = ({
   isLoggedIn,
   username,
   setIsLoggedIn,
-  isAuthenticating,
   setFlashMessage,
   setFlashSuccess,
   setShowSnackbar,
@@ -29,7 +28,7 @@ export const ProfilePage = ({
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    if (!isAuthenticating && !isLoggedIn) {
+    if (!isLoggedIn) {
       navigate("/login");
       setFlashMessage("You have to login to see the content!.");
       setFlashSuccess(false);
@@ -37,7 +36,7 @@ export const ProfilePage = ({
     } else {
       getUser();
     }
-  }, [isLoggedIn, isAuthenticating, navigate, profileId]);
+  }, [isLoggedIn, navigate, profileId]);
 
   const getCurrentUser = async () => {
     try {
@@ -173,7 +172,12 @@ export const ProfilePage = ({
       </Helmet>
       <div className="profile__container">
         {location.pathname === `/profiles/${username}` ? (
-          <img src={logout} className="profile__logout" onClick={handleClick} />
+          <img
+            alt="logout icon"
+            src={logout}
+            className="profile__logout"
+            onClick={handleClick}
+          />
         ) : (
           ""
         )}
