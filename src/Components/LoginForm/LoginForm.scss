@@ -37,6 +37,18 @@
     }
   }
 
+  &__forgot {
+    color: $white;
+    font-size: 0.7rem;
+    margin-top: -0.8rem;
+    margin-bottom: 1.2rem;
+
+    &:hover {
+      color: $darkorange;
+      cursor: pointer;
+    }
+  }
+
   &__checkbox {
     margin: 0 1rem 0 0;
     width: 18px;

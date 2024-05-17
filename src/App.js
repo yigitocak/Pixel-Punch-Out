@@ -18,18 +18,21 @@ import { GamePage } from "./pages/GamePage/GamePage";
 import { NotAvailable } from "./Components/NotAvailable/NotAvailable";
 import { FlashMessage } from "./Components/FlashMessage/FlashMessage";
 import { MaintenancePage } from "./pages/MaintenancePage/MaintenancePage";
+import { ResetPage } from "./pages/ResetPage/ResetPage";
 
 const MAINTENANCE = false;
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [flashMessage, setFlashMessage] = useState("");
   const [flashSuccess, setFlashSuccess] = useState(null);
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [backgroundId, setBackgroundId] = useState(null);
   const AUTH_TOKEN_KEY = "authToken";
   const AUTH_ENDPOINT = "auth";
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth < 1200);
 
   const token = localStorage.getItem(AUTH_TOKEN_KEY);
 
@@ -63,31 +66,48 @@ function App() {
         localStorage.removeItem(AUTH_TOKEN_KEY);
       }
     }
-
     setIsLoggedIn(!!username);
     setUsername(username);
+    setIsAuthenticated(false);
   };
 
   useEffect(() => {
     authenticateToken();
   }, [token]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth < 1200);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   if (MAINTENANCE) {
     return <MaintenancePage />;
+  }
+
+  if (windowWidth) {
+    return <NotAvailable setWindowWidth={setWindowWidth} />;
   }
 
   return (
     <>
       <BrowserRouter>
         <Header isLoggedIn={isLoggedIn} username={username} />
-        <NotAvailable />
         <FlashMessage
           flashMessage={flashMessage}
           flashSuccess={flashSuccess}
           showSnackbar={showSnackbar}
           setShowSnackbar={setShowSnackbar}
         />
-        <Footer />
+        <Footer
+          setFlashSuccess={setFlashSuccess}
+          setFlashMessage={setFlashMessage}
+          setShowSnackbar={setShowSnackbar}
+        />
         <Routes>
           <Route
             path="/"
@@ -135,11 +155,23 @@ function App() {
                 setFlashSuccess={setFlashSuccess}
                 setFlashMessage={setFlashMessage}
                 setShowSnackbar={setShowSnackbar}
+                isAuthenticating={isAuthenticated}
               />
             }
           />
           <Route path="/privacy-policy" element={<PoliciesPage />} />
           <Route path="/search" element={<SearchResultsPage />} />
+          <Route
+            path="/reset"
+            element={
+              <ResetPage
+                setFlashSuccess={setFlashSuccess}
+                setFlashMessage={setFlashMessage}
+                setShowSnackbar={setShowSnackbar}
+              />
+            }
+          />
+          z
           <Route
             path="/play"
             element={
