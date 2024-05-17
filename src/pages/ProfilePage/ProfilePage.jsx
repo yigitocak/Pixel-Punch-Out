@@ -17,26 +17,16 @@ export const ProfilePage = ({
   setFlashMessage,
   setFlashSuccess,
   setShowSnackbar,
+  isAuthenticating,
 }) => {
   const { profileId } = useParams();
   const token = localStorage.getItem("authToken");
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(null); // Initialized as null
   const navigate = useNavigate();
   const [comments, setComments] = useState([]);
   const location = useLocation();
-  const [currentUser, setCurrentUser] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate("/login");
-      setFlashMessage("You have to login to see the content!.");
-      setFlashSuccess(false);
-      setShowSnackbar(true);
-    } else {
-      getUser();
-    }
-  }, [isLoggedIn, navigate, profileId]);
 
   const getCurrentUser = async () => {
     try {
@@ -68,6 +58,17 @@ export const ProfilePage = ({
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    if (!isLoggedIn && !isAuthenticating) {
+      navigate("/login");
+      setFlashMessage("You have to login to see the content!.");
+      setFlashSuccess(false);
+      setShowSnackbar(true);
+    } else {
+      getUser();
+    }
+  }, [isLoggedIn, isAuthenticating, navigate, profileId]);
 
   useEffect(() => {
     getUser();
@@ -120,7 +121,7 @@ export const ProfilePage = ({
     } catch (err) {
       console.error(err);
       setFlashMessage("Failed to upload photo.");
-      setFlashSuccess(true);
+      setFlashSuccess(false);
       setShowSnackbar(true);
     }
   };
@@ -164,7 +165,7 @@ export const ProfilePage = ({
   return (
     <section className="profile">
       <Helmet>
-        <title>{`${user.username}'s Profile | Pixel Punch-Out`}</title>
+        <title>{`${user?.username || "Loading..."}'s Profile | Pixel Punch-Out`}</title>
         <meta
           name="description"
           content="Manage your Pixel Punch-Out profile! View comments, change your profile picture, and customize your account to stand out"
@@ -183,16 +184,20 @@ export const ProfilePage = ({
         )}
         <div className="profile__user">
           <div className="profile__picture-wrapper">
-            <img
-              className="profile__picture"
-              src={user.photoUrl}
-              alt="user profile picture"
-            />
+            {user?.photoUrl ? (
+              <img
+                className="profile__picture"
+                src={user.photoUrl}
+                alt="user profile picture"
+              />
+            ) : (
+              <div className="profile__picture-placeholder">Loading...</div>
+            )}
             {location.pathname === `/profiles/${username}` ? (
               <label className="profile__upload-label">
                 <input
                   type="file"
-                  accept="/image/*"
+                  accept="image/*"
                   className="profile__upload"
                   onChange={onFileUpload}
                 />
@@ -206,31 +211,35 @@ export const ProfilePage = ({
               ""
             )}
           </div>
-          <span className="profile__username">{user.username}</span>
+          <span className="profile__username">{user?.username}</span>
         </div>
         <div className="profile__info-wrapper">
-          <span className="profile__info">Wins:{user.wins}</span>
-          <span className="profile__info">Losses:{user.losses}</span>
+          <span className="profile__info">Wins: {user?.wins}</span>
+          <span className="profile__info">Losses: {user?.losses}</span>
         </div>
-        <ProfileForm
-          username={username}
-          profileId={profileId}
-          reRender={getUser}
-          comments={comments}
-          userPhoto={currentUser.photoUrl}
-          setFlashSuccess={setFlashSuccess}
-          setFlashMessage={setFlashMessage}
-          setShowSnackbar={setShowSnackbar}
-        />
-        <ProfileCommentList
-          comments={comments}
-          username={username}
-          reRender={getUser}
-          profileId={profileId}
-          setFlashSuccess={setFlashSuccess}
-          setFlashMessage={setFlashMessage}
-          setShowSnackbar={setShowSnackbar}
-        />
+        {user && (
+          <>
+            <ProfileForm
+              username={username}
+              profileId={profileId}
+              reRender={getUser}
+              comments={comments}
+              userPhoto={currentUser?.photoUrl}
+              setFlashSuccess={setFlashSuccess}
+              setFlashMessage={setFlashMessage}
+              setShowSnackbar={setShowSnackbar}
+            />
+            <ProfileCommentList
+              comments={comments}
+              username={username}
+              reRender={getUser}
+              profileId={profileId}
+              setFlashSuccess={setFlashSuccess}
+              setFlashMessage={setFlashMessage}
+              setShowSnackbar={setShowSnackbar}
+            />
+          </>
+        )}
         {location.pathname === `/profiles/${username}` ? (
           <div className="profile__delete">
             <button
