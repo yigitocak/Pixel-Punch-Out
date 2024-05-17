@@ -16,46 +16,53 @@ import SourRock from "../../assets/musics/SourRock.mp3";
 import MountainTrials from "../../assets/musics/MountainTrials.mp3";
 import Chopsticks from "../../assets/musics/Chopsticks.mp3";
 
-export const Footer = () => {
+export const Footer = ({
+  setFlashMessage,
+  setFlashSuccess,
+  setShowSnackbar,
+}) => {
   const audioFiles = [
-    AdhesiveWombat,
-    Underclocked,
-    DensityTime,
-    ANightOfDizzySpells,
-    DubHub,
-    PowerUp,
-    SourRock,
-    MountainTrials,
-    Chopsticks,
+    { name: "Adhesive Wombat", path: AdhesiveWombat },
+    { name: "Underclocked", path: Underclocked },
+    { name: "Density Time", path: DensityTime },
+    { name: "A Night Of Dizzy Spells", path: ANightOfDizzySpells },
+    { name: "Dub Hub", path: DubHub },
+    { name: "Power Up", path: PowerUp },
+    { name: "Sour Rock", path: SourRock },
+    { name: "Mountain Trials", path: MountainTrials },
+    { name: "Chopsticks", path: Chopsticks },
   ];
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.5); // Default volume
+  const [volume, setVolume] = useState(0.18); // Default volume
   const audioRef = useRef(null);
 
   useEffect(() => {
-    const playAudio = async () => {
-      try {
-        await audioRef.current.play();
-        setIsPlaying(true);
-      } catch (error) {
-        console.error("Autoplay was prevented:", error);
-        setIsPlaying(false);
-      }
-    };
-
-    playAudio();
-  }, []);
-
-  useEffect(() => {
     if (isPlaying) {
-      audioRef.current
-        .play()
-        .catch((error) => console.error("Error playing the track:", error));
+      audioRef.current.play().catch((error) => {
+        console.error("Error playing the track:", error);
+        setShowSnackbar(true);
+        setFlashSuccess(false);
+        setFlashMessage("Error playing the track!");
+      });
     } else {
       audioRef.current.pause();
     }
-  }, [currentTrackIndex, isPlaying]);
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if (isPlaying) {
+      setFlashMessage(`Now playing: ${audioFiles[currentTrackIndex].name}`);
+      setShowSnackbar(true);
+      setFlashSuccess(true);
+    }
+  }, [
+    currentTrackIndex,
+    isPlaying,
+    setFlashMessage,
+    setShowSnackbar,
+    setFlashSuccess,
+  ]);
 
   useEffect(() => {
     audioRef.current.volume = volume; // Update volume when the state changes
@@ -84,9 +91,10 @@ export const Footer = () => {
 
   return (
     <footer className="audio">
+      <span className="audio__name">{audioFiles[currentTrackIndex].name}</span>
       <audio
         ref={audioRef}
-        src={audioFiles[currentTrackIndex]}
+        src={audioFiles[currentTrackIndex].path}
         onEnded={playNext}
         autoPlay
       />
@@ -120,7 +128,7 @@ export const Footer = () => {
         <input
           type="range"
           min="0"
-          max="1"
+          max="0.35"
           step="0.01"
           value={volume}
           onChange={handleVolumeChange}

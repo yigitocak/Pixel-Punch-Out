@@ -4,7 +4,21 @@
   position: fixed;
   bottom: 1rem;
   right: 1rem;
-  z-index: 2000;
+  z-index: 2003;
+
+  &__name {
+    color: $white;
+    position: absolute;
+    top: -3rem;
+    border-radius: 25px;
+    font-size: 0.65rem;
+    background: $black;
+    padding: 0.5rem 1rem;
+    line-height: 1rem;
+    text-align: center;
+    width: 100%;
+    border: $darkorange 2px solid;
+  }
 
   &__controls {
     display: flex;
@@ -25,7 +39,7 @@
   }
 
   &__button-play {
-    padding: 0.45rem 1rem;
+    padding: 0.35rem 0.75rem;
   }
 
   &__button-image {
