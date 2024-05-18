@@ -28,10 +28,10 @@
     border: none;
     margin-top: 1rem;
     color: $gray;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', serif, Roboto;
 
     &::placeholder {
-      font-family: 'Press Start 2P', cursive;
+      font-family: 'Press Start 2P', serif, Roboto;
       color: $gray;
       padding: 0.5rem 0;
     }
@@ -60,7 +60,7 @@
   }
 
   &__button{
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', serif, Roboto;
     background: $darkorange;
     color: $white;
     border: none;

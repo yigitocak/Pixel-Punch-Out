@@ -47,10 +47,10 @@
     border: none;
     outline: none;
     margin: 1rem 1rem 1.5rem 1rem;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', serif, Roboto;
 
     &::placeholder {
-      font-family: 'Press Start 2P', cursive;
+      font-family: 'Press Start 2P', serif, Roboto;
     }
   }
 
@@ -59,7 +59,7 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', serif, Roboto;
     background: $darkorange;
     color: $white;
 

@@ -42,12 +42,12 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', serif, Roboto;
 
     &--danger {
       background: $red;
       color: $white;
-      font-family: 'Press Start 2P', cursive;
+      font-family: 'Press Start 2P', serif, Roboto;
     }
 
     &:hover {
