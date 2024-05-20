@@ -36,11 +36,11 @@
   &__input {
     outline: none;
     border: none;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', serif, Roboto;
     min-width: 20vw;
 
     &::placeholder {
-      font-family: 'Press Start 2P', cursive;
+      font-family: 'Press Start 2P', serif, Roboto;
     }
   }
 

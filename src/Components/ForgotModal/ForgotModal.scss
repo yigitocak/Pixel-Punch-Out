@@ -1,6 +1,6 @@
 @import "../../styles/partials/colors";
 
-.verify {
+.forgot {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,8 +11,7 @@
   justify-content: center;
   align-items: center;
   line-height: 2rem;
-  z-index: 1002;
-
+  z-index: 2002;
 
   &__content {
     background: $gray;
@@ -37,7 +36,8 @@
 
   &__actions {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 5rem;
   }
 
   &__input {

@@ -1,8 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "start_url": ".",
+  "short_name": "PPO Online",
+  "name": "Pixel Punch-Out",
+  "start_url": "https://ppo-online.com",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#323334",
+  "background_color": "#323334",
+  "lang": "en-US"
 }

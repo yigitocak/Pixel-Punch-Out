@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./HomePage.scss";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/utils";
@@ -7,6 +7,19 @@ import { Helmet } from "react-helmet";
 export const HomePage = ({ isLoggedIn, setBackgroundId }) => {
   const [selectedMap, setSelectedMap] = useState(null);
   const navigate = useNavigate();
+  const [isOnHomePage, setIsOnHomepage] = useState(false);
+
+  useEffect(() => {
+    setIsOnHomepage(true); // Set true when component mounts
+    return () => setIsOnHomepage(false); // Set false when component unmounts
+  }, []);
+
+  useEffect(() => {
+    if (isOnHomePage) {
+      setSelectedMap(null);
+      setBackgroundId(null);
+    }
+  }, [isOnHomePage, setBackgroundId]);
 
   const handleMapClick = (map) => {
     setSelectedMap(map);
