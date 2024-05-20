@@ -1,4 +1,4 @@
-import { Sprite, Fighter } from "./Classes";
+import { Fighter } from "./Classes";
 import { BASE_URL } from "../../../utils/utils";
 
 export const rectangularCollision = (attacker, defender) => {
