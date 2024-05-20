@@ -115,6 +115,9 @@ function App() {
               <HomePage
                 isLoggedIn={isLoggedIn}
                 setBackgroundId={setBackgroundId}
+                setFlashSuccess={setFlashSuccess}
+                setFlashMessage={setFlashMessage}
+                setShowSnackbar={setShowSnackbar}
               />
             }
           />

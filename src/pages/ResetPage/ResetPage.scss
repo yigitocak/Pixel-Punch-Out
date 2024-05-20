@@ -44,10 +44,10 @@
     margin-top: 0.5rem;
     border-radius: 25px;
     border: none;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', serif, Roboto;
 
     &::placeholder {
-      font-family: 'Press Start 2P', cursive;
+      font-family: 'Press Start 2P', serif, Roboto;
     }
   }
 
@@ -60,7 +60,7 @@
     border-radius: 12px;
     border: none;
     color: $white;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', serif, Roboto;
     font-size: 0.8rem;
 
     &:hover {

@@ -37,13 +37,15 @@ export const ResetPage = ({
     if (newPassword === "" || confirmPassword === "") {
       setFlashMessage("Please fill out the fields!");
       setFlashSuccess(false);
-      return setShowSnackbar(true);
+      setShowSnackbar(true);
+      return;
     }
 
     if (newPassword !== confirmPassword) {
       setFlashMessage("Passwords doesn't match!");
       setFlashSuccess(false);
-      return setShowSnackbar(true);
+      setShowSnackbar(true);
+      return;
     }
 
     if (
@@ -54,7 +56,8 @@ export const ResetPage = ({
         "Password must include at least one uppercase letter and one special character.",
       );
       setFlashSuccess(false);
-      return setShowSnackbar(true);
+      setShowSnackbar(true);
+      return;
     }
 
     try {
@@ -63,12 +66,21 @@ export const ResetPage = ({
         newPassword,
         secret: SECRET_KEY,
       });
-      navigate("/login");
-      setFlashMessage("Your password has been reset!");
-      setFlashSuccess(true);
-      setShowSnackbar(true);
+      if (response.status === 200) {
+        navigate("/login");
+        setFlashMessage("Your password has been reset!");
+        setFlashSuccess(true);
+        setShowSnackbar(true);
+      } else {
+        setFlashMessage("Error resetting password!");
+        setFlashSuccess(false);
+        setShowSnackbar(true);
+      }
     } catch (err) {
-      console.error(err);
+      console.error("Error resetting password:", err);
+      setFlashMessage("Error resetting password!");
+      setFlashSuccess(false);
+      setShowSnackbar(true);
     }
   }
 
@@ -84,7 +96,7 @@ export const ResetPage = ({
       const isValid = await validateCode(email, code);
       if (!isValid) {
         navigate("/");
-        setFlashMessage("You can't access this page!");
+        setFlashMessage("This link has expired.");
         setFlashSuccess(false);
         setShowSnackbar(true);
       }
@@ -124,7 +136,9 @@ export const ResetPage = ({
           />
         </label>
         <div className="reset__wrapper">
-          <button className="reset__button">Reset my password!</button>
+          <button className="reset__button" type="submit">
+            Change my password
+          </button>
         </div>
       </form>
     </section>

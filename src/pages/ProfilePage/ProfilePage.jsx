@@ -188,7 +188,7 @@ export const ProfilePage = ({
               <img
                 className="profile__picture"
                 src={user.photoUrl}
-                alt="user profile picture"
+                alt="profile pic"
               />
             ) : (
               <div className="profile__picture-placeholder">Loading...</div>
