@@ -46,9 +46,19 @@ export const determineWinner = ({ playerSprite, enemySprite, timerId }) => {
   }
 };
 
-export const endGame = (winner, timerId) => {
+export const endGame = (winner, timerId, FINISH) => {
   clearTimeout(timerId);
-  document.querySelector("#displayText").innerHTML = `${winner} wins`;
+  try {
+    if (!FINISH) {
+      if (winner === "tie") {
+        document.querySelector("#displayText").innerHTML = `Tie`;
+      } else {
+        document.querySelector("#displayText").innerHTML = `${winner} wins`;
+      }
+    }
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export const createFighter = (

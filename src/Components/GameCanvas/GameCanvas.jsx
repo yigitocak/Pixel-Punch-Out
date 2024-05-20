@@ -262,16 +262,16 @@ export const GameCanvas = ({
         } else if (playerSprite.health <= 0) {
           if (!FINISH) {
             socket.emit("death", playerSprite.id);
+            endGame(enemySprite.name, timerId, FINISH);
             FINISH = true;
           }
-          endGame(enemySprite.name, timerId);
           return;
         } else if (enemySprite.health <= 0) {
           if (!FINISH) {
             socket.emit("death", enemySprite.id);
+            endGame(playerSprite.name, timerId, FINISH);
             FINISH = true;
           }
-          endGame(playerSprite.name, timerId);
           return;
         }
 
