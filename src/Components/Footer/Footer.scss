@@ -79,3 +79,65 @@
     }
   }
 }
+
+.discord {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 2003;
+  transition: left 0.5s;
+
+  &:hover {
+    left: 3rem;
+    cursor: pointer;
+  }
+
+  &__img {
+    height: 50px;
+  }
+
+  &__tooltip {
+    visibility: hidden;
+    background-color: $light-gray;
+    color: $discord-blue;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 110%;
+    left: 17%;
+    margin-left: -50px;
+    opacity: 0;
+    transition: visibility 0.75s ease-in-out;
+    white-space: nowrap;
+    animation: fadeIn 0.75s forwards;
+  }
+
+  &:hover .discord__tooltip {
+    visibility: visible;
+    animation: fadeIn 0.75s forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.9;
+    }
+  }
+
+  &:not(:hover) .discord__tooltip {
+    animation: fadeOut 0.25s forwards;
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 0.9;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}

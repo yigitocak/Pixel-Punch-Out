@@ -15,6 +15,8 @@ import PowerUp from "../../assets/musics/Powerup.mp3";
 import SourRock from "../../assets/musics/SourRock.mp3";
 import MountainTrials from "../../assets/musics/MountainTrials.mp3";
 import Chopsticks from "../../assets/musics/Chopsticks.mp3";
+import discordLogo from "../../assets/logos/discord-logo.svg";
+import { DISCORD_URL } from "../../utils/utils";
 
 export const Footer = ({
   setFlashMessage,
@@ -36,6 +38,7 @@ export const Footer = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.18); // Default volume
   const audioRef = useRef(null);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   useEffect(() => {
     if (isPlaying) {
@@ -89,52 +92,77 @@ export const Footer = ({
     setVolume(event.target.value);
   };
 
+  const openLinkInNewTab = () => {
+    window.open(DISCORD_URL, "_blank", "noopener,noreferrer");
+  };
+
   return (
-    <footer className="audio">
-      <span className="audio__name">{audioFiles[currentTrackIndex].name}</span>
-      <audio
-        ref={audioRef}
-        src={audioFiles[currentTrackIndex].path}
-        onEnded={playNext}
-        autoPlay
-      />
-      <div className="audio__controls">
-        <button onClick={playPrevious} className="audio__button">
-          <img
-            src={prev}
-            alt="Previous track"
-            className="audio__button-image"
-          />
-        </button>
-        <button
-          onClick={playPause}
-          className="audio__button audio__button-play"
-        >
-          {isPlaying ? (
-            <img
-              className="audio__button-image"
-              src={pause}
-              alt="Pause button"
-            />
-          ) : (
-            <img className="audio__button-image" src={play} alt="Play button" />
-          )}
-        </button>
-        <button onClick={playNext} className="audio__button">
-          <img src={next} alt="Next track" className="audio__button-image" />
-        </button>
-      </div>
-      <div className="audio__volume">
-        <input
-          type="range"
-          min="0"
-          max="0.35"
-          step="0.01"
-          value={volume}
-          onChange={handleVolumeChange}
-          className="audio__volume-slider"
+    <footer className="footer">
+      <section className="discord">
+        <img
+          src={discordLogo}
+          alt="discord logo"
+          className="discord__img"
+          onMouseEnter={() => setShowTooltip(true)}
+          onMouseLeave={() => setShowTooltip(false)}
+          onClick={openLinkInNewTab}
         />
-      </div>
+        <span className={`discord__tooltip ${showTooltip ? "visible" : ""}`}>
+          Join now!
+        </span>
+      </section>
+      <section className="audio">
+        <span className="audio__name">
+          {audioFiles[currentTrackIndex].name}
+        </span>
+        <audio
+          ref={audioRef}
+          src={audioFiles[currentTrackIndex].path}
+          onEnded={playNext}
+          autoPlay
+        />
+        <div className="audio__controls">
+          <button onClick={playPrevious} className="audio__button">
+            <img
+              src={prev}
+              alt="Previous track"
+              className="audio__button-image"
+            />
+          </button>
+          <button
+            onClick={playPause}
+            className="audio__button audio__button-play"
+          >
+            {isPlaying ? (
+              <img
+                className="audio__button-image"
+                src={pause}
+                alt="Pause button"
+              />
+            ) : (
+              <img
+                className="audio__button-image"
+                src={play}
+                alt="Play button"
+              />
+            )}
+          </button>
+          <button onClick={playNext} className="audio__button">
+            <img src={next} alt="Next track" className="audio__button-image" />
+          </button>
+        </div>
+        <div className="audio__volume">
+          <input
+            type="range"
+            min="0"
+            max="0.35"
+            step="0.01"
+            value={volume}
+            onChange={handleVolumeChange}
+            className="audio__volume-slider"
+          />
+        </div>
+      </section>
     </footer>
   );
 };
