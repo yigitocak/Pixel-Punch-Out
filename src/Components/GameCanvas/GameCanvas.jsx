@@ -12,7 +12,14 @@ import { HealthBar } from "../GameHealthBar/GameHealthBar";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/utils";
 
-export const GameCanvas = ({ socket, username, backgroundId }) => {
+export const GameCanvas = ({
+  socket,
+  username,
+  backgroundId,
+  setShowSnackbar,
+  setFlashSuccess,
+  setFlashMessage,
+}) => {
   const canvasRef = useRef(null);
   const navigate = useNavigate();
   const BACKGROUNDS = [
@@ -134,39 +141,44 @@ export const GameCanvas = ({ socket, username, backgroundId }) => {
 
           const playerId = socket.id;
           const localPlayer = players.find((player) => player.id === playerId);
-          playerSprite.setPositions(
-            localPlayer.x,
-            localPlayer.y,
-            localPlayer.velocity.x,
-            localPlayer.velocity.y,
-          );
-          playerSprite.setHealth(localPlayer.health);
-          playerSprite.setId(socket.id);
-          playerSprite.setName(username);
 
-          // updating the health bar for player
-          gsap.to("#playerHealth", {
-            width: playerSprite.health + "%",
-          });
+          if (localPlayer) {
+            playerSprite.setPositions(
+              localPlayer.x,
+              localPlayer.y,
+              localPlayer.velocity.x,
+              localPlayer.velocity.y,
+            );
+            playerSprite.setHealth(localPlayer.health);
+            playerSprite.setId(socket.id);
+            playerSprite.setName(username);
+
+            // updating the health bar for player
+            gsap.to("#playerHealth", {
+              width: playerSprite.health + "%",
+            });
+          }
 
           // Updating enemySprite health and position
           if (players.length > 1) {
             const enemy = players.find((player) => player.id !== playerId);
-            enemySprite.setPositions(
-              enemy.x,
-              enemy.y,
-              enemy.velocity.x,
-              enemy.velocity.y,
-            );
-            enemySprite.setHealth(enemy.health);
-            enemySprite.setName(enemy.name);
+            if (enemy) {
+              enemySprite.setPositions(
+                enemy.x,
+                enemy.y,
+                enemy.velocity.x,
+                enemy.velocity.y,
+              );
+              enemySprite.setHealth(enemy.health);
+              enemySprite.setName(enemy.name);
 
-            // updating the health bar for the enemy
-            gsap.to("#enemyHealth", {
-              width: enemySprite.health + "%",
-            });
-            enemySprite.draw();
-            enemySprite.setId(enemy.id);
+              // updating the health bar for the enemy
+              gsap.to("#enemyHealth", {
+                width: enemySprite.health + "%",
+              });
+              enemySprite.draw();
+              enemySprite.setId(enemy.id);
+            }
           }
         }
       });
@@ -250,16 +262,16 @@ export const GameCanvas = ({ socket, username, backgroundId }) => {
         } else if (playerSprite.health <= 0) {
           if (!FINISH) {
             socket.emit("death", playerSprite.id);
+            endGame(enemySprite.name, timerId, FINISH);
             FINISH = true;
           }
-          endGame(enemySprite.name, timerId);
           return;
         } else if (enemySprite.health <= 0) {
           if (!FINISH) {
             socket.emit("death", enemySprite.id);
+            endGame(playerSprite.name, timerId, FINISH);
             FINISH = true;
           }
-          endGame(playerSprite.name, timerId);
           return;
         }
 
@@ -371,15 +383,20 @@ export const GameCanvas = ({ socket, username, backgroundId }) => {
       // Cleanup listeners when the component unmounts
       clearInterval(timerId);
       window.cancelAnimationFrame(animate);
-      socket.off("startGame");
-      window.location.reload();
+      socket.disconnect();
     };
   }, [socket]); // Re-run the effect if the socket changes
 
   return (
     <section className="health">
       <div className="health__container-div">
-        <HealthBar socket={socket} username={username} />
+        <HealthBar
+          socket={socket}
+          username={username}
+          setShowSnackbar={setShowSnackbar}
+          setFlashMessage={setFlashMessage}
+          setFlashSuccess={setFlashSuccess}
+        />
         <canvas ref={canvasRef}></canvas>
       </div>
     </section>

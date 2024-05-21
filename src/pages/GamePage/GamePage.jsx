@@ -29,12 +29,25 @@ export const GamePage = ({
         setFlashMessage("You must choose a background!");
         setFlashSuccess(false);
         setShowSnackbar(true);
+      } else {
+        const newSocket = io(WEBSOCKET);
+        newSocket.on("connect", () => {
+          newSocket.on("ConnectionRefused", (message) => {
+            setFlashMessage(message);
+            setFlashSuccess(false);
+            setShowSnackbar(true);
+          });
+          newSocket.on("SameUserError", (message) => {
+            setFlashMessage(message);
+            setFlashSuccess(false);
+            setShowSnackbar(true);
+            newSocket.disconnect();
+            navigate("/");
+          });
+          newSocket.emit("setName", { id: newSocket.id, name: username });
+        });
+        setSocket(newSocket);
       }
-      const newSocket = io(WEBSOCKET);
-      newSocket.on("connect", () => {
-        newSocket.emit("setName", { id: newSocket.id, name: username });
-      });
-      setSocket(newSocket);
     }
   }, [isOnGamePage]); // This effect runs when isOnGamePage changes
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./GameHealthBar.scss";
+import { useNavigate } from "react-router-dom";
 
 export const HealthBar = ({ socket, username }) => {
   const [enemyName, setEnemyName] = useState("");
