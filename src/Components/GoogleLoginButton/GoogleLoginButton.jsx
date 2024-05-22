@@ -7,7 +7,7 @@ const GoogleLoginButton = ({ onLoginSuccess, onLoginFailure }) => {
   const handleLogin = async (response) => {
     const { credential } = response;
     try {
-      const res = await axios.post(`${BASE_URL}/oauth/google/callback`, {
+      const res = await axios.post(`${BASE_URL}oauth/google/callback`, {
         token: credential,
       });
       onLoginSuccess(res.data);
