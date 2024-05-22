@@ -82,7 +82,6 @@ export const LoginPage = ({
         setFlashSuccess={setFlashSuccess}
         setFlashMessage={setFlashMessage}
         setShowSnackbar={setShowSnackbar}
-        G
       />
       <GoogleLoginButton
         onLoginSuccess={handleGoogleLoginSuccess}
