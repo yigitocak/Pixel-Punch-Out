@@ -20,6 +20,7 @@ export const LoginPage = ({
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [showVerifyModal, setShowVerifyModal] = useState(false);
+  const AUTH_TOKEN_KEY = "authToken";
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -51,7 +52,7 @@ export const LoginPage = ({
     const { token, username, photoUrl } = data;
 
     // Save the token and update the login state
-    localStorage.setItem("token", token);
+    localStorage.setItem(AUTH_TOKEN_KEY, token);
     setIsLoggedIn(true);
     renderUsername(username);
     navigate(`/profiles/${username}`);
