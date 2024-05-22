@@ -84,16 +84,32 @@
 
   &__signup {
     text-align: center;
-    color: $white;
+    color: $orangered;
     margin-top: 2rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
     font-size: 0.8rem;
+    text-decoration: none;
 
     &:hover {
       color: $darkorange;
+      text-decoration: underline;
     }
   }
 
-  &__error {
+  &__signup-wrapper{
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+
+  &__signup-text {
+    text-align: center;
+    color: $white;
+    margin-top: 2rem;
+    font-size: 0.8rem;
+  }
+
+    &__error {
     color: $orangered;
     margin-top: 1.5rem;
     line-height: 1.25rem;

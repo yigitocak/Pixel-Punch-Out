@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
 import { Helmet } from "react-helmet";
-import GoogleLoginButton from "../../Components/GoogleLoginButton/GoogleLoginButton";
 
 export const LoginPage = ({
   isLoggedIn,
@@ -20,7 +19,7 @@ export const LoginPage = ({
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [showVerifyModal, setShowVerifyModal] = useState(false);
-  const AUTH_TOKEN_KEY = "authToken";
+
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -48,23 +47,6 @@ export const LoginPage = ({
     }
   };
 
-  const handleGoogleLoginSuccess = (data) => {
-    const { token, username, photoUrl } = data;
-
-    // Save the token and update the login state
-    localStorage.setItem(AUTH_TOKEN_KEY, token);
-    setIsLoggedIn(true);
-    renderUsername(username);
-    navigate(`/profiles/${username}`);
-  };
-
-  const handleGoogleLoginFailure = (error) => {
-    console.error("Google sign-in failed: ", error);
-    setFlashMessage("Google sign-in failed. Please try again.");
-    setFlashSuccess(false);
-    setShowSnackbar(true);
-  };
-
   return (
     <section className="login">
       <Helmet>
@@ -82,10 +64,6 @@ export const LoginPage = ({
         setFlashSuccess={setFlashSuccess}
         setFlashMessage={setFlashMessage}
         setShowSnackbar={setShowSnackbar}
-      />
-      <GoogleLoginButton
-        onLoginSuccess={handleGoogleLoginSuccess}
-        onLoginFailure={handleGoogleLoginFailure}
       />
       <VerifyModal
         show={showVerifyModal}
