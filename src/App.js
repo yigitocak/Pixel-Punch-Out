@@ -21,7 +21,7 @@ import { MaintenancePage } from "./pages/MaintenancePage/MaintenancePage";
 import { ResetPage } from "./pages/ResetPage/ResetPage";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
-const MAINTENANCE = true;
+const MAINTENANCE = false;
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -34,8 +34,6 @@ function App() {
   const AUTH_TOKEN_KEY = "authToken";
   const AUTH_ENDPOINT = "auth";
   const [windowWidth, setWindowWidth] = useState(window.innerWidth < 1200);
-
-  console.log(process.env.REACT_APP_CLIENT_ID);
 
   const token = localStorage.getItem(AUTH_TOKEN_KEY);
 
@@ -76,7 +74,7 @@ function App() {
 
   useEffect(() => {
     authenticateToken();
-  }, [token]);
+  }, [authenticateToken, token]);
 
   useEffect(() => {
     const handleResize = () => {
