@@ -46,4 +46,16 @@
     font-weight: bold;
     font-size: 1.15rem;
   }
+
+  &__link {
+    color: $orangered;
+
+    &:hover {
+      color: $darkorange;
+    }
+  }
+
+  &__link-wrapper {
+    margin-top: 2rem;
+  }
 }

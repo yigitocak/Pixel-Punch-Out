@@ -1,5 +1,7 @@
 import "./PoliciesPage.scss";
 import { Helmet } from "react-helmet";
+import {NavLink} from "react-router-dom";
+import React from "react";
 
 export const PoliciesPage = () => {
   return (
@@ -82,6 +84,11 @@ export const PoliciesPage = () => {
           become effective. We encourage you to periodically review this page
           for the latest information on our privacy practices.
         </span>
+        <div className="policies__link-wrapper">
+          <NavLink to="/" className="policies__link">
+            Back
+          </NavLink>
+        </div>
       </div>
     </section>
   );
