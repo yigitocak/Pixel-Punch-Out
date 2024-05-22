@@ -1,7 +1,7 @@
 import "./LeaderboardItem.scss"
 import {NavLink} from "react-router-dom";
 
-export const LeaderboardItem = ({wins,loses,username, winrate, id}) => {
+export const LeaderboardItem = ({wins,losses,username, winrate, id}) => {
     return (
         <>
             <li
@@ -25,7 +25,7 @@ export const LeaderboardItem = ({wins,loses,username, winrate, id}) => {
                 <span
                     className="leaderboard__total"
                 >
-            {loses}
+            {losses}
             </span>
             <span
                     className="leaderboard__info"

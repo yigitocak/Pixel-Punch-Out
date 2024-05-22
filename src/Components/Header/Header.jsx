@@ -27,9 +27,15 @@ export const Header = ({ isLoggedIn, username }) => {
     <header className="header">
       <ul className="header__list">
         <li className="header__item">
-          <NavLink className="header__link" to="/">
-            Home
-          </NavLink>
+          {isLoggedIn ? (
+              <NavLink className="header__link" to="/">
+                Start playing!
+              </NavLink>
+          ) : (
+              <NavLink className="header__link" to="/">
+                Learn to play!
+              </NavLink>
+          )}
         </li>
 
         <li className="header__item">
