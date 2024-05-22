@@ -20,7 +20,7 @@ import { FlashMessage } from "./Components/FlashMessage/FlashMessage";
 import { MaintenancePage } from "./pages/MaintenancePage/MaintenancePage";
 import { ResetPage } from "./pages/ResetPage/ResetPage";
 
-const MAINTENANCE = false;
+const MAINTENANCE = true;
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
