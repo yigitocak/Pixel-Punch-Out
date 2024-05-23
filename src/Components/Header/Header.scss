@@ -78,4 +78,13 @@
 
 .active {
   color: $darkorange;
+  position: relative;
+
+  &:before{
+    content: ">";
+    position: absolute;
+    left: -1.25rem;
+  }
+
+
 }

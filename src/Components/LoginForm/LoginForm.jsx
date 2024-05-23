@@ -1,9 +1,10 @@
 import "./LoginForm.scss";
-import { NavLink } from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
 import { ForgotModal } from "../ForgotModal/ForgotModal";
+import GoogleLoginButton from "../GoogleLoginButton/GoogleLoginButton";
 
 export const LoginForm = ({
   setEmail,
@@ -18,6 +19,8 @@ export const LoginForm = ({
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showForgotModal, setShowForgotModal] = useState(false);
+  const AUTH_TOKEN_KEY = "authToken";
+  const navigate = useNavigate();
 
   const handleForgotPassword = async (email) => {
     if (email === "" || email.trim() === "") {
@@ -33,6 +36,12 @@ export const LoginForm = ({
       setShowSnackbar(true);
     } catch (error) {
       console.error("Password reset failed: ", error);
+      if(error.response && error.response.status === 401 && error.response.data.message === "oAuth2"){
+        setFlashMessage("Password reset is not available for this account because it uses OAuth2 authentication.");
+        setFlashSuccess(false);
+        return setShowSnackbar(true);
+      }
+
       setFlashMessage("Failed to send password reset link. Please try again.");
       setFlashSuccess(false);
       setShowSnackbar(true);
@@ -74,6 +83,12 @@ export const LoginForm = ({
       setShowSnackbar(true);
     } catch (error) {
       console.error("Login failed: ", error);
+      if(error.response && error.response.status === 401 && error.response.data.message === "oAuth2 Required"){
+        setFlashMessage("Please log in using the method you used to create your account.");
+        setFlashSuccess(false);
+        return setShowSnackbar(true);
+      }
+
       if (error.response && error.response.status === 401) {
         setFlashMessage("Sorry, your email or password was incorrect.");
         setFlashSuccess(false);
@@ -84,6 +99,23 @@ export const LoginForm = ({
         setShowSnackbar(true);
       }
     }
+  };
+
+  const handleGoogleLoginSuccess = (data) => {
+    const { token, username, photoUrl } = data;
+
+    // Save the token and update the login state
+    localStorage.setItem(AUTH_TOKEN_KEY, token);
+    setIsLoggedIn(true);
+    renderUsername(username);
+    navigate(`/profiles/${username}`);
+  };
+
+  const handleGoogleLoginFailure = (error) => {
+    console.error("Google sign-in failed: ", error);
+    setFlashMessage("Google sign-in failed. Please try again.");
+    setFlashSuccess(false);
+    setShowSnackbar(true);
   };
 
   return (
@@ -128,9 +160,23 @@ export const LoginForm = ({
           <span className="login__remember">Remember me</span>
         </label>
         <button className="login__button">Login</button>
-        <NavLink className="login__signup" to="/signup">
-          Sign Up now!
-        </NavLink>
+        <div
+          className="login__signup-wrapper"
+        >
+          <span
+              className="login__signup-text"
+          >Don't have an account?</span>
+          <NavLink className="login__signup" to="/signup">
+            Sign Up now!
+          </NavLink>
+          <span className="login__signup-text">or</span>
+        </div>
+        <div>
+          <GoogleLoginButton
+              onLoginSuccess={handleGoogleLoginSuccess}
+              onLoginFailure={handleGoogleLoginFailure}
+          />
+        </div>
       </form>
       <ForgotModal
         show={showForgotModal}

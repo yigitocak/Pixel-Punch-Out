@@ -13,7 +13,7 @@ export const SearchResultsItem = ({ user }) => {
       <img
         className="result__picture"
         src={user.photoUrl}
-        alt="user profile picture"
+        alt="user profile"
       />
       <span className="result__username">{user.username}</span>
       <span className="result__wins">Wins: {user.wins}</span>
@@ -21,7 +21,7 @@ export const SearchResultsItem = ({ user }) => {
       <img
         className="result__link"
         src={arrow}
-        alt="link image"
+        alt="link"
         onClick={handleClick}
       />
     </li>

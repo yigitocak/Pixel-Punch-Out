@@ -20,6 +20,7 @@ export const LoginPage = ({
   const [email, setEmail] = useState("");
   const [showVerifyModal, setShowVerifyModal] = useState(false);
 
+
   useEffect(() => {
     if (isLoggedIn) {
       navigate(`/profiles/${username}`);
@@ -73,3 +74,5 @@ export const LoginPage = ({
     </section>
   );
 };
+
+export default LoginPage;

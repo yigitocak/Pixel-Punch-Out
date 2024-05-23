@@ -6,7 +6,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 30vw;
-  height: 8vh;
+  max-width: 90vw; // Ensure the snackbar doesn't exceed the viewport width
+  min-height: 8vh;
   z-index: 1001;
   line-height: 1.5rem;
   text-align: center;
@@ -22,11 +23,13 @@
   &__success, &__fail {
     background: $green;
     width: 100%;
-    height: 100%;
+    min-height: 8vh;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+    padding: 0.5rem; // Add padding for better spacing
+    box-sizing: border-box; // Include padding in width calculation
   }
 
   &__fail {
@@ -35,5 +38,7 @@
 
   &__message {
     color: white;
+    word-wrap: break-word; // Allow text to wrap to the next line
+    white-space: normal; // Allow normal line breaking rules
   }
 }

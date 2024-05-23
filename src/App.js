@@ -19,8 +19,9 @@ import { NotAvailable } from "./Components/NotAvailable/NotAvailable";
 import { FlashMessage } from "./Components/FlashMessage/FlashMessage";
 import { MaintenancePage } from "./pages/MaintenancePage/MaintenancePage";
 import { ResetPage } from "./pages/ResetPage/ResetPage";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
-const MAINTENANCE = true;
+const MAINTENANCE = false;
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -73,7 +74,7 @@ function App() {
 
   useEffect(() => {
     authenticateToken();
-  }, [token]);
+  }, [authenticateToken, token]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -94,7 +95,7 @@ function App() {
   }
 
   return (
-    <>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
       <BrowserRouter>
         <Header isLoggedIn={isLoggedIn} username={username} />
         <FlashMessage
@@ -191,7 +192,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </GoogleOAuthProvider>
   );
 }
 

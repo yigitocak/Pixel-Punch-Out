@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./HomePage.scss";
-import { useNavigate } from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import { BASE_URL } from "../../utils/utils";
 import { Helmet } from "react-helmet";
 
@@ -107,6 +107,9 @@ export const HomePage = ({ isLoggedIn, setBackgroundId }) => {
               Sign Up Now!
             </button>
           </div>
+          <NavLink to="/privacy-policy" className="home__link">
+            Privacy Policy
+          </NavLink>
         </div>
       </section>
     );
