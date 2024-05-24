@@ -168,7 +168,7 @@ export const ProfilePage = ({
         <title>{`${user?.username || "Loading..."}'s Profile | Pixel Punch-Out`}</title>
         <meta
           name="description"
-          content="Manage your Pixel Punch-Out profile! View comments, change your profile picture, and customize your account to stand out"
+          content= {`Checkout ${user?.username}'s Pixel Punch-Out Profile`}
         />
       </Helmet>
       <div className="profile__container">
