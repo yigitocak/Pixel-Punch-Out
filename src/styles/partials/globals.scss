@@ -10,3 +10,20 @@ body{
   font-family: 'Press Start 2P', serif, Roboto;
   letter-spacing: 0.002rem;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $scrollbar-white;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $whitish-gray;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}

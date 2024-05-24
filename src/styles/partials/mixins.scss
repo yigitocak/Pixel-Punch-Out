@@ -1,7 +1,13 @@
 @use "variables" as *;
 
-@mixin notAvailable {
-  @media screen and (max-width: $notAvailable){
+@mixin tablet {
+  @media screen and (min-width: $breakpoint-tablet){
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $breakpoint-desktop){
     @content;
   }
 }
