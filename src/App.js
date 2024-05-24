@@ -15,7 +15,6 @@ import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { SearchResultsPage } from "./pages/SearchResultsPage/SearchResultsPage";
 import { Footer } from "./Components/Footer/Footer";
 import { GamePage } from "./pages/GamePage/GamePage";
-import { NotAvailable } from "./Components/NotAvailable/NotAvailable";
 import { FlashMessage } from "./Components/FlashMessage/FlashMessage";
 import { MaintenancePage } from "./pages/MaintenancePage/MaintenancePage";
 import { ResetPage } from "./pages/ResetPage/ResetPage";
@@ -33,7 +32,6 @@ function App() {
   const [backgroundId, setBackgroundId] = useState(null);
   const AUTH_TOKEN_KEY = "authToken";
   const AUTH_ENDPOINT = "auth";
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth < 1200);
 
   const token = localStorage.getItem(AUTH_TOKEN_KEY);
 
@@ -76,22 +74,8 @@ function App() {
     authenticateToken();
   }, [authenticateToken, token]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth < 1200);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   if (MAINTENANCE) {
     return <MaintenancePage />;
-  }
-
-  if (windowWidth) {
-    return <NotAvailable setWindowWidth={setWindowWidth} />;
   }
 
   return (
