@@ -1,5 +1,5 @@
 import "./LoginForm.scss";
-import {NavLink, useNavigate} from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
@@ -36,8 +36,14 @@ export const LoginForm = ({
       setShowSnackbar(true);
     } catch (error) {
       console.error("Password reset failed: ", error);
-      if(error.response && error.response.status === 401 && error.response.data.message === "oAuth2"){
-        setFlashMessage("Password reset is not available for this account because it uses OAuth2 authentication.");
+      if (
+        error.response &&
+        error.response.status === 401 &&
+        error.response.data.message === "oAuth2"
+      ) {
+        setFlashMessage(
+          "Password reset is not available for this account because it uses OAuth2 authentication.",
+        );
         setFlashSuccess(false);
         return setShowSnackbar(true);
       }
@@ -81,10 +87,18 @@ export const LoginForm = ({
       setFlashMessage("You've successfully logged in!");
       setFlashSuccess(true);
       setShowSnackbar(true);
+      sessionStorage.setItem("signUser", "");
+      sessionStorage.setItem("signEmail", "");
     } catch (error) {
       console.error("Login failed: ", error);
-      if(error.response && error.response.status === 401 && error.response.data.message === "oAuth2 Required"){
-        setFlashMessage("Please log in using the method you used to create your account.");
+      if (
+        error.response &&
+        error.response.status === 401 &&
+        error.response.data.message === "oAuth2 Required"
+      ) {
+        setFlashMessage(
+          "Please log in using the method you used to create your account.",
+        );
         setFlashSuccess(false);
         return setShowSnackbar(true);
       }
@@ -102,7 +116,7 @@ export const LoginForm = ({
   };
 
   const handleGoogleLoginSuccess = (data) => {
-    const { token, username, photoUrl } = data;
+    const { token, username } = data;
 
     // Save the token and update the login state
     localStorage.setItem(AUTH_TOKEN_KEY, token);
@@ -127,9 +141,12 @@ export const LoginForm = ({
             placeholder="Enter your email"
             type="email"
             className="login__input"
+            id="email"
             autoComplete="email"
             value={emailState}
-            onChange={(e) => setEmailState(e.target.value)}
+            onChange={(e) => {
+              setEmailState(e.target.value);
+            }}
           />
         </label>
 
@@ -137,6 +154,7 @@ export const LoginForm = ({
           Password
           <input
             placeholder="Enter your password"
+            id="password"
             type="password"
             className="login__input"
             autoComplete="current-password"
@@ -154,18 +172,15 @@ export const LoginForm = ({
           <input
             type="checkbox"
             className="login__checkbox"
+            id="checkbox"
             checked={rememberMe}
             onChange={(e) => setRememberMe(e.target.checked)}
           />
           <span className="login__remember">Remember me</span>
         </label>
         <button className="login__button">Login</button>
-        <div
-          className="login__signup-wrapper"
-        >
-          <span
-              className="login__signup-text"
-          >Don't have an account?</span>
+        <div className="login__signup-wrapper">
+          <span className="login__signup-text">Don't have an account?</span>
           <NavLink className="login__signup" to="/signup">
             Sign Up now!
           </NavLink>
@@ -173,8 +188,8 @@ export const LoginForm = ({
         </div>
         <div>
           <GoogleLoginButton
-              onLoginSuccess={handleGoogleLoginSuccess}
-              onLoginFailure={handleGoogleLoginFailure}
+            onLoginSuccess={handleGoogleLoginSuccess}
+            onLoginFailure={handleGoogleLoginFailure}
           />
         </div>
       </form>
