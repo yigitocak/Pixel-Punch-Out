@@ -12,12 +12,12 @@ export const LeaderboardPage = () => {
           content="Explore the Pixel Punch-Out leaderboard to see the top fighters! Track your progress, challenge friends, and compete against players worldwide in this exciting browser-based multiplayer fighting game."
         />
       </Helmet>
-      <h1 className="leaderboard__top">Top 10</h1>
       <div className="leaderboard__container">
+        <h1 className="leaderboard__top">Top 10</h1>
         <div className="leaderboard__wrapper">
           <h2 className="leaderboard__title">Username</h2>
-          <h2 className="leaderboard__title">Wins</h2>
-          <h2 className="leaderboard__title">Losses</h2>
+          <h2 className="leaderboard__title win">Wins</h2>
+          <h2 className="leaderboard__title losses">Losses</h2>
           <h2 className="leaderboard__title">Win Rate</h2>
         </div>
         <LeaderboardList />

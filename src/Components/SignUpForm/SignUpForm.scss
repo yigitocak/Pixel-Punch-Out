@@ -5,8 +5,8 @@
   &__form{
     display: flex;
     flex-direction: column;
-    padding: 1.5rem 3rem;
-    max-width: 40vw;
+    padding: 1rem 3rem 1.5rem 3rem;
+    max-width: 45vw;
     width: 100%;
     background: $gray;
     border: 3px solid $darkorange;
@@ -39,8 +39,8 @@
 
   &__checkbox {
     margin: 0 1rem 0 0;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 
   &__remember {

@@ -1,5 +1,5 @@
 import "./SignUpForm.scss";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import validator from "validator";
 import axios from "axios";
@@ -18,7 +18,8 @@ export const SignUpForm = ({
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
 
-  const history = useNavigate();
+  const signEmail = sessionStorage.getItem("signEmail");
+  const signUser = sessionStorage.getItem("signUser");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,7 +51,7 @@ export const SignUpForm = ({
       setFlashSuccess(false);
       return setShowSnackbar(true);
     }
-    if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(username)) {
+    if (/[!@#$%^&*()_+\-=\\[]{};':"\\|,.<>\/?]+/.test(username)) {
       setFlashMessage("Username should not contain special characters.");
       setFlashSuccess(false);
       return setShowSnackbar(true);
@@ -62,7 +63,7 @@ export const SignUpForm = ({
     }
     if (
       !/[A-Z]/.test(password) ||
-      !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)
+      !/[!@#$%^&*()_+\-=\\[]{};':"\\|,.<>\/?]+/.test(password)
     ) {
       setFlashMessage(
         "Password must include at least one uppercase letter and one special character.",
@@ -77,13 +78,16 @@ export const SignUpForm = ({
     }
 
     try {
-      const response = await axios.post(`${BASE_URL}auth/signup`, {
+      await axios.post(`${BASE_URL}auth/signup`, {
         email,
         username,
         password,
       });
       setEmail(email);
       setShowVerifyModal(true);
+      sessionStorage.setItem("signUser", "");
+      sessionStorage.setItem("signEmail", "");
+      sessionStorage.setItem("loginEmail", "");
     } catch (error) {
       console.error("Signup failed: ", error);
       if (error.response.status === 409) {
@@ -107,9 +111,13 @@ export const SignUpForm = ({
           type="text"
           className="signup__input"
           autoComplete="email"
+          id="signup-email"
           name="email"
-          value={email}
-          onChange={(e) => setEmailState(e.target.value)}
+          value={signEmail}
+          onChange={(e) => {
+            setEmailState(e.target.value);
+            sessionStorage.setItem("signEmail", e.target.value);
+          }}
         />
       </label>
 
@@ -120,8 +128,12 @@ export const SignUpForm = ({
           type="text"
           className="signup__input"
           autoComplete="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          id="signup-username"
+          value={signUser}
+          onChange={(e) => {
+            setUsername(e.target.value);
+            sessionStorage.setItem("signUser", e.target.value);
+          }}
         />
       </label>
 
@@ -132,6 +144,7 @@ export const SignUpForm = ({
           type="password"
           className="signup__input"
           autoComplete="new-password"
+          id="signup-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -143,6 +156,7 @@ export const SignUpForm = ({
           placeholder="Re-enter your password"
           type="password"
           className="signup__input"
+          id="confirm-password"
           autoComplete="new-password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
@@ -154,6 +168,7 @@ export const SignUpForm = ({
           type="checkbox"
           className="signup__checkbox"
           name="checkbox"
+          id="checkbox-signup"
           checked={isChecked}
           onChange={(e) => setIsChecked(e.target.checked)}
         />
