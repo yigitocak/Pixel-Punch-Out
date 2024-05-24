@@ -25,8 +25,9 @@ export const LeaderboardList = () => {
 
   return (
     <ul className="leaderboard__list">
-      {data.map((dataItem) => (
+      {data.map((dataItem, index) => (
         <LeaderboardItem
+          index={index}
           key={dataItem.username}
           username={dataItem.username}
           wins={dataItem.wins}

@@ -1,7 +1,6 @@
 @import "../../styles/partials/colors";
 
 .leaderboard {
-
   &__item {
     display: flex;
     justify-content: space-between;
@@ -9,15 +8,15 @@
     align-items: center;
   }
 
-  &__info, &__total {
+  &__info, &__total, &__index {
     color: $white;
-    width: 33.3%;
+    width: 25%; /* Adjusted for better alignment */
     text-align: center;
   }
 
-  &__total {
-    position: relative;
-    left: -1.75rem;
+  &__index {
+    width: 10%; /* Ensure index is left aligned */
+    text-align: left;
   }
 
   &__username {
@@ -28,5 +27,92 @@
     &:hover {
       color: $darkorange;
     }
+  }
+
+  .golden-effect .leaderboard__index,
+  .golden-effect .leaderboard__username,
+  .golden-effect .leaderboard__total,
+  .golden-effect .leaderboard__info {
+    color: gold;
+    text-shadow: 0 0 5px rgba(255, 223, 0, 0.75),
+    0 0 10px rgba(255, 223, 0, 0.5),
+    0 0 15px rgba(255, 223, 0, 0.25);
+    animation: shimmer-gold 2s infinite;
+  }
+
+  .silver-effect .leaderboard__index,
+  .silver-effect .leaderboard__username,
+  .silver-effect .leaderboard__total,
+  .silver-effect .leaderboard__info {
+    color: silver;
+    text-shadow: 0 0 5px rgba(192, 192, 192, 0.75),
+    0 0 10px rgba(192, 192, 192, 0.5),
+    0 0 15px rgba(192, 192, 192, 0.25);
+    animation: shimmer-silver 2s infinite;
+  }
+
+  .bronze-effect .leaderboard__index,
+  .bronze-effect .leaderboard__username,
+  .bronze-effect .leaderboard__total,
+  .bronze-effect .leaderboard__info {
+    color: #CD7F32;
+    text-shadow: 0 0 5px rgba(205, 127, 50, 0.75),
+    0 0 10px rgba(205, 127, 50, 0.5),
+    0 0 15px rgba(205, 127, 50, 0.25);
+    animation: shimmer-bronze 2s infinite;
+  }
+}
+
+@keyframes shimmer-gold {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 223, 0, 0.75),
+    0 0 10px rgba(255, 223, 0, 0.5),
+    0 0 15px rgba(255, 223, 0, 0.25);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(255, 223, 0, 0.75),
+    0 0 20px rgba(255, 223, 0, 0.5),
+    0 0 30px rgba(255, 223, 0, 0.25);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(255, 223, 0, 0.75),
+    0 0 10px rgba(255, 223, 0, 0.5),
+    0 0 15px rgba(255, 223, 0, 0.25);
+  }
+}
+
+@keyframes shimmer-silver {
+  0% {
+    text-shadow: 0 0 5px rgba(192, 192, 192, 0.75),
+    0 0 10px rgba(192, 192, 192, 0.5),
+    0 0 15px rgba(192, 192, 192, 0.25);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(192, 192, 192, 0.75),
+    0 0 20px rgba(192, 192, 192, 0.5),
+    0 0 30px rgba(192, 192, 192, 0.25);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(192, 192, 192, 0.75),
+    0 0 10px rgba(192, 192, 192, 0.5),
+    0 0 15px rgba(192, 192, 192, 0.25);
+  }
+}
+
+@keyframes shimmer-bronze {
+  0% {
+    text-shadow: 0 0 5px rgba(205, 127, 50, 0.75),
+    0 0 10px rgba(205, 127, 50, 0.5),
+    0 0 15px rgba(205, 127, 50, 0.25);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(205, 127, 50, 0.75),
+    0 0 20px rgba(205, 127, 50, 0.5),
+    0 0 30px rgba(205, 127, 50, 0.25);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(205, 127, 50, 0.75),
+    0 0 10px rgba(205, 127, 50, 0.5),
+    0 0 15px rgba(205, 127, 50, 0.25);
   }
 }

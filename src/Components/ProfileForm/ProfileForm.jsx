@@ -34,7 +34,7 @@ export const ProfileForm = ({
     }
 
     try {
-      const response = await axios.post(
+      await axios.post(
         `${BASE_URL}profiles/${profileId}/comments`,
         {
           commentUsername: username,
@@ -80,6 +80,7 @@ export const ProfileForm = ({
           type="text"
           className="profile__input"
           autoComplete="email"
+          id="comment"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
