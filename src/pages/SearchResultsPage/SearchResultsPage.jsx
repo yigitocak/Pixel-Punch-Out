@@ -43,6 +43,7 @@ export const SearchResultsPage = ({ setQueryParam }) => {
     <section className="result">
       <Helmet>
         <title>Search Results | Pixel Punch-Out</title>
+        <meta name="description" content={`Search Results for ${query}`}/>
       </Helmet>
       <h1 className="result__title">Search Results</h1>
       {filteredUsers.length ? (

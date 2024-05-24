@@ -1,6 +1,6 @@
 import "./LeaderboardPage.scss";
 import { LeaderboardList } from "../../Components/LeaderboardList/LeaderboardList";
-import helmet, { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet";
 
 export const LeaderboardPage = () => {
   return (
