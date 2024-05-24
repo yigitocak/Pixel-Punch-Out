@@ -38,7 +38,7 @@ export const Header = ({ isLoggedIn, username }) => {
           )}
         </li>
 
-        <li className="header__item">
+        <li className="header__item header__item--searchbar">
           <form className="header__search-bar" onSubmit={handleSubmit}>
             <input
               type="search"

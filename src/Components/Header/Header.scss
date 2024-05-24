@@ -6,13 +6,7 @@
 
 .header{
   background: $gray;
-  max-height: 70vh;
-  height: 100%;
   width: 100%;
-
-  @include notAvailable {
-    display: none;
-  }
 
   &__wrapper{
     display: flex;
@@ -25,8 +19,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
-    width: 100%;
   }
 
   &__leaderboard {
@@ -54,6 +46,7 @@
 
   &__item {
     padding: 2.5rem 4rem;
+
   }
 
   &__search-bar {
@@ -61,7 +54,6 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 1rem;
-    margin-right: -18vw;
     background: $white;
     border-radius: 12px;
   }
