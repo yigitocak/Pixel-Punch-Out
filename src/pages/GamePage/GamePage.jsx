@@ -17,6 +17,10 @@ export const GamePage = ({
   const [isOnGamePage, setIsOnGamePage] = useState(false);
   const navigate = useNavigate();
 
+  const isMobile = () => {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+};
+
   useEffect(() => {
     setIsOnGamePage(true); // Set true when component mounts
     return () => setIsOnGamePage(false); // Set false when component unmounts
@@ -24,7 +28,12 @@ export const GamePage = ({
 
   useEffect(() => {
     if (isOnGamePage) {
-      if (!backgroundId) {
+      if (isMobile()) {
+        setFlashMessage("You can't play on mobile!");
+        setFlashSuccess(false);
+        setShowSnackbar(true);
+        navigate("/");
+      } else if (!backgroundId) {
         navigate("/");
         setFlashMessage("You must choose a background!");
         setFlashSuccess(false);
@@ -49,7 +58,7 @@ export const GamePage = ({
         setSocket(newSocket);
       }
     }
-  }, [isOnGamePage]); // This effect runs when isOnGamePage changes
+  }, [isOnGamePage]);
 
   if (!isLoggedIn) {
     return (
