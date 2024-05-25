@@ -69,6 +69,11 @@
     margin: 1rem 3rem;
     cursor: pointer;
     border-radius: 10px;
+
+    @include desktop {
+      height: 120px;
+      width: 240px;
+    }
   }
 
   &__map--selected {
