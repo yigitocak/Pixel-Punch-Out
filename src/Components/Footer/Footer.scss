@@ -1,23 +1,25 @@
 @import "../../styles/partials/colors";
+@import "../../styles/partials/mixins";
 
 .audio {
   position: fixed;
-  bottom: 1rem;
   right: 0.5rem;
   z-index: 2003;
+  display: block;
+  bottom: 1rem;
 
   &__name {
     color: $white;
     position: absolute;
-    top: -3rem;
     border-radius: 25px;
-    font-size: 0.65rem;
     background: $black;
-    padding: 0.5rem 1rem;
     line-height: 1rem;
     text-align: center;
     width: 100%;
     border: $darkorange 2px solid;
+    top: -3rem;
+    font-size: 0.65rem;
+    padding: 0.5rem 1rem;
   }
 
   &__controls {
@@ -30,8 +32,9 @@
     background: $darkorange;
     border: none;
     border-radius: 10px;
-    margin: 0.5rem;
     cursor: pointer;
+    margin: 0.5rem;
+    padding: 1px 6px;
 
     &:hover {
       opacity: 0.8;
@@ -51,9 +54,11 @@
   }
 
   &__volume-slider {
+    display: block;
     width: 100%;
     max-width: 200px;
     appearance: none;
+    margin-top: 0.5rem;
     height: 5px;
     background: white;
     border-radius: 5px;
@@ -63,8 +68,8 @@
 
     &::-webkit-slider-thumb {
       appearance: none;
-      width: 15px;
-      height: 15px;
+      width: 12px;
+      height: 12px;
       background: $darkorange;
       border-radius: 50%;
       cursor: pointer;
