@@ -1,0 +1,103 @@
+@import "../../styles/partials/colors";
+@import "../../styles/partials/mixins";
+
+.mobile-header {
+  background: $gray;
+  width: 100%;
+  position: relative;
+  z-index: 3000;
+
+  &__title {
+    position: absolute;
+    top: 40%;
+    left: 4.75rem;
+    color: $white;
+  }
+
+  &__image{
+    position: absolute;
+    left: 0.5rem;
+    top: 0.25rem;
+    height: 60px;
+  }
+
+  &__menu-button {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 1rem;
+    background: none;
+    border: none;
+  }
+
+  &__menu-image {
+    height: 35px;
+  }
+
+  &__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 0.5rem;
+    background: $gray;
+    border-top: 1px solid $white;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid $white;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__item-search {
+    padding: 0 0 0.5rem 0;
+  }
+
+  &__link {
+    color: $white;
+    text-decoration: none;
+
+    &:hover {
+      color: $orangered;
+    }
+  }
+
+  &__search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background: $white;
+    border-radius: 12px;
+  }
+
+  &__input {
+    outline: none;
+    border: none;
+    font-family: 'Press Start 2P', serif, Roboto;
+    min-width: 20vw;
+
+    &::placeholder {
+      font-family: 'Press Start 2P', serif, Roboto;
+    }
+  }
+
+  &__input-button {
+    border: none;
+    cursor: pointer;
+    border-radius: 12px;
+    margin-left: 1rem;
+    background: transparent;
+  }
+}
