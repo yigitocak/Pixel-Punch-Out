@@ -57,7 +57,7 @@ export const SignUpForm = ({
       setFlashSuccess(false);
       return setShowSnackbar(true);
     }
-    if (/[!@#$%^&*()_+\-=\\[]{};':"\\|,.<>\/?]+/.test(username)) {
+    if (/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/.test(username)) {
       setFlashMessage("Username should not contain special characters.");
       setFlashSuccess(false);
       return setShowSnackbar(true);
@@ -69,7 +69,7 @@ export const SignUpForm = ({
     }
     if (
       !/[A-Z]/.test(password) ||
-      !/[!@#$%^&*()_+\-=\\[]{};':"\\|,.<>\/?]+/.test(password)
+      !/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/.test(password)
     ) {
       setFlashMessage(
         "Password must include at least one uppercase letter and one special character.",
