@@ -1,51 +1,86 @@
 @import "../../styles/partials/colors";
+@import "../../styles/partials/mixins";
 
 .result {
   &__item {
     background: $gray;
-    min-width: 51vw;
-    min-height: 24vh;
-    margin: 2rem;
     border: 3px solid $darkorange;
     border-radius: 20px;
     position: relative;
+    width: 100%;
+    min-height: 15vh;
+    margin-bottom: 1rem;
+
+    @include desktop {
+      margin: 2rem;
+      min-width: 51vw;
+      min-height: 24vh;
+    }
   }
 
   &__picture {
-    height: 125px;
-    width: 125px;
     border-radius: 50%;
-    margin: 2.5rem;
+    height: 75px;
+    width: 75px;
+    margin: 1.5rem;
+
+    @include desktop {
+      height: 125px;
+      width: 125px;
+      margin: 2.5rem;
+    }
   }
 
   &__username {
     position: absolute;
-    font-size: 2rem;
-    top: 2.5rem;
     color: $darkorange;
+    font-size: 1.20rem;
+    top: 1.5rem;
+
+    @include desktop {
+      font-size: 2rem;
+      top: 2.5rem;
+    }
   }
 
   &__wins {
-    position: absolute;
-    font-size: 1.25rem;
-    top: 7rem;
     color: $white;
+    font-size: 0.8rem;
+    position: absolute;
+    top: 4rem;
+    @include desktop {
+      font-size: 1.25rem;
+      top: 7rem;
+    }
   }
 
   &__losses {
-    position: absolute;
-    font-size: 1.25rem;
-    top: 7rem;
-    right: 5rem;
     color: $white;
+    font-size: 0.8rem;
+    position: absolute;
+    top: 4rem;
+    right: 2rem;
+
+    @include desktop {
+      position: absolute;
+      font-size: 1.25rem;
+      top: 7rem;
+      right: 5rem;
+    }
   }
 
   &__link {
-    height: 50px;
     position: absolute;
     right: 1rem;
     bottom: 0.5rem;
+    height: 25px;
     cursor: pointer;
+
+    @include desktop {
+      height: 40px;
+      right: 1.25rem;
+      bottom: 1rem;
+    }
 
     &:hover {
       opacity: 0.7;

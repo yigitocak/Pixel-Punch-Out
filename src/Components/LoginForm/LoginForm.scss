@@ -1,23 +1,34 @@
 @import "../../styles/partials/colors";
+@import '../../styles/partials/mixins';
 
 .login {
 
   &__form{
     display: flex;
     flex-direction: column;
-    padding: 1rem 3rem 2rem 3rem;
-    max-width: 40vw;
     width: 100%;
-    background: $gray;
-    border: 3px solid $darkorange;
-    border-radius: 30px;
+    padding: 1rem;
+
+    @include desktop{
+      padding: 1rem 3rem 2rem 3rem;
+      max-width: 40vw;
+      background: $gray;
+      border: 3px solid $darkorange;
+      border-radius: 30px;
+    }
   }
 
   &__label{
     display: flex;
     flex-direction: column;
     color: $darkorange;
-    padding: 1.5rem 0;
+    padding: 0 0 1.5rem 0;
+    font-size: 1.25rem;
+
+    @include desktop {
+      font-size: 1rem;
+      padding: 1.5rem 0;
+    }
   }
 
   &__input {
@@ -50,13 +61,23 @@
   }
 
   &__checkbox {
-    margin: 0 1rem 0 0;
-    width: 18px;
-    height: 18px;
+    margin: 0 0.75rem 0 0;
+    width: 14px;
+    height: 14px;
+
+    @include desktop {
+      margin: 0 1rem 0 0;
+      width: 18px;
+      height: 18px;
+    }
   }
 
   &__remember {
     color: $white;
+    font-size: 0.80rem;
+    @include desktop {
+      font-size: 1rem;
+    }
   }
 
   &__button{
@@ -65,12 +86,16 @@
     color: $white;
     border: none;
     border-radius: 25px;
-    width: 35%;
+    width: 100%;
     text-align: center;
     max-height: 50vh;
     padding: 0.75rem;
     height: 100%;
     margin-top: 1rem;
+
+    @include desktop {
+      width: 35%;
+    }
 
     &:hover {
       opacity: 0.8;
@@ -109,9 +134,31 @@
     font-size: 0.8rem;
   }
 
-    &__error {
+  &__error {
     color: $orangered;
     margin-top: 1.5rem;
     line-height: 1.25rem;
+  }
+
+  &__or {
+    color: $white;
+    font-size: 0.8rem;
+    padding: 0 1rem;
+  }
+
+  &__or-bar {
+    height: 2px;
+    width: 100%;
+    background: $white;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__or-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 1rem;
   }
 }

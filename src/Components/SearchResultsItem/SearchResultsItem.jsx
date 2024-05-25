@@ -10,11 +10,7 @@ export const SearchResultsItem = ({ user }) => {
   };
   return (
     <li className="result__item" key={user.id}>
-      <img
-        className="result__picture"
-        src={user.photoUrl}
-        alt="user profile"
-      />
+      <img className="result__picture" src={user.photoUrl} alt="user profile" />
       <span className="result__username">{user.username}</span>
       <span className="result__wins">Wins: {user.wins}</span>
       <span className="result__losses">Losses: {user.losses}</span>

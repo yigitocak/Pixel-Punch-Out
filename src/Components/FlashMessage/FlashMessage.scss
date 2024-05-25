@@ -1,19 +1,23 @@
 @import "../../styles/partials/colors";
+@import "../../styles/partials/mixins";
 
 .snackbar {
   position: fixed;
   top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 30vw;
-  max-width: 90vw; // Ensure the snackbar doesn't exceed the viewport width
   min-height: 8vh;
-  z-index: 1001;
+  width: 80%;
+  z-index: 5001;
   line-height: 1.5rem;
   text-align: center;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  @include desktop {
+    width: 30vw;
+    max-width: 90vw; // Ensure the snackbar doesn't exceed the viewport width
+  }
 
   &.show {
     opacity: 1;

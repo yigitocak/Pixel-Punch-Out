@@ -1,4 +1,5 @@
 @import "../../styles/partials/colors";
+@import "../../styles/partials/mixins";
 
 .login {
   display: flex;
@@ -6,5 +7,8 @@
   align-items: center;
   max-height: 120vh;
   height: 100%;
-  margin-top: 4rem;
+  margin-top: 1rem;
+  @include desktop {
+    margin-top: 4rem;
+  }
 }
