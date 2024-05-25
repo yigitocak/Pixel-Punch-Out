@@ -29,7 +29,7 @@ export const GamePage = ({
   useEffect(() => {
     if (isOnGamePage) {
       if (isMobile()) {
-        setFlashMessage("Mobile game play is not yet supported!");
+        setFlashMessage("Mobile gameplay is not yet supported!");
         setFlashSuccess(false);
         setShowSnackbar(true);
         navigate("/");
