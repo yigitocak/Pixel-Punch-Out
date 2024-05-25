@@ -18,8 +18,8 @@ export const GamePage = ({
   const navigate = useNavigate();
 
   const isMobile = () => {
-  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-};
+    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  };
 
   useEffect(() => {
     setIsOnGamePage(true); // Set true when component mounts
@@ -29,7 +29,7 @@ export const GamePage = ({
   useEffect(() => {
     if (isOnGamePage) {
       if (isMobile()) {
-        setFlashMessage("You can't play on mobile!");
+        setFlashMessage("Mobile game play is not yet supported!");
         setFlashSuccess(false);
         setShowSnackbar(true);
         navigate("/");
