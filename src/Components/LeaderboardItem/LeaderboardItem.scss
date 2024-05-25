@@ -1,4 +1,5 @@
 @import "../../styles/partials/colors";
+@import "../../styles/partials/mixins";
 
 .leaderboard {
   &__item {
@@ -6,17 +7,45 @@
     justify-content: space-between;
     padding: 0.5rem 1rem;
     align-items: center;
+    font-size: 0.65rem;
+
+    @include desktop {
+      font-size: 1rem;
+    }
   }
 
-  &__info, &__total, &__index {
+  &__info,
+  &__total,
+  &__index {
     color: $white;
-    width: 25%; /* Adjusted for better alignment */
     text-align: center;
+
+    @include desktop {
+      width: 25%;
+    }
+  }
+
+  &__info {
+    width: 30%;
+    @include desktop {
+      width: 25%;
+    }
+  }
+
+  &__total {
+    width: 8%;
+    @include desktop {
+      width: 25%;
+    }
   }
 
   &__index {
-    width: 10%; /* Ensure index is left aligned */
     text-align: left;
+    width: 0;
+
+    @include desktop {
+      width: 5%;
+    }
   }
 
   &__username {
@@ -34,9 +63,7 @@
   .golden-effect .leaderboard__total,
   .golden-effect .leaderboard__info {
     color: gold;
-    text-shadow: 0 0 5px rgba(255, 223, 0, 0.75),
-    0 0 10px rgba(255, 223, 0, 0.5),
-    0 0 15px rgba(255, 223, 0, 0.25);
+    text-shadow: 0 0 5px rgba(255, 223, 0, 0.75), 0 0 10px rgba(255, 223, 0, 0.5), 0 0 15px rgba(255, 223, 0, 0.25);
     animation: shimmer-gold 2s infinite;
   }
 
@@ -45,9 +72,7 @@
   .silver-effect .leaderboard__total,
   .silver-effect .leaderboard__info {
     color: silver;
-    text-shadow: 0 0 5px rgba(192, 192, 192, 0.75),
-    0 0 10px rgba(192, 192, 192, 0.5),
-    0 0 15px rgba(192, 192, 192, 0.25);
+    text-shadow: 0 0 5px rgba(192, 192, 192, 0.75), 0 0 10px rgba(192, 192, 192, 0.5), 0 0 15px rgba(192, 192, 192, 0.25);
     animation: shimmer-silver 2s infinite;
   }
 
@@ -56,63 +81,67 @@
   .bronze-effect .leaderboard__total,
   .bronze-effect .leaderboard__info {
     color: #CD7F32;
-    text-shadow: 0 0 5px rgba(205, 127, 50, 0.75),
-    0 0 10px rgba(205, 127, 50, 0.5),
-    0 0 15px rgba(205, 127, 50, 0.25);
+    text-shadow: 0 0 5px rgba(205, 127, 50, 0.75), 0 0 10px rgba(205, 127, 50, 0.5), 0 0 15px rgba(205, 127, 50, 0.25);
     animation: shimmer-bronze 2s infinite;
+  }
+
+  &__title {
+    @include desktop {
+      font-size: 1rem;
+    }
+
+    &.win::after {
+      content: "Wins"; // Default content for non-mobile
+    }
+
+    &.losses::after {
+      content: "Losses"; // Default content for non-mobile
+    }
+
+    @media (max-width: 768px) {
+      &.win::after {
+        content: "W"; // Content for mobile
+      }
+
+      &.losses::after {
+        content: "L"; // Content for mobile
+      }
+    }
   }
 }
 
 @keyframes shimmer-gold {
   0% {
-    text-shadow: 0 0 5px rgba(255, 223, 0, 0.75),
-    0 0 10px rgba(255, 223, 0, 0.5),
-    0 0 15px rgba(255, 223, 0, 0.25);
+    text-shadow: 0 0 5px rgba(255, 223, 0, 0.75), 0 0 10px rgba(255, 223, 0, 0.5), 0 0 15px rgba(255, 223, 0, 0.25);
   }
   50% {
-    text-shadow: 0 0 10px rgba(255, 223, 0, 0.75),
-    0 0 20px rgba(255, 223, 0, 0.5),
-    0 0 30px rgba(255, 223, 0, 0.25);
+    text-shadow: 0 0 10px rgba(255, 223, 0, 0.75), 0 0 20px rgba(255, 223, 0, 0.5), 0 0 30px rgba(255, 223, 0, 0.25);
   }
   100% {
-    text-shadow: 0 0 5px rgba(255, 223, 0, 0.75),
-    0 0 10px rgba(255, 223, 0, 0.5),
-    0 0 15px rgba(255, 223, 0, 0.25);
+    text-shadow: 0 0 5px rgba(255, 223, 0, 0.75), 0 0 10px rgba(255, 223, 0, 0.5), 0 0 15px rgba(255, 223, 0, 0.25);
   }
 }
 
 @keyframes shimmer-silver {
   0% {
-    text-shadow: 0 0 5px rgba(192, 192, 192, 0.75),
-    0 0 10px rgba(192, 192, 192, 0.5),
-    0 0 15px rgba(192, 192, 192, 0.25);
+    text-shadow: 0 0 5px rgba(192, 192, 192, 0.75), 0 0 10px rgba(192, 192, 192, 0.5), 0 0 15px rgba(192, 192, 192, 0.25);
   }
   50% {
-    text-shadow: 0 0 10px rgba(192, 192, 192, 0.75),
-    0 0 20px rgba(192, 192, 192, 0.5),
-    0 0 30px rgba(192, 192, 192, 0.25);
+    text-shadow: 0 0 10px rgba(192, 192, 192, 0.75), 0 0 20px rgba(192, 192, 192, 0.5), 0 0 30px rgba(192, 192, 192, 0.25);
   }
   100% {
-    text-shadow: 0 0 5px rgba(192, 192, 192, 0.75),
-    0 0 10px rgba(192, 192, 192, 0.5),
-    0 0 15px rgba(192, 192, 192, 0.25);
+    text-shadow: 0 0 5px rgba(192, 192, 192, 0.75), 0 0 10px rgba(192, 192, 192, 0.5), 0 0 15px rgba(192, 192, 192, 0.25);
   }
 }
 
 @keyframes shimmer-bronze {
   0% {
-    text-shadow: 0 0 5px rgba(205, 127, 50, 0.75),
-    0 0 10px rgba(205, 127, 50, 0.5),
-    0 0 15px rgba(205, 127, 50, 0.25);
+    text-shadow: 0 0 5px rgba(205, 127, 50, 0.75), 0 0 10px rgba(205, 127, 50, 0.5), 0 0 15px rgba(205, 127, 50, 0.25);
   }
   50% {
-    text-shadow: 0 0 10px rgba(205, 127, 50, 0.75),
-    0 0 20px rgba(205, 127, 50, 0.5),
-    0 0 30px rgba(205, 127, 50, 0.25);
+    text-shadow: 0 0 10px rgba(205, 127, 50, 0.75), 0 0 20px rgba(205, 127, 50, 0.5), 0 0 30px rgba(205, 127, 50, 0.25);
   }
   100% {
-    text-shadow: 0 0 5px rgba(205, 127, 50, 0.75),
-    0 0 10px rgba(205, 127, 50, 0.5),
-    0 0 15px rgba(205, 127, 50, 0.25);
+    text-shadow: 0 0 5px rgba(205, 127, 50, 0.75), 0 0 10px rgba(205, 127, 50, 0.5), 0 0 15px rgba(205, 127, 50, 0.25);
   }
 }

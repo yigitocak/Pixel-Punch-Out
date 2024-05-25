@@ -20,7 +20,6 @@ export const LoginPage = ({
   const [email, setEmail] = useState("");
   const [showVerifyModal, setShowVerifyModal] = useState(false);
 
-
   useEffect(() => {
     if (isLoggedIn) {
       navigate(`/profiles/${username}`);
@@ -29,7 +28,7 @@ export const LoginPage = ({
 
   const handleVerification = async (code) => {
     try {
-      const response = await axios.post(`${BASE_URL}auth/verify`, {
+      await axios.post(`${BASE_URL}auth/verify`, {
         email,
         code,
       });

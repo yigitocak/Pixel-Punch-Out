@@ -1,10 +1,12 @@
 import "./Header.scss";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import search from "../../assets/images/search.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { MobileHeader } from "../MobileHeader/MobileHeader";
 
 export const Header = ({ isLoggedIn, username }) => {
   const [input, setInput] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1280); // State to track screen size
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -23,18 +25,31 @@ export const Header = ({ isLoggedIn, username }) => {
     navigate(`/search?query=${input}`);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1280);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  if (isMobile) {
+    return <MobileHeader isLoggedIn={isLoggedIn} username={username} />;
+  }
+
   return (
     <header className="header">
       <ul className="header__list">
         <li className="header__item">
           {isLoggedIn ? (
-              <NavLink className="header__link" to="/">
-                Start playing!
-              </NavLink>
+            <NavLink className="header__link" to="/">
+              Start playing!
+            </NavLink>
           ) : (
-              <NavLink className="header__link" to="/">
-                Learn to play!
-              </NavLink>
+            <NavLink className="header__link" to="/">
+              Learn to play!
+            </NavLink>
           )}
         </li>
 

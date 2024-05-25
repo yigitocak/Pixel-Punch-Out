@@ -13,6 +13,8 @@ export const SignUpPage = ({
   setFlashMessage,
   setFlashSuccess,
   setShowSnackbar,
+  setIsLoggedIn,
+  renderUsername,
 }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -54,6 +56,8 @@ export const SignUpPage = ({
           setFlashMessage={setFlashMessage}
           setFlashSuccess={setFlashSuccess}
           setShowSnackbar={setShowSnackbar}
+          setIsLoggedIn={setIsLoggedIn}
+          renderUsername={renderUsername}
         />
         <VerifyModal
           show={showVerifyModal}

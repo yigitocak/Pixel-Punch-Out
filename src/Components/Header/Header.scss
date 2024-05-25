@@ -1,8 +1,5 @@
-@use "../../styles/partials/variables" as *;
-@use "../../styles/partials/globals" as *;
-@use "../../styles/partials/mixins" as *;
 @import "../../styles/partials/colors";
-
+@import "../../styles/partials/mixins";
 
 .header{
   background: $gray;
@@ -45,8 +42,11 @@
   }
 
   &__item {
-    padding: 2.5rem 4rem;
+    padding: 1.5rem 2rem;
 
+    @include desktop {
+      padding: 2.5rem 4rem;
+    }
   }
 
   &__search-bar {
@@ -73,10 +73,10 @@
   position: relative;
 
   &:before{
-    content: ">";
-    position: absolute;
-    left: -1.25rem;
+    @include desktop {
+      content: ">";
+      position: absolute;
+      left: -1.25rem;
+    }
   }
-
-
 }

@@ -184,7 +184,11 @@ export const LoginForm = ({
           <NavLink className="login__signup" to="/signup">
             Sign Up now!
           </NavLink>
-          <span className="login__signup-text">or</span>
+        </div>
+        <div className="login__or-container">
+          <span className="login__or-bar"></span>
+          <span className="login__or">or</span>
+          <span className="login__or-bar"></span>
         </div>
         <div>
           <GoogleLoginButton
