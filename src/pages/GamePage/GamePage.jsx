@@ -17,8 +17,10 @@ export const GamePage = ({
   const [isOnGamePage, setIsOnGamePage] = useState(false);
   const navigate = useNavigate();
 
-  const isMobile = () => {
-    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isPC = () => {
+    return !/Mobi|Android|iPhone|iPad|iPod|Windows Phone|webOS|BlackBerry|Opera Mini|IEMobile/i.test(
+      navigator.userAgent,
+    );
   };
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export const GamePage = ({
 
   useEffect(() => {
     if (isOnGamePage) {
-      if (isMobile()) {
+      if (!isPC()) {
         setFlashMessage("Mobile gameplay is not yet supported!");
         setFlashSuccess(false);
         setShowSnackbar(true);
