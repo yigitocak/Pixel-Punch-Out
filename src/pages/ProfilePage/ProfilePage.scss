@@ -1,4 +1,5 @@
 @import "../../styles/partials/colors";
+@import "../../styles/partials/mixins";
 
 .profile {
   display: flex;
@@ -7,16 +8,20 @@
   align-items: center;
 
   &__container{
-    display: flex;
-    flex-direction: column;
-    padding: 2.5rem 4rem 0 4rem;
-    margin-top: 3rem;
-    max-width: 45vw;
-    width: 100%;
-    background: $gray;
-    border: 3px solid $darkorange;
-    border-radius: 30px;
-    position: relative;
+    padding: 1rem;
+
+    @include desktop {
+      display: flex;
+      flex-direction: column;
+      padding: 2.5rem 4rem 0 4rem;
+      margin-top: 3rem;
+      max-width: 45vw;
+      width: 100%;
+      background: $gray;
+      border: 3px solid $darkorange;
+      border-radius: 30px;
+      position: relative;
+    }
   }
 
   &__picture-wrapper {
@@ -26,16 +31,26 @@
   &__picture {
     border-radius: 50%;
     position: relative;
-    height: 175px;
-    width: 175px;
+    height: 150px;
+    width: 150px;
+    @include desktop {
+      height: 175px;
+      width: 175px;
+    }
   }
 
   &__logout {
     position: absolute;
-    top: 2rem;
-    right: 2rem;
-    height: 30px;
-    cursor: pointer;
+    top: 5.25rem;
+    right: 1.25rem;
+    height: 25px;
+    @include desktop {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      height: 30px;
+      cursor: pointer;
+    }
     &:hover{
       opacity: 0.7;
     }
@@ -69,15 +84,23 @@
 
   &__username {
     color: $white;
-    font-size: 1.7rem;
     flex: 1;
     margin-left: -3rem;
+    font-size: 1rem;
+
+    @include desktop {
+      font-size: 1.7rem;
+    }
   }
 
   &__info {
     color: $darkorange;
-    font-size: 1.5rem;
     margin-top: 1rem;
+    font-size: 1.1rem;
+
+    @include desktop {
+      font-size: 1.5rem;
+    }
   }
 
   &__info-wrapper {
@@ -94,12 +117,14 @@
   }
 
   &__delete {
-    width: 35vw;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 2rem;
 
+    @include desktop {
+      width: 35vw;
+    }
   }
 
   &__delete-button {

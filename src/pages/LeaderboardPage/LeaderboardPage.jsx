@@ -16,8 +16,8 @@ export const LeaderboardPage = () => {
         <h1 className="leaderboard__top">Top 10</h1>
         <div className="leaderboard__wrapper">
           <h2 className="leaderboard__title">Username</h2>
-          <h2 className="leaderboard__title win">Wins</h2>
-          <h2 className="leaderboard__title losses">Losses</h2>
+          <h2 className="leaderboard__title win"></h2>
+          <h2 className="leaderboard__title losses"></h2>
           <h2 className="leaderboard__title">Win Rate</h2>
         </div>
         <LeaderboardList />

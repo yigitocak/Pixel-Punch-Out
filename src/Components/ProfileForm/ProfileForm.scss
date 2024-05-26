@@ -1,23 +1,27 @@
 @import "../../styles/partials/colors";
+@import "../../styles/partials/mixins";
 
 .profile {
-
-  &__form{
+  &__form {
     margin-top: 2rem;
     padding-top: 1rem;
     border-top: 2px solid $darkorange;
   }
 
-  &__label{
+  &__label {
     display: flex;
     flex-direction: column;
     color: $darkorange;
-    padding: 1.5rem 0;
+    padding-bottom: 1rem;
+
+    @include desktop {
+      padding: 1.5rem 0;
+    }
   }
 
   &__input {
     max-height: 25vh;
-    height: 100%;
+    height: auto;
     padding: 0.75rem;
     border-radius: 30px;
     outline: none;
@@ -33,18 +37,20 @@
     }
   }
 
-  &__button{
+  &__button {
     font-family: 'Press Start 2P', serif, Roboto;
     background: $darkorange;
     color: $white;
     border: none;
     border-radius: 25px;
-    width: 35%;
     text-align: center;
-    max-height: 50vh;
     padding: 0.75rem;
-    height: 100%;
     margin-bottom: 1rem;
+    width: 100%;
+
+    @include desktop {
+      width: 35%;
+    }
 
     &:hover {
       cursor: pointer;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./HomePage.scss";
-import {NavLink, useNavigate} from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/utils";
 import { Helmet } from "react-helmet";
 
@@ -150,14 +150,16 @@ export const HomePage = ({ isLoggedIn, setBackgroundId }) => {
             alt="dojo map"
             onClick={() => handleMapClick("dojo")}
           />
-          <button
-            onClick={() => {
-              navigate("/play");
-            }}
-            className="home__button"
-          >
-            Play
-          </button>
+          <div>
+            <button
+              onClick={() => {
+                navigate("/play");
+              }}
+              className="home__button"
+            >
+              Play
+            </button>
+          </div>
         </div>
       </div>
     </section>

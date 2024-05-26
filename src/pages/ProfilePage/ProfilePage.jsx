@@ -168,7 +168,7 @@ export const ProfilePage = ({
         <title>{`${user?.username || "Loading..."}'s Profile | Pixel Punch-Out`}</title>
         <meta
           name="description"
-          content= {`Checkout ${user?.username}'s Pixel Punch-Out Profile`}
+          content={`Checkout ${user?.username}'s Pixel Punch-Out Profile`}
         />
       </Helmet>
       <div className="profile__container">
@@ -204,7 +204,7 @@ export const ProfilePage = ({
                 <img
                   src={camera}
                   className="profile__upload-camera"
-                  alt="profile picture upload"
+                  alt="upload"
                 />
               </label>
             ) : (

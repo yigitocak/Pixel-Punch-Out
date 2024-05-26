@@ -1,43 +1,66 @@
 @import "../../styles/partials/colors";
+@import "../../styles/partials/mixins";
 
 .home {
   text-align: center;
-  margin: 2rem;
   line-height: 1.6rem;
   display: flex;
   justify-content: center;
+  margin: 1rem;
+
+  @include desktop {
+    margin: 2rem;
+  }
 
   &__wrapper {
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem 3rem;
-    max-width: 80vw;
-    width: 100%;
-    background: $gray;
-    border: 3px solid $darkorange;
-    border-radius: 30px;
+    @include desktop {
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 3rem;
+      max-width: 80vw;
+      width: 100%;
+      background: $gray;
+      border: 3px solid $darkorange;
+      border-radius: 30px;
+    }
   }
 
   &__gif {
-    width: 20vw;
     display: block;
+    width: 65vw;
+
+    @include desktop {
+      width: 20vw;
+    }
   }
 
   &__gif-jump {
-    height: 40vh;
     display: block;
+    height: 30vh;
+
+    @include desktop {
+      height: 40vh;
+    }
   }
 
   &__title{
-    font-size: 2rem;
     color: $darkorange;
     margin-bottom: 1rem;
+    font-size: 1.2rem;
+
+    @include desktop {
+      font-size: 2rem;
+    }
   }
 
   &__info {
-    font-size: 1.1rem;
     color: $white;
     margin-bottom: 2rem;
+    font-size: 0.9rem;
+
+    @include desktop {
+      font-size: 1.1rem;
+    }
   }
 
   &__map {
@@ -46,6 +69,11 @@
     margin: 1rem 3rem;
     cursor: pointer;
     border-radius: 10px;
+
+    @include desktop {
+      height: 120px;
+      width: 240px;
+    }
   }
 
   &__map--selected {
@@ -54,8 +82,12 @@
   }
 
   &__sub-title {
-    font-size: 1.8rem;
     color: $darkorange;
+    font-size: 1.25rem;
+
+    @include desktop {
+      font-size: 1.8rem;
+    }
   }
 
   &__list {
@@ -87,12 +119,14 @@
     border: none;
     border-radius: 10px;
     padding: 0.75rem 1.5rem;
-    font-size: 1.2rem;
     cursor: pointer;
     transition: opacity 0.3s, transform 0.3s;
-    width: 25vw;
     margin-bottom: 2rem;
     font-family: 'Press Start 2P', serif, Roboto;
+
+    @include desktop {
+      font-size: 1.2rem;
+    }
 
     &:hover {
       opacity: 0.8;
@@ -102,9 +136,13 @@
 
   &__signup-button {
     background: linear-gradient(45deg, #ff6347, #ff4500);
-    font-size: 1.5rem;
     padding: 1rem 2rem;
     margin-top: 1rem;
+    font-size: 1.2rem;
+
+    @include desktop {
+      font-size: 1.5rem;
+    }
   }
 
   &__link{

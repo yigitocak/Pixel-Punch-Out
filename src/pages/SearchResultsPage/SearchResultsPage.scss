@@ -1,14 +1,17 @@
 @import "../../styles/partials/colors";
+@import "../../styles/partials/mixins";
 
 .result{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-
+  @include desktop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
   &__title {
     color: $darkorange;
+    text-align: center;
   }
 
   &__list {
@@ -20,5 +23,6 @@
     margin-top: 2rem;
     color: $orangered;
     font-size: 1.25rem;
+    text-align: center;
   }
 }

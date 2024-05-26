@@ -34,11 +34,27 @@ export const Footer = ({
     { name: "Mountain Trials", path: MountainTrials },
     { name: "Chopsticks", path: Chopsticks },
   ];
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+
+  // Randomize the initial track
+  const getRandomTrackIndex = () =>
+    Math.floor(Math.random() * audioFiles.length);
+  const [currentTrackIndex, setCurrentTrackIndex] =
+    useState(getRandomTrackIndex);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.18); // Default volume
+  const [volume, setVolume] = useState(0.0245); // Default volume set to 0.01
   const audioRef = useRef(null);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Adjust the width threshold as needed
+    };
+
+    handleResize(); // Check on initial load
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     if (isPlaying) {
@@ -96,6 +112,10 @@ export const Footer = ({
     window.open(DISCORD_URL, "_blank", "noopener,noreferrer");
   };
 
+  if (isMobile) {
+    return null; // Do not render Footer on mobile devices
+  }
+
   return (
     <footer className="footer">
       <section className="discord">
@@ -119,7 +139,6 @@ export const Footer = ({
           ref={audioRef}
           src={audioFiles[currentTrackIndex].path}
           onEnded={playNext}
-          autoPlay
         />
         <div className="audio__controls">
           <button onClick={playPrevious} className="audio__button">
@@ -155,7 +174,7 @@ export const Footer = ({
           <input
             type="range"
             min="0"
-            max="0.35"
+            max="0.05"
             step="0.01"
             value={volume}
             onChange={handleVolumeChange}

@@ -1,9 +1,10 @@
 import "./SignUpForm.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import validator from "validator";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
+import GoogleLoginButton from "../GoogleLoginButton/GoogleLoginButton";
 
 export const SignUpForm = ({
   setEmail,
@@ -11,6 +12,8 @@ export const SignUpForm = ({
   setFlashMessage,
   setFlashSuccess,
   setShowSnackbar,
+  setIsLoggedIn,
+  renderUsername,
 }) => {
   const [email, setEmailState] = useState("");
   const [username, setUsername] = useState("");
@@ -20,6 +23,9 @@ export const SignUpForm = ({
 
   const signEmail = sessionStorage.getItem("signEmail");
   const signUser = sessionStorage.getItem("signUser");
+
+  const AUTH_TOKEN_KEY = "authToken";
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,7 +57,7 @@ export const SignUpForm = ({
       setFlashSuccess(false);
       return setShowSnackbar(true);
     }
-    if (/[!@#$%^&*()_+\-=\\[]{};':"\\|,.<>\/?]+/.test(username)) {
+    if (/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/.test(username)) {
       setFlashMessage("Username should not contain special characters.");
       setFlashSuccess(false);
       return setShowSnackbar(true);
@@ -63,7 +69,7 @@ export const SignUpForm = ({
     }
     if (
       !/[A-Z]/.test(password) ||
-      !/[!@#$%^&*()_+\-=\\[]{};':"\\|,.<>\/?]+/.test(password)
+      !/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/.test(password)
     ) {
       setFlashMessage(
         "Password must include at least one uppercase letter and one special character.",
@@ -100,6 +106,23 @@ export const SignUpForm = ({
         setShowSnackbar(true);
       }
     }
+  };
+
+  const handleGoogleLoginSuccess = (data) => {
+    const { token, username } = data;
+
+    // Save the token and update the login state
+    localStorage.setItem(AUTH_TOKEN_KEY, token);
+    setIsLoggedIn(true);
+    renderUsername(username);
+    navigate(`/profiles/${username}`);
+  };
+
+  const handleGoogleLoginFailure = (error) => {
+    console.error("Google sign-in failed: ", error);
+    setFlashMessage("Google sign-in failed. Please try again.");
+    setFlashSuccess(false);
+    setShowSnackbar(true);
   };
 
   return (
@@ -182,6 +205,18 @@ export const SignUpForm = ({
       <button className="signup__button" type="submit">
         Sign Up
       </button>
+      <div className="signup__or-container">
+        <span className="signup__or-bar"></span>
+        <span className="signup__or">or</span>
+        <span className="signup__or-bar"></span>
+      </div>
+
+      <div>
+        <GoogleLoginButton
+          onLoginSuccess={handleGoogleLoginSuccess}
+          onLoginFailure={handleGoogleLoginFailure}
+        />
+      </div>
       <NavLink className="signup__back" to="/login">
         Back to Login
       </NavLink>
