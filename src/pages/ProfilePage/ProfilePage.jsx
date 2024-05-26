@@ -162,6 +162,15 @@ export const ProfilePage = ({
     }
   };
 
+
+  const handleDiscordVerify = () => {
+    const baseUrl = "http://localhost:8080/discord/verify"
+    const queryParams = new URLSearchParams({user_id: currentUser.username});
+
+    window.location.href = `${baseUrl}?${queryParams}`
+  }
+
+
   return (
     <section className="profile">
       <Helmet>
@@ -212,6 +221,10 @@ export const ProfilePage = ({
             )}
           </div>
           <span className="profile__username">{user?.username}</span>
+          {location.pathname === `/profiles/${username}` && !user?.discordID && (
+            <button onClick={handleDiscordVerify}>VERIFY DISCORD</button>
+          )}
+          <span>{user?.discordID}</span>
         </div>
         <div className="profile__info-wrapper">
           <span className="profile__info">Wins: {user?.wins}</span>
