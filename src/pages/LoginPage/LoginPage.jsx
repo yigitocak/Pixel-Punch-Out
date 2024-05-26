@@ -1,7 +1,7 @@
 import "./LoginPage.scss";
 import { LoginForm } from "../../Components/LoginForm/LoginForm";
 import { VerifyModal } from "../../Components/VerifyModal/VerifyModal";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useLocation, redirect} from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
@@ -17,8 +17,10 @@ export const LoginPage = ({
   setShowSnackbar,
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [showVerifyModal, setShowVerifyModal] = useState(false);
+  const AUTH_TOKEN_KEY = "authToken";
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -26,9 +28,23 @@ export const LoginPage = ({
     }
   }, [isLoggedIn, username, navigate]);
 
+  useEffect(() => {
+    const query = new URLSearchParams(location.search);
+    const token = query.get("token");
+    const usernameQuery = query.get("username");
+    const photoUrl = query.get("photoUrl");
+    if (token) {
+      // Save the token in local storage or state
+      localStorage.setItem(AUTH_TOKEN_KEY, token);
+      setIsLoggedIn(true);
+      // Optionally, navigate to a different page
+      navigate(`/profiles/${usernameQuery}`);
+    }
+  }, [location.search, setIsLoggedIn, navigate]);
+
   const handleVerification = async (code) => {
     try {
-      await axios.post(`${BASE_URL}auth/verify`, {
+      const response = await axios.post(`${BASE_URL}auth/verify`, {
         email,
         code,
       });
@@ -45,6 +61,12 @@ export const LoginPage = ({
       setShowSnackbar(true);
     }
   };
+
+  const handleDiscordLogin = () => {
+    window.location.href = "http://localhost:8080/discord/oauth/login";
+  }
+
+
 
   return (
     <section className="login">
@@ -70,6 +92,9 @@ export const LoginPage = ({
         text="Please enter the new verification code sent to your email."
         title="Your account is not verified!"
       />
+      <button onClick={handleDiscordLogin} className="discord-login-button">
+        Login with Discord
+      </button>
     </section>
   );
 };
