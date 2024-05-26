@@ -5,6 +5,7 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
 import { ForgotModal } from "../ForgotModal/ForgotModal";
 import GoogleLoginButton from "../GoogleLoginButton/GoogleLoginButton";
+import { DiscordLoginButton } from "../DiscordLoginButton/DiscordLoginButton";
 
 export const LoginForm = ({
   setEmail,
@@ -195,6 +196,9 @@ export const LoginForm = ({
             onLoginSuccess={handleGoogleLoginSuccess}
             onLoginFailure={handleGoogleLoginFailure}
           />
+        </div>
+        <div>
+          <DiscordLoginButton />
         </div>
       </form>
       <ForgotModal

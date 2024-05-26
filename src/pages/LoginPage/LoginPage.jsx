@@ -1,7 +1,7 @@
 import "./LoginPage.scss";
 import { LoginForm } from "../../Components/LoginForm/LoginForm";
 import { VerifyModal } from "../../Components/VerifyModal/VerifyModal";
-import {useNavigate, useLocation, redirect} from "react-router-dom";
+import { useNavigate, useLocation, redirect } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
@@ -64,9 +64,7 @@ export const LoginPage = ({
 
   const handleDiscordLogin = () => {
     window.location.href = "http://localhost:8080/discord/oauth/login";
-  }
-
-
+  };
 
   return (
     <section className="login">
@@ -92,9 +90,6 @@ export const LoginPage = ({
         text="Please enter the new verification code sent to your email."
         title="Your account is not verified!"
       />
-      <button onClick={handleDiscordLogin} className="discord-login-button">
-        Login with Discord
-      </button>
     </section>
   );
 };
