@@ -191,13 +191,11 @@ export const LoginForm = ({
           <span className="login__or">or</span>
           <span className="login__or-bar"></span>
         </div>
-        <div>
+        <div className="login__button-container">
           <GoogleLoginButton
             onLoginSuccess={handleGoogleLoginSuccess}
             onLoginFailure={handleGoogleLoginFailure}
           />
-        </div>
-        <div>
           <DiscordLoginButton />
         </div>
       </form>
