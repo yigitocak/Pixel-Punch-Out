@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "./DiscordLoginButton.scss";
+import discordLogo from "../../assets/logos/discord-white.svg";
 
 export const DiscordLoginButton = () => {
   const navigate = useNavigate();
@@ -11,6 +13,7 @@ export const DiscordLoginButton = () => {
 
   return (
     <button onClick={handleDiscordLogin} className="discord-login-button">
+      <img src={discordLogo} alt="Discord Logo" className="discord-logo" />
       Login with Discord
     </button>
   );
