@@ -5,6 +5,7 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
 import { ForgotModal } from "../ForgotModal/ForgotModal";
 import GoogleLoginButton from "../GoogleLoginButton/GoogleLoginButton";
+import { DiscordLoginButton } from "../DiscordLoginButton/DiscordLoginButton";
 
 export const LoginForm = ({
   setEmail,
@@ -190,11 +191,12 @@ export const LoginForm = ({
           <span className="login__or">or</span>
           <span className="login__or-bar"></span>
         </div>
-        <div>
+        <div className="login__button-container">
           <GoogleLoginButton
             onLoginSuccess={handleGoogleLoginSuccess}
             onLoginFailure={handleGoogleLoginFailure}
           />
+          <DiscordLoginButton />
         </div>
       </form>
       <ForgotModal
