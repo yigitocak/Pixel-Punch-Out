@@ -9,6 +9,7 @@ import camera from "../../assets/images/camera.svg";
 import logout from "../../assets/images/logout.svg";
 import { ConfirmModal } from "../../Components/ConfirmModal/ConfirmModal";
 import { Helmet } from "react-helmet";
+import discordLogo from "../../assets/logos/discord-white.svg";
 
 export const ProfilePage = ({
   isLoggedIn,
@@ -162,14 +163,12 @@ export const ProfilePage = ({
     }
   };
 
-
   const handleDiscordVerify = () => {
-    const baseUrl = "http://localhost:8080/discord/verify"
-    const queryParams = new URLSearchParams({user_id: currentUser.username});
+    const baseUrl = "http://localhost:8080/discord/verify";
+    const queryParams = new URLSearchParams({ user_id: currentUser.username });
 
-    window.location.href = `${baseUrl}?${queryParams}`
-  }
-
+    window.location.href = `${baseUrl}?${queryParams}`;
+  };
 
   return (
     <section className="profile">
@@ -221,10 +220,21 @@ export const ProfilePage = ({
             )}
           </div>
           <span className="profile__username">{user?.username}</span>
-          {location.pathname === `/profiles/${username}` && !user?.discordID && (
-            <button onClick={handleDiscordVerify}>VERIFY DISCORD</button>
+          {location.pathname === `/profiles/${username}` && !user?.discordID ? (
+            <button
+              onClick={handleDiscordVerify}
+              className="verify-discord-button"
+            >
+              <img
+                src={discordLogo}
+                alt="Discord Logo"
+                className="discord-logo"
+              />
+              Verify Discord
+            </button>
+          ) : (
+            <span className="verify-discord-button">Verified</span>
           )}
-          <span>{user?.discordID}</span>
         </div>
         <div className="profile__info-wrapper">
           <span className="profile__info">Wins: {user?.wins}</span>
