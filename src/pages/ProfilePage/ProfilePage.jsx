@@ -2,7 +2,7 @@ import "./ProfilePage.scss";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BASE_URL } from "../../utils/utils";
+import { BASE_URL, fetchUserData } from "../../utils/utils";
 import { ProfileForm } from "../../Components/ProfileForm/ProfileForm";
 import { ProfileCommentList } from "../../Components/ProfileCommentList/ProfileCommentList";
 import camera from "../../assets/images/camera.svg";
@@ -170,6 +170,9 @@ export const ProfilePage = ({
     window.location.href = `${baseUrl}?${queryParams}`;
   };
 
+  const discordData = fetchUserData(user?.discordID);
+  console.log(discordData);
+
   return (
     <section className="profile">
       <Helmet>
@@ -220,22 +223,33 @@ export const ProfilePage = ({
             )}
           </div>
           <span className="profile__username">{user?.username}</span>
-          {location.pathname === `/profiles/${username}` && !user?.discordID ? (
-            <button
-              onClick={handleDiscordVerify}
-              className="verify-discord-button"
-            >
-              <img
-                src={discordLogo}
-                alt="Discord Logo"
-                className="discord-logo"
-              />
-              Verify Discord
-            </button>
-          ) : (
-            <span className="verify-discord-button">Verified</span>
-          )}
         </div>
+        {location.pathname === `/profiles/${username}` && !user?.discordID && (
+          <button
+            onClick={handleDiscordVerify}
+            className="verify-discord-button"
+          >
+            <img
+              src={discordLogo}
+              alt="Discord Logo"
+              className="discord-logo"
+            />
+            Verify Discord
+          </button>
+        )}
+        {user?.discordID && (
+          <span className="verify-discord-button">
+            <img
+              src={discordLogo}
+              alt="Discord Logo"
+              className="discord-logo"
+            />
+            Verified
+            <span className="tooltip">
+              This user verified their account. They known as
+            </span>
+          </span>
+        )}
         <div className="profile__info-wrapper">
           <span className="profile__info">Wins: {user?.wins}</span>
           <span className="profile__info">Losses: {user?.losses}</span>

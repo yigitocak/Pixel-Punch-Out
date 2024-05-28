@@ -1,7 +1,7 @@
 import "./LoginPage.scss";
 import { LoginForm } from "../../Components/LoginForm/LoginForm";
 import { VerifyModal } from "../../Components/VerifyModal/VerifyModal";
-import { useNavigate, useLocation, redirect } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
@@ -33,6 +33,20 @@ export const LoginPage = ({
     const token = query.get("token");
     const usernameQuery = query.get("username");
     const photoUrl = query.get("photoUrl");
+    const errorQuery = query.get("error");
+
+    if (errorQuery === "discordConflict") {
+      setFlashMessage("This Discord account is already linked to an account.");
+      setFlashSuccess(false);
+      setShowSnackbar(true);
+    } else if (errorQuery === "unexpected") {
+      setFlashMessage(
+        "An unexpected error has occurred. If this issue persists, contact support on our Discord server.",
+      );
+      setFlashSuccess(false);
+      setShowSnackbar(true);
+    }
+
     if (token) {
       // Save the token in local storage or state
       localStorage.setItem(AUTH_TOKEN_KEY, token);
@@ -44,7 +58,7 @@ export const LoginPage = ({
 
   const handleVerification = async (code) => {
     try {
-      const response = await axios.post(`${BASE_URL}auth/verify`, {
+      await axios.post(`${BASE_URL}auth/verify`, {
         email,
         code,
       });
