@@ -5,6 +5,7 @@ import validator from "validator";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
 import GoogleLoginButton from "../GoogleLoginButton/GoogleLoginButton";
+import { DiscordLoginButton } from "../DiscordLoginButton/DiscordLoginButton";
 
 export const SignUpForm = ({
   setEmail,
@@ -216,6 +217,9 @@ export const SignUpForm = ({
           onLoginSuccess={handleGoogleLoginSuccess}
           onLoginFailure={handleGoogleLoginFailure}
         />
+      </div>
+      <div>
+        <DiscordLoginButton />
       </div>
       <NavLink className="signup__back" to="/login">
         Back to Login

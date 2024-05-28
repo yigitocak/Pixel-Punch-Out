@@ -143,3 +143,69 @@
     }
   }
 }
+
+.verify-discord-button {
+  position: relative; /* Needed for tooltip positioning */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #5865f2;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin-top: 1rem;
+
+  &:hover {
+    background-color: #4e5bbd;
+
+    .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .discord-logo {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  .tooltip {
+    visibility: hidden;
+    opacity: 0;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 15px;
+    padding: 10px 15px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position the tooltip above the text */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    white-space: nowrap;
+    transition: opacity 0.3s;
+    font-size: 0.9rem;
+    line-height: 1.25rem;
+
+    /* Tooltip arrow */
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%; /* At the bottom of the tooltip */
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: black transparent transparent transparent;
+    }
+  }
+}

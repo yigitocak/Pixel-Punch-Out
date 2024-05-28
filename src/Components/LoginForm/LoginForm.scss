@@ -161,4 +161,11 @@
     width: 100%;
     margin-bottom: 1rem;
   }
+
+  &__button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
 }

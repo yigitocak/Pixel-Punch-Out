@@ -9,6 +9,7 @@ import camera from "../../assets/images/camera.svg";
 import logout from "../../assets/images/logout.svg";
 import { ConfirmModal } from "../../Components/ConfirmModal/ConfirmModal";
 import { Helmet } from "react-helmet";
+import discordLogo from "../../assets/logos/discord-white.svg";
 
 export const ProfilePage = ({
   isLoggedIn,
@@ -27,6 +28,7 @@ export const ProfilePage = ({
   const location = useLocation();
   const [currentUser, setCurrentUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [discordUsername, setDiscordUsername] = useState("");
 
   const getCurrentUser = async () => {
     try {
@@ -162,6 +164,34 @@ export const ProfilePage = ({
     }
   };
 
+  const handleDiscordVerify = () => {
+    const baseUrl = `${BASE_URL}discord/verify`;
+    const queryParams = new URLSearchParams({ user_id: currentUser.username });
+
+    window.location.href = `${baseUrl}?${queryParams}`;
+  };
+
+  const fetchDiscordUsername = async (userId) => {
+    try {
+      const response = await axios.post(`${BASE_URL}discord/getuserdata`, {
+        discordId: userId,
+      });
+      return response.data.username;
+    } catch (err) {
+      console.error("Error While Getting Discord Data", err);
+    }
+  };
+
+  useEffect(() => {
+    const getDiscordUsername = async () => {
+      if (user?.discordID) {
+        const username = await fetchDiscordUsername(user.discordID);
+        setDiscordUsername(username);
+      }
+    };
+    getDiscordUsername();
+  }, [user]);
+
   return (
     <section className="profile">
       <Helmet>
@@ -213,6 +243,33 @@ export const ProfilePage = ({
           </div>
           <span className="profile__username">{user?.username}</span>
         </div>
+        {location.pathname === `/profiles/${username}` && !user?.discordID && (
+          <button
+            onClick={handleDiscordVerify}
+            className="verify-discord-button"
+          >
+            <img
+              src={discordLogo}
+              alt="Discord Logo"
+              className="discord-logo"
+            />
+            Verify Discord
+          </button>
+        )}
+        {user?.discordID && (
+          <span className="verify-discord-button">
+            <img
+              src={discordLogo}
+              alt="Discord Logo"
+              className="discord-logo"
+            />
+            Verified
+            <span className="tooltip">
+              This user verified their account. {<br />}
+              They are known as {discordUsername}
+            </span>
+          </span>
+        )}
         <div className="profile__info-wrapper">
           <span className="profile__info">Wins: {user?.wins}</span>
           <span className="profile__info">Losses: {user?.losses}</span>

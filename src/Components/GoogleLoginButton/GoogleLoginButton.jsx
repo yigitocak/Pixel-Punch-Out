@@ -2,6 +2,7 @@ import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
+import "./GoogleLoginButton.scss";
 
 const GoogleLoginButton = ({ onLoginSuccess, onLoginFailure }) => {
   const handleLogin = async (response) => {
@@ -16,7 +17,11 @@ const GoogleLoginButton = ({ onLoginSuccess, onLoginFailure }) => {
     }
   };
 
-  return <GoogleLogin onSuccess={handleLogin} onError={onLoginFailure} />;
+  return (
+    <div className="custom-google-login-button">
+      <GoogleLogin onSuccess={handleLogin} onError={onLoginFailure} />
+    </div>
+  );
 };
 
 export default GoogleLoginButton;

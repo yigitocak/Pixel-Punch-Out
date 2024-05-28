@@ -1,7 +1,7 @@
 import "./LoginPage.scss";
 import { LoginForm } from "../../Components/LoginForm/LoginForm";
 import { VerifyModal } from "../../Components/VerifyModal/VerifyModal";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
@@ -17,14 +17,44 @@ export const LoginPage = ({
   setShowSnackbar,
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [showVerifyModal, setShowVerifyModal] = useState(false);
+  const AUTH_TOKEN_KEY = "authToken";
 
   useEffect(() => {
     if (isLoggedIn) {
       navigate(`/profiles/${username}`);
     }
   }, [isLoggedIn, username, navigate]);
+
+  useEffect(() => {
+    const query = new URLSearchParams(location.search);
+    const token = query.get("token");
+    const usernameQuery = query.get("username");
+    const photoUrl = query.get("photoUrl");
+    const errorQuery = query.get("error");
+
+    if (errorQuery === "discordConflict") {
+      setFlashMessage("This Discord account is already linked to an account.");
+      setFlashSuccess(false);
+      setShowSnackbar(true);
+    } else if (errorQuery === "unexpected") {
+      setFlashMessage(
+        "An unexpected error has occurred. If this issue persists, contact support on our Discord server.",
+      );
+      setFlashSuccess(false);
+      setShowSnackbar(true);
+    }
+
+    if (token) {
+      // Save the token in local storage or state
+      localStorage.setItem(AUTH_TOKEN_KEY, token);
+      setIsLoggedIn(true);
+      // Optionally, navigate to a different page
+      navigate(`/profiles/${usernameQuery}`);
+    }
+  }, [location.search, setIsLoggedIn, navigate]);
 
   const handleVerification = async (code) => {
     try {
@@ -44,6 +74,10 @@ export const LoginPage = ({
       setFlashSuccess(false);
       setShowSnackbar(true);
     }
+  };
+
+  const handleDiscordLogin = () => {
+    window.location.href = `${BASE_URL}discord/oauth/login`;
   };
 
   return (

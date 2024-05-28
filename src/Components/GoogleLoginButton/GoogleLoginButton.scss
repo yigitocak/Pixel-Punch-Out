@@ -1,0 +1,24 @@
+.custom-google-login-button {
+  display: inline-block;
+
+  .g_id_signin {
+    background-color: #4285f4;
+    color: white;
+    border-radius: 4px;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #357ae8;
+    }
+
+    & .g_id_signin_icon {
+      display: none;
+    }
+  }
+}

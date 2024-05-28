@@ -1,0 +1,25 @@
+.discord-login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #5865f2;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #4e5bbd;
+  }
+
+  .discord-logo {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+}
