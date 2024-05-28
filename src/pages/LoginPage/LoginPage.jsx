@@ -77,7 +77,7 @@ export const LoginPage = ({
   };
 
   const handleDiscordLogin = () => {
-    window.location.href = "http://localhost:8080/discord/oauth/login";
+    window.location.href = `${BASE_URL}discord/oauth/login`;
   };
 
   return (

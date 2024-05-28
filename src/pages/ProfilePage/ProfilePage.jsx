@@ -2,7 +2,7 @@ import "./ProfilePage.scss";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BASE_URL, BOT_ID } from "../../utils/utils";
+import { BASE_URL } from "../../utils/utils";
 import { ProfileForm } from "../../Components/ProfileForm/ProfileForm";
 import { ProfileCommentList } from "../../Components/ProfileCommentList/ProfileCommentList";
 import camera from "../../assets/images/camera.svg";
@@ -28,7 +28,7 @@ export const ProfilePage = ({
   const location = useLocation();
   const [currentUser, setCurrentUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [userDiscord, setUserDiscord] = useState("");
+  const [discordUsername, setDiscordUsername] = useState("");
 
   const getCurrentUser = async () => {
     try {
@@ -165,31 +165,32 @@ export const ProfilePage = ({
   };
 
   const handleDiscordVerify = () => {
-    const baseUrl = "http://localhost:8080/discord/verify";
+    const baseUrl = `${BASE_URL}discord/verify`;
     const queryParams = new URLSearchParams({ user_id: currentUser.username });
 
     window.location.href = `${baseUrl}?${queryParams}`;
   };
 
-  const fetchUserData = async () => {
-    const botToken = BOT_ID;
-    const url = `https://discord.com/api/v10/users/${user?.discordID}`;
-
+  const fetchDiscordUsername = async (userId) => {
     try {
-      const response = await axios.get(url, {
-        headers: {
-          Authorization: `Bot ${botToken}`,
-        },
+      const response = await axios.post(`${BASE_URL}discord/getuserdata`, {
+        discordId: userId,
       });
-      setUserDiscord(response.data);
+      return response.data.username;
     } catch (err) {
-      console.error(err);
+      console.error("Error While Getting Discord Data", err);
     }
   };
 
   useEffect(() => {
-    fetchUserData();
-  }, [userDiscord, user?.discordID]);
+    const getDiscordUsername = async () => {
+      if (user?.discordID) {
+        const username = await fetchDiscordUsername(user.discordID);
+        setDiscordUsername(username);
+      }
+    };
+    getDiscordUsername();
+  }, [user]);
 
   return (
     <section className="profile">
@@ -264,7 +265,8 @@ export const ProfilePage = ({
             />
             Verified
             <span className="tooltip">
-              This user verified their account. They known as {userDiscord}
+              This user verified their account. {<br />}
+              They are known as {discordUsername}
             </span>
           </span>
         )}
