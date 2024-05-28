@@ -2,7 +2,7 @@ import "./ProfilePage.scss";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BASE_URL, fetchUserData } from "../../utils/utils";
+import { BASE_URL, BOT_ID } from "../../utils/utils";
 import { ProfileForm } from "../../Components/ProfileForm/ProfileForm";
 import { ProfileCommentList } from "../../Components/ProfileCommentList/ProfileCommentList";
 import camera from "../../assets/images/camera.svg";
@@ -28,6 +28,7 @@ export const ProfilePage = ({
   const location = useLocation();
   const [currentUser, setCurrentUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [userDiscord, setUserDiscord] = useState("");
 
   const getCurrentUser = async () => {
     try {
@@ -170,8 +171,25 @@ export const ProfilePage = ({
     window.location.href = `${baseUrl}?${queryParams}`;
   };
 
-  const discordData = fetchUserData(user?.discordID);
-  console.log(discordData);
+  const fetchUserData = async () => {
+    const botToken = BOT_ID;
+    const url = `https://discord.com/api/v10/users/${user?.discordID}`;
+
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `Bot ${botToken}`,
+        },
+      });
+      setUserDiscord(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, [userDiscord, user?.discordID]);
 
   return (
     <section className="profile">
@@ -246,7 +264,7 @@ export const ProfilePage = ({
             />
             Verified
             <span className="tooltip">
-              This user verified their account. They known as
+              This user verified their account. They known as {userDiscord}
             </span>
           </span>
         )}
