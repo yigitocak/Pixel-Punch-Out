@@ -28,6 +28,15 @@
     flex: 1;
   }
 
+  &__edit-pen {
+    height: 25px;
+
+    &:hover {
+      opacity: 0.7;
+      cursor: pointer;
+    }
+  }
+
   &__picture {
     border-radius: 50%;
     position: relative;
@@ -161,6 +170,7 @@
   cursor: pointer;
   outline: none;
   margin-top: 1rem;
+  font-family: 'Press Start 2P', serif, Roboto;
 
   &:hover {
     background-color: #4e5bbd;

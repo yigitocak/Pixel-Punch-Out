@@ -1,0 +1,77 @@
+@import "../../styles/partials/colors";
+@import "../../styles/partials/mixins";
+
+.change-name {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1002;
+
+  &__content {
+    background: $gray;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+    border: 3px solid $darkorange;
+
+    @include desktop {
+      width: 55vw;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 2rem;
+    color: $orangered;
+  }
+
+  &__input {
+    min-width: 30vw;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin: 1rem 1rem 1.5rem 1rem;
+    font-family: 'Press Start 2P', serif, Roboto;
+
+    &::placeholder {
+      font-family: 'Press Start 2P', serif, Roboto;
+    }
+  }
+
+  &__body {
+    margin: 1rem 0;
+    color: $white;
+    font-size: 1rem;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', serif, Roboto;
+
+    &--danger {
+      background: $red;
+      color: $white;
+      font-family: 'Press Start 2P', serif, Roboto;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
