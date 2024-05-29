@@ -10,6 +10,8 @@ import logout from "../../assets/images/logout.svg";
 import { ConfirmModal } from "../../Components/ConfirmModal/ConfirmModal";
 import { Helmet } from "react-helmet";
 import discordLogo from "../../assets/logos/discord-white.svg";
+import editPen from "../../assets/images/editPen.svg";
+import { ChangeName } from "../../Components/ChangeName/ChangeName";
 
 export const ProfilePage = ({
   isLoggedIn,
@@ -28,7 +30,9 @@ export const ProfilePage = ({
   const location = useLocation();
   const [currentUser, setCurrentUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showNameModal, setShowNameModal] = useState(false);
   const [discordUsername, setDiscordUsername] = useState("");
+  const [changeName, setChangeName] = useState("");
 
   const getCurrentUser = async () => {
     try {
@@ -164,6 +168,39 @@ export const ProfilePage = ({
     }
   };
 
+  const handleUsername = async () => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}profiles/username`,
+        { username, newUsername: changeName },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      console.log(response.data);
+      localStorage.setItem("authToken", response.data.token);
+      setShowNameModal(false);
+      navigate(`/profiles/${changeName}`);
+      setFlashMessage(response.data.message);
+      setFlashSuccess(true);
+      setShowSnackbar(true);
+    } catch (e) {
+      console.error(e);
+      if (e.response.status === 400) {
+        setFlashMessage(e.response.data.message + "!");
+        setFlashSuccess(false);
+        setShowSnackbar(true);
+        return setShowNameModal(false);
+      }
+      setFlashMessage("Something went wrong!");
+      setFlashSuccess(false);
+      setShowSnackbar(true);
+      setShowNameModal(false);
+    }
+  };
+
   const handleDiscordVerify = () => {
     const baseUrl = `${BASE_URL}discord/verify`;
     const queryParams = new URLSearchParams({ user_id: currentUser.username });
@@ -241,7 +278,28 @@ export const ProfilePage = ({
               ""
             )}
           </div>
-          <span className="profile__username">{user?.username}</span>
+          <span className="profile__username">
+            {user?.username}
+            {location.pathname === `/profiles/${username}` ? (
+              <>
+                <img
+                  className="profile__edit-pen"
+                  src={editPen}
+                  alt="edit pen"
+                  onClick={() => setShowNameModal(true)}
+                />
+                <ChangeName
+                  show={showNameModal}
+                  handleClose={() => setShowNameModal(false)}
+                  setChangeName={setChangeName}
+                  changeName={changeName}
+                  handleConfirm={handleUsername}
+                />
+              </>
+            ) : (
+              <></>
+            )}
+          </span>
         </div>
         {location.pathname === `/profiles/${username}` && !user?.discordID && (
           <button
