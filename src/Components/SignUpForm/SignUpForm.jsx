@@ -212,13 +212,11 @@ export const SignUpForm = ({
         <span className="signup__or-bar"></span>
       </div>
 
-      <div>
+      <div className="signup__button-container">
         <GoogleLoginButton
           onLoginSuccess={handleGoogleLoginSuccess}
           onLoginFailure={handleGoogleLoginFailure}
         />
-      </div>
-      <div>
         <DiscordLoginButton />
       </div>
       <NavLink className="signup__back" to="/login">

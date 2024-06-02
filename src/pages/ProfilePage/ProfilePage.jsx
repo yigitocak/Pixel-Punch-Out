@@ -12,6 +12,7 @@ import { Helmet } from "react-helmet";
 import discordLogo from "../../assets/logos/discord-white.svg";
 import editPen from "../../assets/images/editPen.svg";
 import { ChangeName } from "../../Components/ChangeName/ChangeName";
+import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 
 export const ProfilePage = ({
   isLoggedIn,
@@ -33,6 +34,7 @@ export const ProfilePage = ({
   const [showNameModal, setShowNameModal] = useState(false);
   const [discordUsername, setDiscordUsername] = useState("");
   const [changeName, setChangeName] = useState("");
+  const [userFound, setUserFound] = useState(null);
 
   const getCurrentUser = async () => {
     try {
@@ -60,8 +62,12 @@ export const ProfilePage = ({
       });
       setUser(response.data.profile);
       setComments(response.data.profile.comments);
+      setUserFound(true);
     } catch (err) {
       console.error(err);
+      if (err.response.status === 400) {
+        setUserFound(false);
+      }
     }
   };
 
@@ -169,10 +175,23 @@ export const ProfilePage = ({
   };
 
   const handleUsername = async () => {
+    if (changeName === "") {
+      setFlashMessage("Please fill out the field!");
+      setFlashSuccess(false);
+      return setShowSnackbar(true);
+    }
+
+    const invalidCharacters = /[^a-zA-Z0-9]/;
+    if (changeName.includes(" ") || invalidCharacters.test(changeName)) {
+      setFlashMessage("Username can't contain space or special characters!");
+      setFlashSuccess(false);
+      return setShowSnackbar(true);
+    }
+
     try {
       const response = await axios.post(
         `${BASE_URL}profiles/username`,
-        { username, newUsername: changeName },
+        { newUsername: changeName },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -204,7 +223,6 @@ export const ProfilePage = ({
   const handleDiscordVerify = () => {
     const baseUrl = `${BASE_URL}discord/verify`;
     const queryParams = new URLSearchParams({ user_id: currentUser.username });
-
     window.location.href = `${baseUrl}?${queryParams}`;
   };
 
@@ -228,6 +246,10 @@ export const ProfilePage = ({
     };
     getDiscordUsername();
   }, [user]);
+
+  if (!userFound) {
+    return <NotFoundPage />;
+  }
 
   return (
     <section className="profile">
