@@ -81,10 +81,6 @@ export const LoginPage = ({
     }
   };
 
-  const handleDiscordLogin = () => {
-    window.location.href = `${BASE_URL}discord/oauth/login`;
-  };
-
   return (
     <section className="login">
       <Helmet>
