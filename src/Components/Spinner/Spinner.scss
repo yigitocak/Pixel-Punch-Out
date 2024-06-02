@@ -1,0 +1,23 @@
+@import "../../styles/partials/colors";
+@import "../../styles/partials/mixins";
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.spinner {
+  border: 16px solid $white;
+  border-top: 16px solid $darkorange;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
