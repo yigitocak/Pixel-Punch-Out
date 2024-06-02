@@ -13,6 +13,7 @@ import discordLogo from "../../assets/logos/discord-white.svg";
 import editPen from "../../assets/images/editPen.svg";
 import { ChangeName } from "../../Components/ChangeName/ChangeName";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
+import { Spinner } from "../../Components/Spinner/Spinner"; // Import your spinner component
 
 export const ProfilePage = ({
   isLoggedIn,
@@ -25,7 +26,7 @@ export const ProfilePage = ({
 }) => {
   const { profileId } = useParams();
   const token = localStorage.getItem("authToken");
-  const [user, setUser] = useState(null); // Initialized as null
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const [comments, setComments] = useState([]);
   const location = useLocation();
@@ -35,6 +36,7 @@ export const ProfilePage = ({
   const [discordUsername, setDiscordUsername] = useState("");
   const [changeName, setChangeName] = useState("");
   const [userFound, setUserFound] = useState(null);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   const getCurrentUser = async () => {
     try {
@@ -54,6 +56,7 @@ export const ProfilePage = ({
   }, [username]);
 
   const getUser = async () => {
+    setLoading(true); // Set loading to true when starting data fetch
     try {
       const response = await axios.get(`${BASE_URL}profiles/${profileId}`, {
         headers: {
@@ -68,6 +71,8 @@ export const ProfilePage = ({
       if (err.response.status === 400) {
         setUserFound(false);
       }
+    } finally {
+      setLoading(false); // Set loading to false when data fetch completes
     }
   };
 
@@ -246,6 +251,10 @@ export const ProfilePage = ({
     };
     getDiscordUsername();
   }, [user]);
+
+  if (loading) {
+    return <Spinner />; // Show spinner while loading
+  }
 
   if (!userFound) {
     return <NotFoundPage />;
