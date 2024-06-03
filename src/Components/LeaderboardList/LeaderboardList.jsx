@@ -4,6 +4,7 @@ import axios from "axios";
 import { LeaderboardItem } from "../LeaderboardItem/LeaderboardItem";
 import "./LeaderboardList.scss";
 import { BASE_URL } from "../../utils/utils";
+import { Spinner } from "../Spinner/Spinner";
 
 const fetchLeaderboardData = async () => {
   const { data } = await axios.get(`${BASE_URL}leaderboard`);
@@ -20,8 +21,9 @@ export const LeaderboardList = () => {
     },
   );
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error loading data</p>;
+  if (isLoading) return <Spinner />;
+  if (error)
+    return <p className="leaderboard__error-loading">Error loading data!</p>;
 
   return (
     <ul className="leaderboard__list">

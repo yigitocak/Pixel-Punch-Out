@@ -13,7 +13,7 @@ import discordLogo from "../../assets/logos/discord-white.svg";
 import editPen from "../../assets/images/editPen.svg";
 import { ChangeName } from "../../Components/ChangeName/ChangeName";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
-import { Spinner } from "../../Components/Spinner/Spinner"; // Import your spinner component
+import { Spinner } from "../../Components/Spinner/Spinner";
 
 export const ProfilePage = ({
   isLoggedIn,
@@ -36,7 +36,7 @@ export const ProfilePage = ({
   const [discordUsername, setDiscordUsername] = useState("");
   const [changeName, setChangeName] = useState("");
   const [userFound, setUserFound] = useState(null);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
 
   const getCurrentUser = async () => {
     try {
@@ -56,7 +56,7 @@ export const ProfilePage = ({
   }, [username]);
 
   const getUser = async () => {
-    setLoading(true); // Set loading to true when starting data fetch
+    setLoading(true);
     try {
       const response = await axios.get(`${BASE_URL}profiles/${profileId}`, {
         headers: {
@@ -72,7 +72,7 @@ export const ProfilePage = ({
         setUserFound(false);
       }
     } finally {
-      setLoading(false); // Set loading to false when data fetch completes
+      setLoading(false);
     }
   };
 
@@ -253,7 +253,7 @@ export const ProfilePage = ({
   }, [user]);
 
   if (loading) {
-    return <Spinner />; // Show spinner while loading
+    return <Spinner />;
   }
 
   if (!userFound) {
@@ -289,7 +289,9 @@ export const ProfilePage = ({
                 alt="profile pic"
               />
             ) : (
-              <div className="profile__picture-placeholder">Loading...</div>
+              <div className="profile__picture-placeholder">
+                <Spinner />
+              </div>
             )}
             {location.pathname === `/profiles/${username}` ? (
               <label className="profile__upload-label">
@@ -309,8 +311,19 @@ export const ProfilePage = ({
               ""
             )}
           </div>
-          <span className="profile__username">
+          <span
+            className={
+              user?.admin ? "profile__username--admin" : "profile__username"
+            }
+          >
             {user?.username}
+            {user?.admin ? (
+              <div className="tooltip">
+                The red username indicates that this user is an admin.
+              </div>
+            ) : (
+              <></>
+            )}
             {location.pathname === `/profiles/${username}` ? (
               <>
                 <img
@@ -327,9 +340,7 @@ export const ProfilePage = ({
                   handleConfirm={handleUsername}
                 />
               </>
-            ) : (
-              <></>
-            )}
+            ) : null}
           </span>
         </div>
         {location.pathname === `/profiles/${username}` && !user?.discordID && (
@@ -400,9 +411,7 @@ export const ProfilePage = ({
               handleConfirm={handleDelete}
             />
           </div>
-        ) : (
-          ""
-        )}
+        ) : null}
       </div>
     </section>
   );
