@@ -53,7 +53,6 @@ export const ProfileForm = ({
       reRender();
       setComment("");
     } catch (error) {
-      console.error("Comment submission failed: ", error);
       if (error.response && error.response.status === 400) {
         setFlashMessage("Unable to post comment.");
         setFlashSuccess(false);

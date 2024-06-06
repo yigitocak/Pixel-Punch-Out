@@ -56,9 +56,7 @@ export const endGame = (winner, timerId, FINISH) => {
         document.querySelector("#displayText").innerHTML = `${winner} wins`;
       }
     }
-  } catch (err) {
-    console.error(err);
-  }
+  } catch (err) {}
 };
 
 export const createFighter = (

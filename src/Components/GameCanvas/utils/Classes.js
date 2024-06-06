@@ -21,9 +21,7 @@ export class Sprite {
       this.height = this.image.height;
       this.imageLoaded = true;
     };
-    this.image.onerror = () => {
-      console.error("Error loading the image", imageSrc);
-    };
+    this.image.onerror = () => {};
     this.scale = scale;
     this.framesMax = framesMax;
     this.framesElapsed = 0;

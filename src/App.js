@@ -42,10 +42,6 @@ function App() {
       });
       return response.data.success ? response.data.decoded.username : null;
     } catch (err) {
-      console.error(
-        "Error verifying token:",
-        err.response ? err.response.data : err.message,
-      );
       if (err.response && err.response.data && err.response.data.message) {
         setFlashMessage("You have been logged out! Please login again.");
         setFlashSuccess(false);

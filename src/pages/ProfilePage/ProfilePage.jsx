@@ -14,6 +14,7 @@ import editPen from "../../assets/images/editPen.svg";
 import { ChangeName } from "../../Components/ChangeName/ChangeName";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Spinner } from "../../Components/Spinner/Spinner";
+import { ProfileSpinner } from "../../Components/ProfileSpinner/ProfileSpinner";
 
 export const ProfilePage = ({
   isLoggedIn,
@@ -37,6 +38,7 @@ export const ProfilePage = ({
   const [changeName, setChangeName] = useState("");
   const [userFound, setUserFound] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [photoLoading, setPhotoLoading] = useState(false);
 
   const getCurrentUser = async () => {
     try {
@@ -46,9 +48,7 @@ export const ProfilePage = ({
         },
       });
       setCurrentUser(response.data.profile);
-    } catch (e) {
-      console.error(e);
-    }
+    } catch (e) {}
   };
 
   useEffect(() => {
@@ -67,7 +67,6 @@ export const ProfilePage = ({
       setComments(response.data.profile.comments);
       setUserFound(true);
     } catch (err) {
-      console.error(err);
       if (err.response.status === 400) {
         setUserFound(false);
       }
@@ -120,6 +119,8 @@ export const ProfilePage = ({
     const formData = new FormData();
     formData.append("photo", file);
 
+    setPhotoLoading(true);
+
     try {
       const response = await axios.post(
         `${BASE_URL}profiles/${username}/uploadPhoto`,
@@ -136,10 +137,11 @@ export const ProfilePage = ({
       setFlashSuccess(true);
       setShowSnackbar(true);
     } catch (err) {
-      console.error(err);
       setFlashMessage("Failed to upload photo.");
       setFlashSuccess(false);
       setShowSnackbar(true);
+    } finally {
+      setPhotoLoading(false);
     }
   };
 
@@ -172,7 +174,6 @@ export const ProfilePage = ({
       setFlashSuccess(true);
       setShowSnackbar(true);
     } catch (err) {
-      console.error(err);
       setFlashMessage("Failed to delete profile.");
       setFlashSuccess(false);
       setShowSnackbar(true);
@@ -203,7 +204,6 @@ export const ProfilePage = ({
           },
         },
       );
-      console.log(response.data);
       localStorage.setItem("authToken", response.data.token);
       setShowNameModal(false);
       navigate(`/profiles/${changeName}`);
@@ -211,7 +211,6 @@ export const ProfilePage = ({
       setFlashSuccess(true);
       setShowSnackbar(true);
     } catch (e) {
-      console.error(e);
       if (e.response.status === 400) {
         setFlashMessage(e.response.data.message + "!");
         setFlashSuccess(false);
@@ -237,9 +236,7 @@ export const ProfilePage = ({
         discordId: userId,
       });
       return response.data.username;
-    } catch (err) {
-      console.error("Error While Getting Discord Data", err);
-    }
+    } catch (err) {}
   };
 
   useEffect(() => {
@@ -282,7 +279,9 @@ export const ProfilePage = ({
         )}
         <div className="profile__user">
           <div className="profile__picture-wrapper">
-            {user?.photoUrl ? (
+            {photoLoading ? (
+              <ProfileSpinner />
+            ) : user?.photoUrl ? (
               <img
                 className="profile__picture"
                 src={user.photoUrl}
@@ -290,10 +289,10 @@ export const ProfilePage = ({
               />
             ) : (
               <div className="profile__picture-placeholder">
-                <Spinner />
+                <ProfileSpinner />
               </div>
             )}
-            {location.pathname === `/profiles/${username}` ? (
+            {location.pathname === `/profiles/${username}` && !photoLoading ? (
               <label className="profile__upload-label">
                 <input
                   type="file"
@@ -391,6 +390,7 @@ export const ProfilePage = ({
               username={username}
               reRender={getUser}
               profileId={profileId}
+              user={user}
               setFlashSuccess={setFlashSuccess}
               setFlashMessage={setFlashMessage}
               setShowSnackbar={setShowSnackbar}

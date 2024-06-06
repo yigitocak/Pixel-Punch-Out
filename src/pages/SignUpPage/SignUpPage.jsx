@@ -34,7 +34,6 @@ export const SignUpPage = ({
         setShowSnackbar(true);
         navigate("/login");
       } catch (error) {
-        console.error("Verification failed: ", error);
         setFlashMessage("Verification failed. Please try again.");
         setFlashSuccess(false);
         setShowSnackbar(true);

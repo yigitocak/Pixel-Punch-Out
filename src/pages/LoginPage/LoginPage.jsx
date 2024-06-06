@@ -69,7 +69,6 @@ export const LoginPage = ({
       setShowVerifyModal(false);
       navigate(`/login`);
     } catch (error) {
-      console.error("Verification failed: ", error);
       if (error.response.status === 401) {
         setFlashMessage("Verification code is not correct!");
         setFlashSuccess(false);
