@@ -27,7 +27,6 @@ export const ResetPage = ({
       });
       return response.status === 200;
     } catch (error) {
-      console.error("Error validating code:", error);
       return false;
     }
   }
@@ -77,7 +76,6 @@ export const ResetPage = ({
         setShowSnackbar(true);
       }
     } catch (err) {
-      console.error("Error resetting password:", err);
       setFlashMessage("Error resetting password!");
       setFlashSuccess(false);
       setShowSnackbar(true);

@@ -36,7 +36,6 @@ export const LoginForm = ({
       setFlashSuccess(true);
       setShowSnackbar(true);
     } catch (error) {
-      console.error("Password reset failed: ", error);
       if (
         error.response &&
         error.response.status === 401 &&
@@ -91,7 +90,6 @@ export const LoginForm = ({
       sessionStorage.setItem("signUser", "");
       sessionStorage.setItem("signEmail", "");
     } catch (error) {
-      console.error("Login failed: ", error);
       if (
         error.response &&
         error.response.status === 401 &&
@@ -127,7 +125,6 @@ export const LoginForm = ({
   };
 
   const handleGoogleLoginFailure = (error) => {
-    console.error("Google sign-in failed: ", error);
     setFlashMessage("Google sign-in failed. Please try again.");
     setFlashSuccess(false);
     setShowSnackbar(true);

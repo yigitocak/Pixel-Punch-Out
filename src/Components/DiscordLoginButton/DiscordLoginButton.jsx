@@ -1,10 +1,10 @@
-import React from "react";
 import "./DiscordLoginButton.scss";
 import discordLogo from "../../assets/logos/discord-white.svg";
 import { BASE_URL } from "../../utils/utils";
 
 export const DiscordLoginButton = () => {
-  const handleDiscordLogin = () => {
+  const handleDiscordLogin = (e) => {
+    e.preventDefault();
     window.location.href = `${BASE_URL}discord/oauth/login`;
   };
 

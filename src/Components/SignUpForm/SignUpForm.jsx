@@ -96,7 +96,6 @@ export const SignUpForm = ({
       sessionStorage.setItem("signEmail", "");
       sessionStorage.setItem("loginEmail", "");
     } catch (error) {
-      console.error("Signup failed: ", error);
       if (error.response.status === 409) {
         setFlashMessage("Username or email already exists.");
         setFlashSuccess(false);
@@ -120,7 +119,6 @@ export const SignUpForm = ({
   };
 
   const handleGoogleLoginFailure = (error) => {
-    console.error("Google sign-in failed: ", error);
     setFlashMessage("Google sign-in failed. Please try again.");
     setFlashSuccess(false);
     setShowSnackbar(true);
@@ -212,13 +210,11 @@ export const SignUpForm = ({
         <span className="signup__or-bar"></span>
       </div>
 
-      <div>
+      <div className="signup__button-container">
         <GoogleLoginButton
           onLoginSuccess={handleGoogleLoginSuccess}
           onLoginFailure={handleGoogleLoginFailure}
         />
-      </div>
-      <div>
         <DiscordLoginButton />
       </div>
       <NavLink className="signup__back" to="/login">

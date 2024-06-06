@@ -10,6 +10,11 @@ import logout from "../../assets/images/logout.svg";
 import { ConfirmModal } from "../../Components/ConfirmModal/ConfirmModal";
 import { Helmet } from "react-helmet";
 import discordLogo from "../../assets/logos/discord-white.svg";
+import editPen from "../../assets/images/editPen.svg";
+import { ChangeName } from "../../Components/ChangeName/ChangeName";
+import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
+import { Spinner } from "../../Components/Spinner/Spinner";
+import { ProfileSpinner } from "../../Components/ProfileSpinner/ProfileSpinner";
 
 export const ProfilePage = ({
   isLoggedIn,
@@ -22,13 +27,18 @@ export const ProfilePage = ({
 }) => {
   const { profileId } = useParams();
   const token = localStorage.getItem("authToken");
-  const [user, setUser] = useState(null); // Initialized as null
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const [comments, setComments] = useState([]);
   const location = useLocation();
   const [currentUser, setCurrentUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showNameModal, setShowNameModal] = useState(false);
   const [discordUsername, setDiscordUsername] = useState("");
+  const [changeName, setChangeName] = useState("");
+  const [userFound, setUserFound] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [photoLoading, setPhotoLoading] = useState(false);
 
   const getCurrentUser = async () => {
     try {
@@ -38,9 +48,7 @@ export const ProfilePage = ({
         },
       });
       setCurrentUser(response.data.profile);
-    } catch (e) {
-      console.error(e);
-    }
+    } catch (e) {}
   };
 
   useEffect(() => {
@@ -48,6 +56,7 @@ export const ProfilePage = ({
   }, [username]);
 
   const getUser = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${BASE_URL}profiles/${profileId}`, {
         headers: {
@@ -56,8 +65,13 @@ export const ProfilePage = ({
       });
       setUser(response.data.profile);
       setComments(response.data.profile.comments);
+      setUserFound(true);
     } catch (err) {
-      console.error(err);
+      if (err.response.status === 400) {
+        setUserFound(false);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -105,6 +119,8 @@ export const ProfilePage = ({
     const formData = new FormData();
     formData.append("photo", file);
 
+    setPhotoLoading(true);
+
     try {
       const response = await axios.post(
         `${BASE_URL}profiles/${username}/uploadPhoto`,
@@ -121,10 +137,11 @@ export const ProfilePage = ({
       setFlashSuccess(true);
       setShowSnackbar(true);
     } catch (err) {
-      console.error(err);
       setFlashMessage("Failed to upload photo.");
       setFlashSuccess(false);
       setShowSnackbar(true);
+    } finally {
+      setPhotoLoading(false);
     }
   };
 
@@ -157,17 +174,59 @@ export const ProfilePage = ({
       setFlashSuccess(true);
       setShowSnackbar(true);
     } catch (err) {
-      console.error(err);
       setFlashMessage("Failed to delete profile.");
       setFlashSuccess(false);
       setShowSnackbar(true);
     }
   };
 
+  const handleUsername = async () => {
+    if (changeName === "") {
+      setFlashMessage("Please fill out the field!");
+      setFlashSuccess(false);
+      return setShowSnackbar(true);
+    }
+
+    const invalidCharacters = /[^a-zA-Z0-9]/;
+    if (changeName.includes(" ") || invalidCharacters.test(changeName)) {
+      setFlashMessage("Username can't contain space or special characters!");
+      setFlashSuccess(false);
+      return setShowSnackbar(true);
+    }
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}profiles/username`,
+        { newUsername: changeName },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      localStorage.setItem("authToken", response.data.token);
+      setShowNameModal(false);
+      navigate(`/profiles/${changeName}`);
+      setFlashMessage(response.data.message);
+      setFlashSuccess(true);
+      setShowSnackbar(true);
+    } catch (e) {
+      if (e.response.status === 400) {
+        setFlashMessage(e.response.data.message + "!");
+        setFlashSuccess(false);
+        setShowSnackbar(true);
+        return setShowNameModal(false);
+      }
+      setFlashMessage("Something went wrong!");
+      setFlashSuccess(false);
+      setShowSnackbar(true);
+      setShowNameModal(false);
+    }
+  };
+
   const handleDiscordVerify = () => {
     const baseUrl = `${BASE_URL}discord/verify`;
     const queryParams = new URLSearchParams({ user_id: currentUser.username });
-
     window.location.href = `${baseUrl}?${queryParams}`;
   };
 
@@ -177,9 +236,7 @@ export const ProfilePage = ({
         discordId: userId,
       });
       return response.data.username;
-    } catch (err) {
-      console.error("Error While Getting Discord Data", err);
-    }
+    } catch (err) {}
   };
 
   useEffect(() => {
@@ -191,6 +248,14 @@ export const ProfilePage = ({
     };
     getDiscordUsername();
   }, [user]);
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (!userFound) {
+    return <NotFoundPage />;
+  }
 
   return (
     <section className="profile">
@@ -214,16 +279,20 @@ export const ProfilePage = ({
         )}
         <div className="profile__user">
           <div className="profile__picture-wrapper">
-            {user?.photoUrl ? (
+            {photoLoading ? (
+              <ProfileSpinner />
+            ) : user?.photoUrl ? (
               <img
                 className="profile__picture"
                 src={user.photoUrl}
                 alt="profile pic"
               />
             ) : (
-              <div className="profile__picture-placeholder">Loading...</div>
+              <div className="profile__picture-placeholder">
+                <ProfileSpinner />
+              </div>
             )}
-            {location.pathname === `/profiles/${username}` ? (
+            {location.pathname === `/profiles/${username}` && !photoLoading ? (
               <label className="profile__upload-label">
                 <input
                   type="file"
@@ -241,7 +310,37 @@ export const ProfilePage = ({
               ""
             )}
           </div>
-          <span className="profile__username">{user?.username}</span>
+          <span
+            className={
+              user?.admin ? "profile__username--admin" : "profile__username"
+            }
+          >
+            {user?.username}
+            {user?.admin ? (
+              <div className="tooltip">
+                The red username indicates that this user is an admin.
+              </div>
+            ) : (
+              <></>
+            )}
+            {location.pathname === `/profiles/${username}` ? (
+              <>
+                <img
+                  className="profile__edit-pen"
+                  src={editPen}
+                  alt="edit pen"
+                  onClick={() => setShowNameModal(true)}
+                />
+                <ChangeName
+                  show={showNameModal}
+                  handleClose={() => setShowNameModal(false)}
+                  setChangeName={setChangeName}
+                  changeName={changeName}
+                  handleConfirm={handleUsername}
+                />
+              </>
+            ) : null}
+          </span>
         </div>
         {location.pathname === `/profiles/${username}` && !user?.discordID && (
           <button
@@ -291,6 +390,7 @@ export const ProfilePage = ({
               username={username}
               reRender={getUser}
               profileId={profileId}
+              user={user}
               setFlashSuccess={setFlashSuccess}
               setFlashMessage={setFlashMessage}
               setShowSnackbar={setShowSnackbar}
@@ -311,9 +411,7 @@ export const ProfilePage = ({
               handleConfirm={handleDelete}
             />
           </div>
-        ) : (
-          ""
-        )}
+        ) : null}
       </div>
     </section>
   );

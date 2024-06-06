@@ -62,7 +62,6 @@ export const Footer = ({
   useEffect(() => {
     if (isPlaying) {
       audioRef.current.play().catch((error) => {
-        console.error("Error playing the track:", error);
         setShowSnackbar(true);
         setFlashSuccess(false);
         setFlashMessage("Error playing the track!");

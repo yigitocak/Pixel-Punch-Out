@@ -69,15 +69,15 @@ export const LoginPage = ({
       setShowVerifyModal(false);
       navigate(`/login`);
     } catch (error) {
-      console.error("Verification failed: ", error);
+      if (error.response.status === 401) {
+        setFlashMessage("Verification code is not correct!");
+        setFlashSuccess(false);
+        return setShowSnackbar(true);
+      }
       setFlashMessage("Verification failed. Please try again.");
       setFlashSuccess(false);
       setShowSnackbar(true);
     }
-  };
-
-  const handleDiscordLogin = () => {
-    window.location.href = `${BASE_URL}discord/oauth/login`;
   };
 
   return (

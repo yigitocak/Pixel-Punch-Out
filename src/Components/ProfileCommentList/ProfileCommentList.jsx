@@ -6,6 +6,7 @@ export const ProfileCommentList = ({
   username,
   profileId,
   reRender,
+  user,
   setFlashMessage,
   setFlashSuccess,
   setShowSnackbar,
@@ -19,13 +20,13 @@ export const ProfileCommentList = ({
             <ProfileCommentsItem
               key={comment.commentId}
               comment={comment.comment}
-              user={comment.username}
               timestamp={comment.timestamp}
               username={username}
-              id={comment.commentId}
+              commentId={comment.commentId}
               profileId={profileId}
-              photoUrl={comment.usernamePhotoUrl}
               reRender={reRender}
+              id={comment.id}
+              user={user}
               setFlashSuccess={setFlashSuccess}
               setFlashMessage={setFlashMessage}
               setShowSnackbar={setShowSnackbar}

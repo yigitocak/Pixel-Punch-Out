@@ -7,4 +7,9 @@
     list-style: none;
     padding: 0;
   }
+
+  &__error-loading {
+    text-align: center;
+    color: $white;
+  }
 }

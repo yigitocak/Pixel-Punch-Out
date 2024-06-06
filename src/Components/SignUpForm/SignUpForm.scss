@@ -129,4 +129,15 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
+
+  &__button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    @include desktop {
+      gap: 1rem;
+    }
+  }
 }
