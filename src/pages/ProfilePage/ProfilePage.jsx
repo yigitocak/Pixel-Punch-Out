@@ -15,6 +15,7 @@ import { ChangeName } from "../../Components/ChangeName/ChangeName";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Spinner } from "../../Components/Spinner/Spinner";
 import { ProfileSpinner } from "../../Components/ProfileSpinner/ProfileSpinner";
+import Cookies from "js-cookie";
 
 export const ProfilePage = ({
   isLoggedIn,
@@ -26,7 +27,7 @@ export const ProfilePage = ({
   isAuthenticating,
 }) => {
   const { profileId } = useParams();
-  const token = localStorage.getItem("authToken");
+  const token = Cookies.get("authToken");
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const [comments, setComments] = useState([]);
@@ -39,6 +40,7 @@ export const ProfilePage = ({
   const [userFound, setUserFound] = useState(null);
   const [loading, setLoading] = useState(true);
   const [photoLoading, setPhotoLoading] = useState(false);
+  const [hover, setHover] = useState("gizmo");
 
   const getCurrentUser = async () => {
     try {
@@ -147,7 +149,7 @@ export const ProfilePage = ({
 
   const handleClick = () => {
     try {
-      localStorage.removeItem("authToken");
+      Cookies.remove("authToken");
       setIsLoggedIn(false);
       setFlashMessage("You've logged out!");
       setFlashSuccess(true);
@@ -167,7 +169,7 @@ export const ProfilePage = ({
           Authorization: `Bearer ${token}`,
         },
       });
-      localStorage.removeItem("authToken");
+      Cookies.remove("authToken");
       setIsLoggedIn(false);
       navigate("/login");
       setFlashMessage("You've deleted your profile!");
@@ -204,7 +206,7 @@ export const ProfilePage = ({
           },
         },
       );
-      localStorage.setItem("authToken", response.data.token);
+      Cookies.set("authToken", response.data.token);
       setShowNameModal(false);
       navigate(`/profiles/${changeName}`);
       setFlashMessage(response.data.message);
@@ -248,6 +250,10 @@ export const ProfilePage = ({
     };
     getDiscordUsername();
   }, [user]);
+
+  const handleHover = (text) => {
+    setHover(text);
+  };
 
   if (loading) {
     return <Spinner />;

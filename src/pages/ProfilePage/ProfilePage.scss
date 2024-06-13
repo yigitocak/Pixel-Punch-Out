@@ -26,6 +26,8 @@
 
   &__picture-wrapper {
     flex: 1;
+    display: flex;
+    justify-content: center;
   }
 
   &__edit-pen {
