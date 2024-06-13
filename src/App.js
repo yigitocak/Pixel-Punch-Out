@@ -19,6 +19,7 @@ import { FlashMessage } from "./Components/FlashMessage/FlashMessage";
 import { MaintenancePage } from "./pages/MaintenancePage/MaintenancePage";
 import { ResetPage } from "./pages/ResetPage/ResetPage";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import Cookies from "js-cookie";
 
 const MAINTENANCE = false;
 
@@ -33,7 +34,7 @@ function App() {
   const AUTH_TOKEN_KEY = "authToken";
   const AUTH_ENDPOINT = "auth";
 
-  const token = localStorage.getItem(AUTH_TOKEN_KEY);
+  const token = Cookies.get(AUTH_TOKEN_KEY);
 
   const verifyToken = async (token) => {
     try {
@@ -58,7 +59,7 @@ function App() {
       username = await verifyToken(token);
 
       if (!username) {
-        localStorage.removeItem(AUTH_TOKEN_KEY);
+        Cookies.remove(AUTH_TOKEN_KEY);
       }
     }
     setIsLoggedIn(!!username);
@@ -68,7 +69,7 @@ function App() {
 
   useEffect(() => {
     authenticateToken();
-  }, [authenticateToken, token]);
+  }, [token]);
 
   if (MAINTENANCE) {
     return <MaintenancePage />;
@@ -157,7 +158,6 @@ function App() {
               />
             }
           />
-          z
           <Route
             path="/play"
             element={

@@ -6,6 +6,7 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
 import GoogleLoginButton from "../GoogleLoginButton/GoogleLoginButton";
 import { DiscordLoginButton } from "../DiscordLoginButton/DiscordLoginButton";
+import Cookies from "js-cookie";
 
 export const SignUpForm = ({
   setEmail,
@@ -112,7 +113,7 @@ export const SignUpForm = ({
     const { token, username } = data;
 
     // Save the token and update the login state
-    localStorage.setItem(AUTH_TOKEN_KEY, token);
+    Cookies.set(AUTH_TOKEN_KEY, token);
     setIsLoggedIn(true);
     renderUsername(username);
     navigate(`/profiles/${username}`);
