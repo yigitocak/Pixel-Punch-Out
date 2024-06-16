@@ -7,6 +7,7 @@ import { ProfileForm } from "../../Components/ProfileForm/ProfileForm";
 import { ProfileCommentList } from "../../Components/ProfileCommentList/ProfileCommentList";
 import camera from "../../assets/images/camera.svg";
 import logout from "../../assets/images/logout.svg";
+import close from "../../assets/images/close.svg";
 import { ConfirmModal } from "../../Components/ConfirmModal/ConfirmModal";
 import { Helmet } from "react-helmet";
 import discordLogo from "../../assets/logos/discord-white.svg";
@@ -255,6 +256,17 @@ export const ProfilePage = ({
     setHover(text);
   };
 
+  const unlinkDiscord = async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}discord/unlink`, {
+        userId: user.discordID,
+      });
+      console.log(response);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   if (loading) {
     return <Spinner />;
   }
@@ -370,9 +382,15 @@ export const ProfilePage = ({
             />
             Verified
             <span className="tooltip">
-              This user verified their account. {<br />}
+              This user verified their account. <br />
               They are known as {discordUsername}
             </span>
+            <img
+              className="verify-discord-button__unlink"
+              src={close}
+              alt="Unlink"
+              onClick={unlinkDiscord}
+            />
           </span>
         )}
         <div className="profile__info-wrapper">

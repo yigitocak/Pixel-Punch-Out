@@ -267,4 +267,15 @@
       border-color: black transparent transparent transparent;
     }
   }
+
+  &__unlink {
+    height: 20px;
+    position: absolute;
+    right: 1rem;
+    transition: background-color 0.5s;
+
+    &:hover {
+      background: #374287;
+    }
+  }
 }
