@@ -6,6 +6,7 @@ import { BASE_URL } from "../../utils/utils";
 import { ForgotModal } from "../ForgotModal/ForgotModal";
 import GoogleLoginButton from "../GoogleLoginButton/GoogleLoginButton";
 import { DiscordLoginButton } from "../DiscordLoginButton/DiscordLoginButton";
+import Cookies from "js-cookie";
 
 export const LoginForm = ({
   setEmail,
@@ -81,7 +82,7 @@ export const LoginForm = ({
         return;
       }
 
-      localStorage.setItem("authToken", response.data.token);
+      Cookies.set("authToken", response.data.token);
       setIsLoggedIn(true);
       renderUsername(response.data.username);
       setFlashMessage("You've successfully logged in!");
@@ -118,7 +119,7 @@ export const LoginForm = ({
     const { token, username } = data;
 
     // Save the token and update the login state
-    localStorage.setItem(AUTH_TOKEN_KEY, token);
+    Cookies.set(AUTH_TOKEN_KEY, token);
     setIsLoggedIn(true);
     renderUsername(username);
     navigate(`/profiles/${username}`);

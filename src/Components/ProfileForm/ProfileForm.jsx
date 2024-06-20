@@ -2,6 +2,7 @@ import "./ProfileForm.scss";
 import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
+import Cookies from "js-cookie";
 
 export const ProfileForm = ({
   username,
@@ -14,7 +15,7 @@ export const ProfileForm = ({
   setShowSnackbar,
 }) => {
   const [comment, setComment] = useState("");
-  const token = localStorage.getItem("authToken");
+  const token = Cookies.get("authToken");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

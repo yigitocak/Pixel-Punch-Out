@@ -26,6 +26,8 @@
 
   &__picture-wrapper {
     flex: 1;
+    display: flex;
+    justify-content: center;
   }
 
   &__edit-pen {
@@ -263,6 +265,17 @@
       border-width: 5px;
       border-style: solid;
       border-color: black transparent transparent transparent;
+    }
+  }
+
+  &__unlink {
+    height: 20px;
+    position: absolute;
+    right: 1rem;
+    transition: background-color 0.5s;
+
+    &:hover {
+      background: #374287;
     }
   }
 }

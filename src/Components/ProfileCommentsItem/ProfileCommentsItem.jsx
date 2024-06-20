@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 export const ProfileCommentsItem = ({
   comment,
@@ -19,7 +20,7 @@ export const ProfileCommentsItem = ({
   user,
 }) => {
   const location = useLocation();
-  const token = localStorage.getItem("authToken");
+  const token = Cookies.get("authToken");
   const [commentUser, setCommentUser] = useState(null);
   const [photoUrl, setPhotoUrl] = useState(null);
 

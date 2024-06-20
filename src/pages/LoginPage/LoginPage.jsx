@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../utils/utils";
 import { Helmet } from "react-helmet";
+import Cookies from "js-cookie";
 
 export const LoginPage = ({
   isLoggedIn,
@@ -32,7 +33,6 @@ export const LoginPage = ({
     const query = new URLSearchParams(location.search);
     const token = query.get("token");
     const usernameQuery = query.get("username");
-    const photoUrl = query.get("photoUrl");
     const errorQuery = query.get("error");
 
     if (errorQuery === "discordConflict") {
@@ -48,13 +48,24 @@ export const LoginPage = ({
     }
 
     if (token) {
-      // Save the token in local storage or state
-      localStorage.setItem(AUTH_TOKEN_KEY, token);
+      // Save the token in cookies
+      Cookies.set(AUTH_TOKEN_KEY, token, {
+        expires: 7,
+        secure: true,
+        sameSite: "Strict",
+      });
       setIsLoggedIn(true);
       // Optionally, navigate to a different page
       navigate(`/profiles/${usernameQuery}`);
     }
-  }, [location.search, setIsLoggedIn, navigate]);
+  }, [
+    location.search,
+    setIsLoggedIn,
+    navigate,
+    setFlashMessage,
+    setFlashSuccess,
+    setShowSnackbar,
+  ]);
 
   const handleVerification = async (code) => {
     try {

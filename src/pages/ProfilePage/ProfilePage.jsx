@@ -7,6 +7,7 @@ import { ProfileForm } from "../../Components/ProfileForm/ProfileForm";
 import { ProfileCommentList } from "../../Components/ProfileCommentList/ProfileCommentList";
 import camera from "../../assets/images/camera.svg";
 import logout from "../../assets/images/logout.svg";
+import close from "../../assets/images/close.svg";
 import { ConfirmModal } from "../../Components/ConfirmModal/ConfirmModal";
 import { Helmet } from "react-helmet";
 import discordLogo from "../../assets/logos/discord-white.svg";
@@ -15,6 +16,7 @@ import { ChangeName } from "../../Components/ChangeName/ChangeName";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Spinner } from "../../Components/Spinner/Spinner";
 import { ProfileSpinner } from "../../Components/ProfileSpinner/ProfileSpinner";
+import Cookies from "js-cookie";
 
 export const ProfilePage = ({
   isLoggedIn,
@@ -26,7 +28,7 @@ export const ProfilePage = ({
   isAuthenticating,
 }) => {
   const { profileId } = useParams();
-  const token = localStorage.getItem("authToken");
+  const token = Cookies.get("authToken");
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const [comments, setComments] = useState([]);
@@ -147,7 +149,7 @@ export const ProfilePage = ({
 
   const handleClick = () => {
     try {
-      localStorage.removeItem("authToken");
+      Cookies.remove("authToken");
       setIsLoggedIn(false);
       setFlashMessage("You've logged out!");
       setFlashSuccess(true);
@@ -167,7 +169,7 @@ export const ProfilePage = ({
           Authorization: `Bearer ${token}`,
         },
       });
-      localStorage.removeItem("authToken");
+      Cookies.remove("authToken");
       setIsLoggedIn(false);
       navigate("/login");
       setFlashMessage("You've deleted your profile!");
@@ -204,7 +206,7 @@ export const ProfilePage = ({
           },
         },
       );
-      localStorage.setItem("authToken", response.data.token);
+      Cookies.set("authToken", response.data.token);
       setShowNameModal(false);
       navigate(`/profiles/${changeName}`);
       setFlashMessage(response.data.message);
@@ -248,6 +250,17 @@ export const ProfilePage = ({
     };
     getDiscordUsername();
   }, [user]);
+
+  const unlinkDiscord = async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}discord/unlink`, {
+        userId: user.discordID,
+      });
+      console.log(response);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   if (loading) {
     return <Spinner />;
@@ -364,9 +377,15 @@ export const ProfilePage = ({
             />
             Verified
             <span className="tooltip">
-              This user verified their account. {<br />}
+              This user verified their account. <br />
               They are known as {discordUsername}
             </span>
+            <img
+              className="verify-discord-button__unlink"
+              src={close}
+              alt="Unlink"
+              onClick={unlinkDiscord}
+            />
           </span>
         )}
         <div className="profile__info-wrapper">
