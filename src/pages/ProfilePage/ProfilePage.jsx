@@ -41,7 +41,6 @@ export const ProfilePage = ({
   const [userFound, setUserFound] = useState(null);
   const [loading, setLoading] = useState(true);
   const [photoLoading, setPhotoLoading] = useState(false);
-  const [hover, setHover] = useState("gizmo");
 
   const getCurrentUser = async () => {
     try {
@@ -251,10 +250,6 @@ export const ProfilePage = ({
     };
     getDiscordUsername();
   }, [user]);
-
-  const handleHover = (text) => {
-    setHover(text);
-  };
 
   const unlinkDiscord = async () => {
     try {
