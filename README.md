@@ -1,9 +1,11 @@
-# [Pixel Punch-Out](https://ppo-online.com/)
+# [Pixel Punch-Out](https://github.com/yigitocak/pixel-punch-out/) 
+* [Pixel Punch-Out - Backend](https://github.com/yigitocak/pixel-punch-out-server/) 
+* [Pixel Punch-Out - Websocket](https://github.com/yigitocak/pixel-punch-out-websocket-server/)
 
-
+ 
 ## Overview
 
-**Pixel Punch-Out** is a multiplayer web platform fighting game that allows players to engage in combat with friends. Players can create and join rooms, select from various arenas. The game features a token-based authentication system for secure sign-up and login processes.
+**Pixel Punch-Out** is a multiplayer web platform fighting game that allows players to engage in combat with friends. Players can create and join rooms and select from various arenas. The game features a token-based authentication system for secure sign-up and login processes.
 
 
 ## Problem
@@ -13,7 +15,7 @@ There aren't many options for multiplayer fighting games that you can play right
 
 ## User Profile
 
-**Pixel Punch-Out** is designed for young to middle-aged gamers looking for a fun and engaging multiplayer experience. This game appeals to both casual gamers who want a quick and enjoyable match with friends and more competitive players who enjoy mastering fighting games. Users can easily set up a game room, and start fighting within minutes, making it ideal for those who value convenience and fast gameplay. The simple browser-based access ensures that anyone with internet access can join in the fun, regardless of their hardware capabilities.
+**Pixel Punch-Out** is designed for young to middle-aged gamers looking for a fun and engaging multiplayer experience. This game appeals to both casual gamers who want a quick and enjoyable match with friends and more competitive players who enjoy mastering fighting games. Users can easily set up a game room and start fighting within minutes, making it ideal for those who value convenience and fast gameplay. The simple browser-based access ensures that anyone with internet access can join in the fun, regardless of their hardware capabilities.
 
 
 ## Features
@@ -122,7 +124,7 @@ The development of **Pixel Punch-Out** is organized into an intense 2-week sprin
     - Set up the project repository and configure the tech stack.
     - Develop the core game mechanics.
     - Implement character and arena selection functionalities.
-    - Start front-end UI development for game.
+    - Start front-end UI development for the game.
 
 ### Week 2: Backend Integration and Launch
 - **Goals:**
